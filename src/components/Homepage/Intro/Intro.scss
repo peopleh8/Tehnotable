@@ -1,0 +1,186 @@
+.intro {
+  &-slider {
+    position: relative;
+    height: 800px;
+    &__item {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      padding-top: 250px;
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        object-fit: cover;
+        left: 0;
+        top: 0;
+      }
+      &-title {
+        font-weight: 400;
+        font-size: 84px;
+        line-height: 100px;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        max-width: 750px;
+        margin-bottom: 40px;
+        span {
+          font-weight: 700;
+        }
+      }
+      &-btn {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        @media (min-width: 1024px) {
+          &:hover {
+            .intro-slider__item-shape {
+              stroke-dashoffset: 205px;
+            }
+            .intro-slider__item-text {
+              color: rgba(#fff, .7);
+            }
+            .intro-slider__item-play {
+              transform: translate(-50%, -50%) scale(1.5)
+            }
+          }
+        }
+        @media (max-width: 1024px) {
+          &:active {
+            .intro-slider__item-shape {
+              stroke-dashoffset: 205px;
+            }
+            .intro-slider__item-text {
+              color: rgba(#fff, .7);
+            }
+            .intro-slider__item-play {
+              transform: translate(-50%, -50%) scale(1.5)
+            }
+          }
+        }
+      }
+      &-icon {
+        margin-right: 32px;
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        position: relative;
+        z-index: 10;
+        overflow: hidden;
+      }
+      &-shape {
+        position: absolute;
+        top: 0;
+        left: 0;
+        fill: transparent;
+        stroke: #fff;
+        stroke-width: 2px;
+        stroke-dasharray: 205px;
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+      }
+      &-play {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 15px;
+        height: 15px;
+        fill: #fff;
+        transition: transform .3s ease-in-out;
+      }
+      &-text {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 17px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        transition: color .2s ease;
+      }
+    }
+    &__pagination {
+      position: absolute;
+      z-index: 100;
+      max-width: 1460px;
+      width: 100%;
+      left: 50% !important;
+      bottom: 67px !important;
+      transform: translateX(-50%);
+      &-inner {
+        display: flex;
+        justify-content: space-between;
+      }
+      &-item {
+        width: 100%;
+        cursor: pointer;
+        position: relative;
+        &::before {
+          content: "";
+          width: 100%;
+          height: 2px;
+          position: absolute;
+          background: #fff;
+          transform-origin: right center;
+          transform: scaleX(0);
+          transition: transform .35s ease;
+        }
+        &.active {
+          &::before {
+            transform: scaleX(1);
+            transform-origin: left center;
+          }
+          .intro-slider__pagination-item-text::before {
+            transform: translate(0, -50%) scaleX(1);
+          }
+        }
+        @media (min-width: 1024px) {
+          &:hover:not(.active) {
+            .intro-slider__pagination-item-text {
+              color: rgba(#fff, .7);
+            }
+          }
+        }
+        @media (max-width: 1024px) {
+          &:active:not(.active) {
+            .intro-slider__pagination-item-text {
+              color: rgba(#fff, .7);
+            }
+          }
+        }
+        &-inner {
+          padding-top: 15px;
+          border-top: 2px solid rgba(#fff, .3);
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 17px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: #FFFFFF;
+        }
+        &-text {
+          padding: 12px 15px;
+          position: relative;
+          overflow: hidden;
+          transition: color .2s ease;
+          &::before {
+            content: "";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform-origin: right center;
+            transform: translate(0, -50%) scaleX(0);
+            width: 30px;
+            height: 2px;
+            background: #fff;
+            transition: transform .3s ease;
+          }
+        }
+        & + & {
+          margin-left: 30px;
+        }
+      }
+    }
+  }
+}

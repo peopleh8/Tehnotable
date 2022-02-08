@@ -1,0 +1,237 @@
+.footer {
+  &-top {
+    background: #F3F3F3;
+    padding: 48px 0 22px;
+    &__inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    &__social {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      &-item {
+        width: 32px;
+        height: 32px;
+        border: 1px solid #807F7F;
+        border-radius: 4px;
+        transition: background .2s ease;
+        &:nth-of-type(1) {
+          .footer-top__social-icon svg {
+            width: 18px;
+            height: 15px;
+          }
+        }
+        &:nth-of-type(2) {
+          .footer-top__social-icon svg {
+            width: 6px;
+            height: 15px;
+          }
+        }
+        &:nth-of-type(3) {
+          .footer-top__social-icon svg {
+            width: 14px;
+            height: 14px;
+          }
+        }
+        & + & {
+          margin-left: 15px;
+        }
+        @media (min-width: 1024px) {
+          &:hover {
+            background: #000;
+            .footer-top__social-icon svg {
+              fill: #F3F3F3;
+            }
+          }
+        }
+      }
+      &-link {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+      &-icon {
+        display: block;
+        svg {
+          display: block;
+          transition: fill .2s ease;
+        }
+      }
+    }
+    &__left {
+      width: 25%;
+    }
+    &__links {
+      width: 25%;
+    }
+  }
+  &-bot {
+    background: #000000;
+    padding: 13px 0;
+    &__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__links {
+      display: flex;
+      align-items: center;
+    }
+    &__link {
+      font-family: "IBM Plex Mono";
+      display: block;
+      font-weight: 500;
+      font-size: 9px;
+      line-height: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #807F7F;
+      transition: color .2s ease;
+      @media (min-width: 1024px) {
+        &:hover {
+          color: #fff;
+        }
+      }
+      @media (max-width: 1024px) {
+        &:active {
+          color: #fff;
+        }
+      }
+      & + & {
+        margin-left: 25px;
+      }
+    }
+  }
+}
+
+.footer-info {
+  margin-top: 30px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.footer-switcher {
+  width: 25%;
+  &__item {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #807F7F;
+    transition: color .2s ease;
+    &.active {
+      color: #000;
+    }
+    & + & {
+      margin-left: 15px;
+    }
+    @media (min-width: 1024px) {
+      &:hover {
+        color: #000;
+      }
+    }
+    @media (max-width: 1024px) {
+      &:active {
+        color: #000;
+      }
+    }
+  }
+}
+
+.footer-pay {
+  width: 25%;
+  display: flex;
+  &__item {
+    border: 1px solid #807F7F;
+    border-radius: 4px;
+    width: 70px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & + & {
+      margin-left: 15px;
+    }
+  }
+}
+
+.footer-contacts {
+  width: 50%;
+  padding-top: 32px;
+  border-top: 1px solid #807F7F;
+  &__title {
+    max-width: 85px;
+    margin-bottom: 5px !important;
+  }
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__item {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  &__link {
+    transition: color .2s ease;
+    @media (min-width: 1024px) {
+      &:hover {
+        color: #133BFE;
+      }
+    }
+    @media (max-width: 1024px) {
+      &:active {
+        color: #133BFE;
+      }
+    }
+  }
+}
+
+.footer-title {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #807F7F;
+  margin-bottom: 20px;
+}
+
+.footer-list {
+  &__item {
+    line-height: 1;
+    & + & {
+      margin-top: 8px;
+    }
+  }
+  &__link {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #000000;
+    transition: color .2s ease;
+    @media (min-width: 1024px) {
+      &:hover {
+        color: #133BFE;
+      }
+    }
+    @media (max-width: 1024px) {
+      &:active {
+        color: #133BFE;
+      }
+    }
+  }
+}
