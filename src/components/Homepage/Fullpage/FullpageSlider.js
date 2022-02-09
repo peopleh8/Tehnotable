@@ -2,10 +2,10 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Mousewheel, Pagination, Parallax } from "swiper";
 
-import 'swiper/css'
-import 'swiper/css/mousewheel'
-import 'swiper/css/pagination'
-import 'swiper/css/parallax'
+import 'swiper/scss'
+import 'swiper/scss/mousewheel'
+import 'swiper/scss/pagination'
+import 'swiper/scss/parallax'
 
 import item from "../../../images/fullpage-item.jpg";
 

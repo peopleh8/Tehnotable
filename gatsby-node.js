@@ -1,5 +1,20 @@
 const path = require(`path`)
 
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html" || stage === "develop-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: path.resolve('./src/components/Homepage/Fullpage/DrawLogo.js'),
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
+  }
+}
+
 const languages = [
   {
     path: "/",

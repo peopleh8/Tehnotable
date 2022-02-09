@@ -1,10 +1,10 @@
-import React, {useRef} from 'react'
-import { graphql } from 'gatsby';
+import React, { useRef } from 'react'
+import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout/Layout'
 import Seo from '../components/seo'
-import Intro from '../components/Homepage/Intro/Intro';
-import Fullpage from '../components/Homepage/Fullpage/Fullpage';
+import Intro from '../components/Homepage/Intro/Intro'
+import Fullpage from '../components/Homepage/Fullpage/Fullpage'
 
 const IndexPage = (props) => {
   const homePage = props.data.allWpPage.edges[0].node.homePage;
