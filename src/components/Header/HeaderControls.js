@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 
 import sprite from '../../icons/sprite.svg'
 
-const HeaderControls = () => {
+const HeaderControls = (props) => {
   return (
     <div className="header-controls">
       <div className="header-controls__item">
@@ -14,11 +14,24 @@ const HeaderControls = () => {
         </Link>
       </div>
       <div className="header-controls__item">
-        <Link to={`#`} className="header-controls__link">
+        <button
+          className="header-controls__link search-close"
+          onClick={() => {props.setIsSearchOpen(false)}}
+          style={{display: props.isSearchOpen ? 'block' : 'none'}}
+        >
+          <svg>
+            <use href={`${sprite}#close`} />
+          </svg>
+        </button>
+        <button
+          className="header-controls__link search-open"
+          onClick={() => {props.setIsSearchOpen(true)}}
+          style={{display: !props.isSearchOpen ? 'block' : 'none'}}
+        >
           <svg>
             <use href={`${sprite}#search`} />
           </svg>
-        </Link>
+        </button>
       </div>
       <div className="header-controls__item">
         <Link to={`#`} className="header-controls__link">

@@ -10,8 +10,6 @@ import { isBrowser } from '../../../utils/isBrowser'
 import DrawLogo from './DrawLogo'
 import FullpageSlider from './FullpageSlider'
 
-
-
 const Fullpage = React.forwardRef((props, ref) => {
   let { sectionWrapperOne, sectionWrapperTwo, sectionOne, sectionTwo } = ref
   let [ isDraw, setIsDraw ] = useState(false);
@@ -68,8 +66,9 @@ const Fullpage = React.forwardRef((props, ref) => {
 
       tlStart = gsap.timeline({
         scrollTrigger: {
-          trigger: slider.current,
-          start: "+1px bottom",
+          trigger: sectionWrapperOne.current,
+          start: "bottom bottom",
+          // markers: true,
           onEnter: () => {
             setTimeout(() => {
               gsap.to(window, {duration: 1, scrollTo: slider.current, ease: "Power1.easeInOut"});
@@ -89,7 +88,8 @@ const Fullpage = React.forwardRef((props, ref) => {
       tlEnd = gsap.timeline({
         scrollTrigger: {
           trigger: slider.current,
-          start: `${slider.current.offsetHeight - 1}px top`,
+          start: "bottom top",
+          markers: true,
           onLeaveBack: () => {
             setTimeout(() => {
               gsap.to(window, {duration: 1, scrollTo: slider.current, ease: "Power1.easeInOut"});

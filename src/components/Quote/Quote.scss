@@ -1,0 +1,36 @@
+.quote {
+  &__wrapper {
+    padding-bottom: 77px;
+    border-bottom: 1px solid #E7E7E7;
+  }
+  &__inner {
+    background: #EEEEEE;
+    border-radius: 4px;
+    position: relative;
+    height: 490px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-left: 80px;
+    img {
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+  }
+  &-content {
+    max-width: 750px;
+    &__title {
+      font-weight: 700;
+      font-size: 33px;
+      line-height: 40px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      span {
+        color: #133BFE;
+      }
+    }
+  }
+}

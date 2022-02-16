@@ -1,4 +1,9 @@
 .header {
+  position: absolute;
+  z-index: 999999;
+  left: 0;
+  top: 0;
+  right: 0;
   &__top {
     background: #000;
     color: #fff;
@@ -199,6 +204,22 @@
       fill: #000;
       stroke: #000;
       transition: all .2s ease;
+    }
+    &.search-close {
+      border-radius: 50%;
+      background: #EEEEEE;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      svg {
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 }

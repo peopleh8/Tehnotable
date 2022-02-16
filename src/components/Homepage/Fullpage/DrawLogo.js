@@ -4,7 +4,7 @@ import DrawSVG from 'react-svg-drawing'
 const DrawLogo = ({ isDraw }) => {
   return (
     <div className='fullpage-slider__logo'>
-      {isDraw && <DrawSVG strokeWidth="1" easing="easeInQuad" duration="2700">
+      {isDraw && <DrawSVG strokeWidth="2" easing="easeInQuad" duration="2700">
         <svg className='slider-logo__svg' width="946" height="703" viewBox="0 0 946 703" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path className='slider-logo__path' opacity="0.3" d="M-42.9648 1L411.819 5.21886L944.043 292.101L822.955 307.571L445.611 99.4401L134.443 107.878L-42.9648 1Z" stroke="#807F7F"/>
           <path className='slider-logo__path' opacity="0.3" d="M732.809 530.023L855.325 502.037L944.043 290.748L822.935 306.14L732.809 530.023Z" stroke="#807F7F"/>

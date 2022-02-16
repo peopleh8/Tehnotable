@@ -1,12 +1,12 @@
 .intro {
   &-slider {
     position: relative;
-    height: 800px;
+    height: 910px;
     &__item {
       position: relative;
       z-index: 2;
       height: 100%;
-      padding-top: 250px;
+      padding-top: 360px;
       img {
         position: absolute;
         width: 100%;
@@ -28,76 +28,6 @@
         span {
           font-weight: 700;
         }
-      }
-      &-btn {
-        display: inline-flex;
-        align-items: center;
-        cursor: pointer;
-        @media (min-width: 1024px) {
-          &:hover {
-            .intro-slider__item-shape {
-              stroke-dashoffset: 205px;
-            }
-            .intro-slider__item-text {
-              color: rgba(#fff, .7);
-            }
-            .intro-slider__item-play {
-              transform: translate(-50%, -50%) scale(1.5)
-            }
-          }
-        }
-        @media (max-width: 1024px) {
-          &:active {
-            .intro-slider__item-shape {
-              stroke-dashoffset: 205px;
-            }
-            .intro-slider__item-text {
-              color: rgba(#fff, .7);
-            }
-            .intro-slider__item-play {
-              transform: translate(-50%, -50%) scale(1.5)
-            }
-          }
-        }
-      }
-      &-icon {
-        margin-right: 32px;
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        position: relative;
-        z-index: 10;
-        overflow: hidden;
-      }
-      &-shape {
-        position: absolute;
-        top: 0;
-        left: 0;
-        fill: transparent;
-        stroke: #fff;
-        stroke-width: 2px;
-        stroke-dasharray: 205px;
-        stroke-dashoffset: 0;
-        transition: stroke-dashoffset 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-      }
-      &-play {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 15px;
-        height: 15px;
-        fill: #fff;
-        transition: transform .3s ease-in-out;
-      }
-      &-text {
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 17px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #FFFFFF;
-        transition: color .2s ease;
       }
     }
     &__pagination {

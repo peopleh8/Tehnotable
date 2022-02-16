@@ -1,0 +1,63 @@
+.search-panel {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  right: 0;
+  background: #000000;
+  transition: all .15s ease;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  &.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  &__form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 33px 40px;
+  }
+  &__inp-wrapper {
+    width: 100%;
+    padding-right: 30px;
+  }
+  &__inp {
+    width: 100%;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 26px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    &::placeholder {
+      color: #807F7F;
+    }
+  }
+  &__btn-wrapper {
+    width: 25px;
+    height: 25px;
+  }
+  &__btn {
+    width: 100%;
+    height: 100%;
+    @media (min-width: 1024px) {
+      &:hover svg {
+        fill: rgba(#fff, .7)
+      }
+    }
+    @media (max-width: 1024px) {
+      &:active svg {
+        fill: rgba(#fff, .7)
+      }
+    }
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: #fff;
+      transition: fill .2s ease;
+    }
+  }
+}

@@ -56,16 +56,16 @@ const Intro = () => {
             <h1 className="intro-slider__item-title">
               The furniture of <span>tomorrow</span>
             </h1>
-            <div className="intro-slider__item-btn">
-              <div className="intro-slider__item-icon">
-                <svg viewBox="0 0 65 65" width="65" height="65" className="intro-slider__item-shape">
+            <div className="intro-slider__item-btn video-btn">
+              <div className="intro-slider__item-icon video-btn__icon">
+                <svg viewBox="0 0 65 65" width="65" height="65" className="intro-slider__item-shape video-btn__shape">
                   <circle r="32.5" cx="32.5" cy="32.5" />
                 </svg>
-                <svg className="intro-slider__item-play">
+                <svg className="intro-slider__item-play video-btn__play">
                   <use href={`${sprite}#play`} />
                 </svg>
               </div>
-              <p className="intro-slider__item-text">Watch the video</p>
+              <p className="intro-slider__item-text video-btn__text">Watch the video</p>
             </div>
           </div>
         </SwiperSlide>
