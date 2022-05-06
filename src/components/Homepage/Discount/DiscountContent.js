@@ -10,7 +10,7 @@ const DiscountContent = () => {
       <div className="discount-content__title title title--big">best discounted package</div>
       <p className="discount-content__desc">Since 2017, the Ukrainian company TehnoTable has been producing innovative sit/stand desks</p>
       <div className="discount-content__inner">
-        <div className="discount-content__sale">-10%</div>
+        <div className="discount-content__sale">-<span>10</span>%</div>
         <div className="discount-content__item sample-item">
           <div className="discount-content__item-inner sample-item__inner">
             <Link className="discount-content__item-link sample-item__link" to={`#`} />
@@ -41,9 +41,9 @@ const DiscountContent = () => {
             </span>
           </button>
         </div>
-        <span className="discount-content__btn-border" />
-        <span className="discount-content__btn-border" />
-        <span className="discount-content__btn-border" />
+        <span className="discount-content__btn-border discount-content__btn-border--long" />
+        <span className="discount-content__btn-border discount-content__btn-border--short" />
+        <span className="discount-content__btn-border discount-content__btn-border--short" />
       </div>
     </div>
   )

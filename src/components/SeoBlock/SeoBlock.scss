@@ -1,16 +1,14 @@
 .seo-block {
   padding: 77px 0 145px;
-  &__title {
+  &__title-wrapper {
     margin-bottom: 40px;
   }
   &__article {
     max-height: 190px;
     overflow: hidden;
     position: relative;
-    transition: max-height 1.3s ease;
+    transition: max-height .8s ease;
     &.open {
-      transition: max-height 1.3s ease;
-      max-height: 2000px;
       &::after {
         opacity: 0;
       }
@@ -123,6 +121,9 @@
       position: relative;
       overflow: hidden;
       display: block;
+      span {
+        transition: opacity .20s ease;
+      }
       &::before,
       &::after {
         content: "";

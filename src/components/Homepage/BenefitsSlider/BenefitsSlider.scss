@@ -1,0 +1,29 @@
+.benefits-slider {
+  padding-bottom: 215px;
+  &__marquee {
+    display: flex;
+    transform: translateX(100%);
+    &-item {
+      & + & {
+        margin-left: 30px;
+      }
+    }
+  }
+  &-item {
+    text-align: center;
+    &__title {
+      margin-bottom: 25px;
+      white-space: nowrap;
+    }
+    &__desc {
+      margin-bottom: 40px;
+    }
+    &__photo {
+      width: 480px;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

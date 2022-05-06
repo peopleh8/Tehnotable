@@ -52,4 +52,15 @@ exports.createPages = async ({ actions: { createPage } }) => {
       },
     })
   })
+
+  languages.forEach(lang => {
+    createPage({
+      path: `${lang.path}contacts/`,
+      component: path.resolve("./src/templates/Contacts.js"),
+      context: {
+        lang: lang.code,
+        prefix: lang.path,
+      },
+    })
+  })
 }

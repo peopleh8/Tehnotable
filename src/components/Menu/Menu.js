@@ -70,7 +70,7 @@ const Menu = (props) => {
         </li>
         <li className="menu-list__item">
           <Link
-            to={`#`}
+            to={`${props.langPrefix}contacts/`}
             className="menu-list__link"
             activeClassName="active"
           >

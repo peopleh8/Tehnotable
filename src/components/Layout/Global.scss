@@ -188,6 +188,10 @@ body {
   }
 }
 
+.title-wrapper {
+  overflow: hidden;
+}
+
 .title {
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -262,6 +266,6 @@ body {
   }
 }
 
-.temp {
-  height: 100vh;
+.section {
+  padding-top: 110px;
 }

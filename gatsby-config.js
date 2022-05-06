@@ -16,30 +16,30 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    {
-      resolve: "gatsby-source-wordpress",
-      options: {
-        url: 'https://gatsby-new.saprit.com/graphql',
-        useACF: true,
-        protocol: `https`,
-        auth: {
-          htaccess: {
-            username: "admin",
-            password: "123",
-          },
-        },
-        develop: {
-          hardCacheMediaFiles: true,
-        },
-        type: {
-          Post: {
-            limit: process.env.NODE_ENV === "development" ?
-              50 :
-              5000,
-          },
-        },
-      },
-    },
+    // {
+    //   resolve: "gatsby-source-wordpress",
+    //   options: {
+    //     url: 'https://gatsby-new.saprit.com/graphql',
+    //     useACF: true,
+    //     protocol: `https`,
+    //     auth: {
+    //       htaccess: {
+    //         username: "admin",
+    //         password: "123",
+    //       },
+    //     },
+    //     develop: {
+    //       hardCacheMediaFiles: true,
+    //     },
+    //     type: {
+    //       Post: {
+    //         limit: process.env.NODE_ENV === "development" ?
+    //           50 :
+    //           5000,
+    //       },
+    //     },
+    //   },
+    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

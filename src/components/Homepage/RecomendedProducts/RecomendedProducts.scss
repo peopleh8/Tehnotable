@@ -1,5 +1,5 @@
 .recomended {
-  padding: 155px 0 195px;
+  padding: 155px 0 0;
   &__top {
     display: flex;
     align-items: center;
@@ -37,6 +37,7 @@
   }
   &-slider {
     &__item {
+      padding-bottom: 195px;
       &-preview {
         background: #EEEEEE;
         margin-bottom: 25px;

@@ -6,17 +6,19 @@ import Seo from '../components/seo'
 import Intro from '../components/Homepage/Intro/Intro'
 import Category from '../components/Homepage/Category/Category'
 import Fullpage from '../components/Homepage/Fullpage/Fullpage'
-import MainAbout from "../components/Homepage/MainAbout/MainAbout";
-import RecomendedProducts from "../components/Homepage/RecomendedProducts/RecomendedProducts";
-import Discount from "../components/Homepage/Discount/Discount";
-import Gallery from "../components/Gallery/Gallery";
-import Quote from "../components/Quote/Quote";
-import SeoBlock from "../components/SeoBlock/SeoBlock";
-import WorkPosition from "../components/Homepage/WorkPosition/WorkPosition";
-import MainOrder from "../components/Homepage/MainOrder/MainOrder";
+import MainAbout from '../components/Homepage/MainAbout/MainAbout'
+import RecomendedProducts from '../components/Homepage/RecomendedProducts/RecomendedProducts'
+import Discount from '../components/Homepage/Discount/Discount'
+import Gallery from '../components/Gallery/Gallery'
+import Quote from '../components/Quote/Quote'
+import SeoBlock from '../components/SeoBlock/SeoBlock'
+import WorkPosition from '../components/Homepage/WorkPosition/WorkPosition'
+import MainOrder from '../components/Homepage/MainOrder/MainOrder'
+import BenefitsSlider from '../components/Homepage/BenefitsSlider/BenefitsSlider'
+import BenefitsTab from "../components/Homepage/BenefitsTab/BenefitsTab";
 
 const IndexPage = (props) => {
-  const homePage = props.data.allWpPage.edges[0].node.homePage;
+  // const homePage = props.data.allWpPage.edges[0].node.homePage;
 
   const sectionWrapperOne = useRef();
   const sectionWrapperTwo = useRef();
@@ -33,20 +35,18 @@ const IndexPage = (props) => {
         <Category />
         <MainAbout />
         <RecomendedProducts />
+        <BenefitsSlider />
         <MainOrder />
-        <WorkPosition />
-        <h1>{homePage.title}</h1>
-        <h1>{homePage.description}</h1>
-        <section className="temp" ref={sectionOne}>
-          <h1>Some Section</h1>
-        </section>
+        <BenefitsTab />
+        <div className="work-position-wrapper" ref={sectionOne}>
+          <WorkPosition />
+        </div>
       </div>
-      {/*<Fullpage ref={fullpageRef} />*/}
+      <Fullpage ref={fullpageRef} />
       <div className="section-wrapper" ref={sectionWrapperTwo}>
-        <section className="temp" ref={sectionTwo}>
-          <h1>Some Section</h1>
-        </section>
-        <Discount />
+        <div className="discount-wrapper" ref={sectionTwo}>
+          <Discount />
+        </div>
         <Gallery />
         <Quote />
         <SeoBlock />
@@ -55,22 +55,22 @@ const IndexPage = (props) => {
   )
 }
 
-export const query = graphql`
-  query MyQuery($lang: String) {
-    allWpPage(filter: {slug: {eq: "home"}, locale: {locale: {eq: $lang}}}) {
-      edges {
-        node {
-          homePage {
-            description
-            title
-          }
-          locale {
-            locale
-          }
-        }
-      }
-    }
-  }
-`
+// export const query = graphql`
+//   query MyQuery($lang: String) {
+//     allWpPage(filter: {slug: {eq: "home"}, locale: {locale: {eq: $lang}}}) {
+//       edges {
+//         node {
+//           homePage {
+//             description
+//             title
+//           }
+//           locale {
+//             locale
+//           }
+//         }
+//       }
+//     }
+//   }
+// `
 
 export default IndexPage
