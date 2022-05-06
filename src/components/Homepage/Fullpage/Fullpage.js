@@ -71,6 +71,10 @@ const Fullpage = React.forwardRef((props, ref) => {
     }
   }
 
+  if (isBrowser()) {
+    window.addEventListener('scroll', resizeWindow)
+  }
+
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
     gsap.registerPlugin(ScrollTrigger);
