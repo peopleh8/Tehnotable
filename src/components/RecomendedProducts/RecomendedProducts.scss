@@ -1,0 +1,52 @@
+.recomended {
+  padding: 155px 0 0;
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  &__slider-nav {
+    display: flex;
+    align-items: center;
+  }
+  &__slider-btn {
+    width: 26px;
+    height: 20px;
+    cursor: pointer;
+    & + & {
+      margin-left: 30px;
+    }
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      stroke: #000;
+      transition: stroke .2s ease;
+    }
+    @media (min-width: 1024px) {
+      &:hover svg {
+        stroke: #133BFE;
+      }
+    }
+    @media (max-width: 1024px) {
+      &:active svg {
+        stroke: #133BFE;
+      }
+    }
+  }
+  &-slider {
+    &__item {
+      padding-bottom: 195px;
+      &-preview {
+        margin-bottom: 25px;
+      }
+      &-controls {
+        margin-bottom: 25px;
+      }
+      &-title {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@
   &__marquee {
     display: flex;
     transform: translateX(100%);
+    counter-reset: benefitsSlider;
     &-item {
       & + & {
         margin-left: 30px;
@@ -20,9 +21,27 @@
     }
     &__photo {
       width: 480px;
+      position: relative;
+      overflow: hidden;
+      &::before {
+        counter-increment: benefitsSlider;
+        content: "0" counter(benefitsSlider);
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, 0);
+        font-weight: 400;
+        font-size: 288px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        opacity: 0.3;
+      }
       img {
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
       }
     }
   }

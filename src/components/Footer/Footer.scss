@@ -101,6 +101,9 @@
           color: #fff;
         }
       }
+      &.active {
+        color: #fff;
+      }
       & + & {
         margin-left: 25px;
       }
@@ -164,10 +167,6 @@
   width: 50%;
   padding-top: 32px;
   border-top: 1px solid #807F7F;
-  &__title {
-    max-width: 85px;
-    margin-bottom: 5px !important;
-  }
   &__inner {
     display: flex;
     align-items: center;
@@ -197,14 +196,6 @@
 }
 
 .footer-title {
-  font-family: "IBM Plex Mono";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #807F7F;
   margin-bottom: 20px;
 }
 

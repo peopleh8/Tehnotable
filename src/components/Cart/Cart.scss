@@ -1,0 +1,295 @@
+.cart {
+  position: fixed;
+  z-index: 200;
+  right: 0;
+  top: 0;
+  max-width: 610px;
+  width: 100%;
+  .ReactCollapse--collapse {
+    transition: height .45s ease;
+  }
+  &__inner {
+    width: 100%;
+    min-height: 100vh;
+    background: #000;
+    color: #fff;
+    padding: 90px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  &__close {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #EEE !important;
+    @media (min-width: 1024px) {
+      transition: background .2s ease;
+      &:hover {
+        background: #133BFE !important;
+        span span {
+          background: #fff;
+        }
+      }
+    }
+    @media (max-width: 1024px) {
+      transition: background .1s ease;
+      &:active {
+        background: #133BFE !important;
+        span span {
+          background: #fff;
+        }
+      }
+    }
+    &-inner {
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      span {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        height: 1px;
+        background: #000;
+        @media (min-width: 1024px) {
+          transition: background .2s ease;
+        }
+        @media (max-width: 1024px) {
+          transition: background .1s ease;
+        }
+        &:nth-child(1) {
+          transform: translate(-50%, -50%) rotate(45deg)
+        }
+        &:nth-child(2) {
+          transform: translate(-50%, -50%) rotate(-45deg)
+        }
+      }
+    }
+  }
+  &__title-wrapper {
+    margin-bottom: 40px;
+  }
+  &-list {
+    width: 100%;
+    overflow: auto;
+    max-height: calc(100vh - 30px - 90px - 222px - 35px - 40px - 30px);
+    &.has-padding {
+      .simplebar-content {
+        padding: 0 15px 0 0 !important;
+      }
+    }
+    .simplebar-scrollbar.simplebar-visible {
+      &::before {
+        transition: opacity .2s ease !important;
+        background: #fff;
+      }
+      &.simplebar-hover {
+        &::before {
+          opacity: .7;
+        }
+      }
+    }
+  }
+  &-item {
+    & + & {
+      margin-top: 25px;
+      padding-top: 25px;
+      border-top: 1px solid #807F7F;
+    }
+    &__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    &__info {
+      margin-right: 10px;
+    }
+    &__title,
+    &__price {
+      font-weight: 700;
+      font-size: 15px;
+      line-height: 18px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    &__title {
+      margin-bottom: 8px;
+    }
+    &__price {
+      margin-bottom: 15px;
+      font-family: "IBM Plex Mono";
+    }
+    &__category {
+      font-family: "IBM Plex Mono";
+      font-weight: 500;
+      font-size: 9px;
+      line-height: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #807F7F;
+      margin-bottom: 15px;
+    }
+    &__counter {
+      border: 1px solid #fff;
+      width: 105px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      &-btn,
+      &-inp {
+        color: #fff;
+        font-family: "IBM Plex Mono";
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 150%;
+        text-align: center;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      &-inp {
+        text-align: center;
+      }
+      &-btn {
+        @media (min-width: 1024px) {
+          transition: color .2s ease;
+          &:hover {
+            color: #133BFE;
+          }
+        }
+        @media (max-width: 1024px) {
+          transition: color .1s ease;
+          &:active {
+            color: #133BFE;
+          }
+        }
+      }
+    }
+    &__photo {
+      width: 140px;
+      height: 115px;
+      margin-bottom: 8px;
+    }
+    &__photo-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &__btn {
+      width: fit-content;
+      font-weight: 400 !important;
+      font-size: 12px !important;
+      line-height: 160% !important;
+      letter-spacing: -0.01em;
+      color: #807F7F;
+      text-align: center;
+      @media (min-width: 1024px) {
+        transition: color .2s ease;
+        &:hover {
+          color: #fff;
+        }
+      }
+      @media (max-width: 1024px) {
+        transition: color .1s ease;
+        &:active {
+          color: #fff;
+        }
+      }
+    }
+  }
+  &-bot {
+    width: 100%;
+    margin-top: 35px;
+    &__list {
+      padding-top: 25px;
+      margin-bottom: 25px;
+      border-top: 1px solid #807F7F;
+    }
+    &__item {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 160%;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      & + & {
+        margin-top: 8px;
+      }
+      &-icon {
+        display: block;
+        margin-right: 15px;
+        svg {
+          display: block;
+          width: 15px;
+          height: 10px;
+          stroke: #fff;
+        }
+      }
+    }
+    &__info {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 40px;
+      border-top: 1px solid #807F7F;
+      &-title {
+        font-family: "IBM Plex Mono";
+        font-weight: 500;
+        font-size: 9px;
+        line-height: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #807F7F;
+        margin-bottom: 20px;
+      }
+      &-cost {
+        font-family: "IBM Plex Mono";
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 150%;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      &-btn.btn {
+        color: #000;
+        background: #fff;
+        @media (min-width: 1024px) {
+          &:hover {
+            color: #fff;
+            .cart-bot__info-btn-inner {
+              &::before,
+              &::after {
+                background: #fff;
+              }
+            }
+          }
+        }
+        @media (max-width: 1024px) {
+          &:active {
+            color: #fff;
+            .cart-bot__info-btn-inner {
+              &::before,
+              &::after {
+                background: #fff;
+              }
+            }
+          }
+        }
+      }
+      &-btn-inner.btn__inner {
+        &::before,
+        &::after {
+          background: #000;
+        }
+      }
+    }
+  }
+}

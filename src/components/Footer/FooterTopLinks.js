@@ -5,7 +5,7 @@ const FooterTopLinks = () => {
   return (
     <React.Fragment>
       <div className="footer-top__links footer-top__links--catalog">
-        <div className="footer-top__title footer-title">catalog links</div>
+        <div className="footer-top__title footer-title local-title local-title--grey">catalog links</div>
         <ul className="footer-top__list footer-list">
           <li className="footer-list__item">
             <Link className="footer-list__link" to={`#`}>Height-adjustable tables</Link>
@@ -22,7 +22,7 @@ const FooterTopLinks = () => {
         </ul>
       </div>
       <div className="footer-top__links footer-top__links--support">
-        <div className="footer-top__title footer-title">support</div>
+        <div className="footer-top__title footer-title local-title local-title--grey">support</div>
         <ul className="footer-top__list footer-list">
           <li className="footer-list__item">
             <Link className="footer-list__link" to={`#`}>FAQ</Link>
@@ -33,7 +33,7 @@ const FooterTopLinks = () => {
         </ul>
       </div>
       <div className="footer-top__links footer-top__links--explore">
-        <div className="footer-top__title footer-title">Explore</div>
+        <div className="footer-top__title footer-title local-title local-title--grey">Explore</div>
         <ul className="footer-top__list footer-list">
           <li className="footer-list__item">
             <Link className="footer-list__link" to={`#`}>About us</Link>

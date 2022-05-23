@@ -3,7 +3,7 @@ import React from 'react'
 const FooterContacts = () => {
   return (
     <div className="footer-top__contacts footer-contacts">
-      <div className="footer-contacts__title footer-title">Contact us</div>
+      <div className="footer-contacts__title footer-title local-title local-title--grey">Contact us</div>
       <div className="footer-contacts__inner">
         <div className="footer-contacts__item">
           <div className="footer-contacts__schedule">Mon-Fri: 8am-5pm GMT</div>

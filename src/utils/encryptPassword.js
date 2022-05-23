@@ -1,0 +1,1 @@
+export const encryptPassword = password => password.trim().split('').map((char, index) => index >= password.length - 2 ? char : char.replace(char, '*')).join('')

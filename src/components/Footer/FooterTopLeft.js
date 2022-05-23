@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from '../Logo/Logo'
+
 import sprite from '../../icons/sprite.svg'
 
 const FooterTopLeft = () => {

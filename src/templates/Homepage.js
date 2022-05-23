@@ -1,24 +1,26 @@
-import React, { useRef } from 'react'
-import { graphql } from 'gatsby'
+import React, { useRef, useState } from 'react'
 
 import Layout from '../components/Layout/Layout'
 import Seo from '../components/seo'
+
 import Intro from '../components/Homepage/Intro/Intro'
-import Category from '../components/Homepage/Category/Category'
 import Fullpage from '../components/Homepage/Fullpage/Fullpage'
-import MainAbout from '../components/Homepage/MainAbout/MainAbout'
-import RecomendedProducts from '../components/Homepage/RecomendedProducts/RecomendedProducts'
-import Discount from '../components/Homepage/Discount/Discount'
-import Gallery from '../components/Gallery/Gallery'
-import Quote from '../components/Quote/Quote'
-import SeoBlock from '../components/SeoBlock/SeoBlock'
 import WorkPosition from '../components/Homepage/WorkPosition/WorkPosition'
 import MainOrder from '../components/Homepage/MainOrder/MainOrder'
 import BenefitsSlider from '../components/Homepage/BenefitsSlider/BenefitsSlider'
-import BenefitsTab from "../components/Homepage/BenefitsTab/BenefitsTab";
+import BenefitsTab from '../components/Homepage/BenefitsTab/BenefitsTab'
+
+import Category from '../components/Category/Category'
+import MainAbout from '../components/MainAbout/MainAbout'
+import Gallery from '../components/Gallery/Gallery'
+import Quote from '../components/Quote/Quote'
+import SeoBlock from '../components/SeoBlock/SeoBlock'
+import RecomendedProducts from '../components/RecomendedProducts/RecomendedProducts'
+import Discount from '../components/Discount/Discount'
 
 const IndexPage = (props) => {
   // const homePage = props.data.allWpPage.edges[0].node.homePage;
+  let [ isHideHeaderFullpage, setIsHideHeaderFullpage ] = useState(false)
 
   const sectionWrapperOne = useRef();
   const sectionWrapperTwo = useRef();
@@ -28,7 +30,7 @@ const IndexPage = (props) => {
   const fullpageRef = { sectionWrapperOne, sectionWrapperTwo, sectionOne, sectionTwo }
 
   return (
-    <Layout langPrefix={props.pageContext.prefix}>
+    <Layout langPrefix={props.pageContext.prefix} isHideHeaderFullpage={isHideHeaderFullpage}>
       <Seo title="Home" lang={props.pageContext.lang} />
       <div className="section-wrapper" ref={sectionWrapperOne}>
         <Intro />
@@ -42,7 +44,7 @@ const IndexPage = (props) => {
           <WorkPosition />
         </div>
       </div>
-      <Fullpage ref={fullpageRef} />
+      <Fullpage setIsHideHeaderFullpage={setIsHideHeaderFullpage} ref={fullpageRef} />
       <div className="section-wrapper" ref={sectionWrapperTwo}>
         <div className="discount-wrapper" ref={sectionTwo}>
           <Discount />

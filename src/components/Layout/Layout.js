@@ -8,12 +8,12 @@ import 'normalize.css'
 import './Layout.scss'
 
 
-const Layout = ({ children, langPrefix }) => {
+const Layout = ({ children, langPrefix, isHiddenFooterTop, isShowenHeaderCheckout, isHideHeaderFullpage }) => {
   return (
     <div className={`wrapper`}>
-      <Header langPrefix={langPrefix} />
+      <Header langPrefix={langPrefix} isShowenHeaderCheckout={isShowenHeaderCheckout} isHideHeaderFullpage={isHideHeaderFullpage} />
       <main className={`main`}>{children}</main>
-      <Footer />
+      <Footer isHiddenFooterTop={isHiddenFooterTop} />
     </div>
   )
 }

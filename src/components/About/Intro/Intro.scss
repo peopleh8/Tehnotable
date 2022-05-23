@@ -1,0 +1,22 @@
+.intro-about {
+  padding: 155px 0;
+  &__title {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 140%;
+    max-width: 990px;
+    margin-bottom: 80px;
+  }
+  &__desc {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__side {
+    max-width: 735px;
+  }
+  &__text {
+    & + & {
+      margin-top: 15px;
+    }
+  }
+}

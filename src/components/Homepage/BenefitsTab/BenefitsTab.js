@@ -79,7 +79,9 @@ const BenefitsTab = () => {
         speed={500}
         allowTouchMove={false}
         autoplay={{
-          delay: 8000
+          delay: 8000,
+          pauseOnMouseEnter: true,
+          disableOnInteraction: false
         }}
         pagination={{
           clickable: true,

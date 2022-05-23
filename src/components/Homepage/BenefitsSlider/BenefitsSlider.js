@@ -77,7 +77,7 @@ const BenefitsSlider = () => {
                 <div className="benefits-slider-item__title title title--small" dangerouslySetInnerHTML={{ __html: slide.title }} />
                 <p className="benefits-slider-item__desc">{slide.desc}</p>
                 <div className="benefits-slider-item__photo">
-                  <img src={slide.imgSrc} alt=""/>
+                  <img src={slide.imgSrc} alt="" width={480} height={670} />
                 </div>
               </div>
             )

@@ -22,17 +22,32 @@
   &__inp-wrapper {
     width: 100%;
     padding-right: 30px;
+    position: relative;
   }
-  &__inp {
+  &__inp,
+  &__placeholder {
     width: 100%;
     font-weight: 700;
     font-size: 21px;
     line-height: 26px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+  }
+  &__inp {
     color: #FFFFFF;
-    &::placeholder {
-      color: #807F7F;
+  }
+  &__placeholder {
+    color: #807F7F;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    user-select: none;
+    transition: all .3s ease;
+    &.focused {
+      transform: translate(50px, -50%);
+      opacity: 0;
     }
   }
   &__btn-wrapper {

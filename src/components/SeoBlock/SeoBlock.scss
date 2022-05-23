@@ -24,59 +24,6 @@
       pointer-events: none;
       transition: opacity .25s ease;
     }
-    p {
-      margin-bottom: 35px;
-    }
-    ul {
-      margin-bottom: 35px;
-      li {
-        position: relative;
-        padding-left: 15px;
-        margin-bottom: 10px;
-        &::before {
-          content: "";
-          position: absolute;
-          left: 0;
-          top: 13px;
-          width: 6px;
-          height: 6px;
-          background: #000;
-          border-radius: 50%;
-        }
-      }
-    }
-    ol {
-      margin-bottom: 35px;
-      counter-reset: seoCounter;
-      li {
-        margin-bottom: 10px;
-        &::before {
-          counter-increment: seoCounter;
-          content: counter(seoCounter) ". ";
-        }
-      }
-    }
-    h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-    }
-    h2 {
-      font-size: 33px;
-    }
-    h3 {
-      font-size: 30px;
-    }
-    h4 {
-      font-size: 27px;
-    }
-    h5 {
-      font-size: 24px;
-    }
-    h6 {
-      font-size: 21px;
-    }
   }
   &__btn-wrapper {
     margin-top: 50px;

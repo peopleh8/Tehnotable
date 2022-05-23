@@ -1,0 +1,42 @@
+.error-intro {
+  &__title {
+    width: 100%;
+    text {
+      text-transform: uppercase;
+      animation: stroke 5s 1;
+      stroke-width: 2;
+      font-weight: 700;
+      stroke: #fff;
+      fill: #fff;
+      font-size: 240px;
+    }
+  }
+  &__btn   {
+    display: block;
+    width: 225px;
+    height: 70px;
+    white-space: nowrap;
+    background: #fff;
+    span {
+      color: #000;
+    }
+    @media (min-width: 1024px) {
+      &:hover span {
+        color: #fff;
+      }
+    }
+  }
+}
+
+@keyframes stroke {
+  0%   {
+    fill: rgba(#fff,0); stroke: rgba(#fff,1);
+    stroke-dashoffset: 25%; stroke-dasharray: 0 50%; stroke-width: 2;
+  }
+  70%  {fill: rgba(#fff,0); stroke: rgba(#fff,1); }
+  80%  {fill: rgba(#fff,0); stroke: rgba(#fff,1); stroke-width: 2; }
+  100% {
+    fill: rgba(#fff,1); stroke: rgba(#fff,1);
+    stroke-dashoffset: -25%; stroke-dasharray: 50% 0; stroke-width: 2;
+  }
+}

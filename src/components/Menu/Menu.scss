@@ -10,7 +10,6 @@
     &__item {
       display: flex;
       align-items: center;
-      //position: relative;
       @media (min-width: 1024px) {
         &:hover {
           .menu-list__link {
@@ -19,6 +18,7 @@
           .menu-list__border {
             transform: scaleX(1);
             transform-origin: right center;
+            pointer-events: none;
           }
           .menu-list__icon svg {
             transform: rotate(-180deg);

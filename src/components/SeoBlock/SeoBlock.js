@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 import './SeoBlock.scss'
 import { isBrowser } from '../../utils/isBrowser'
@@ -77,7 +77,7 @@ const SeoBlock = () => {
         <div className="seo-block__title-wrapper title-wrapper">
           <div className="seo-block__title title title--small">SEO TEXT</div>
         </div>
-        <article className={`seo-block__article ${isOpen ? 'open' : ''}`}>
+        <article className={`seo-block__article article ${isOpen ? 'open' : ''}`}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad amet cupiditate debitis dignissimos dolore enim facilis hic illo ipsum, iusto laborum magnam magni modi nihil perferendis, provident quidem quisquam, soluta totam voluptas. Asperiores atque, culpa cumque deleniti doloremque eos id ipsa labore placeat possimus praesentium provident similique sint ullam voluptate.
           </p>

@@ -16,8 +16,9 @@ const Menu = (props) => {
           onMouseLeave={() => props.setIsItemHover(false)}
         >
           <Link
-            to={`#`}
+            to={`${props.langPrefix}catalog/`}
             className="menu-list__link"
+            activeClassName="active"
           >
             Catalog
             <div className="menu-list__border" />
@@ -60,7 +61,7 @@ const Menu = (props) => {
         </li>
         <li className="menu-list__item">
           <Link
-            to={`#`}
+            to={`${props.langPrefix}blog/`}
             className="menu-list__link"
             activeClassName="active"
           >

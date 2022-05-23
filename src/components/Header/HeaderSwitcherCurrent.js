@@ -1,20 +1,11 @@
 import React from 'react'
 
-import sprite from "../../icons/sprite.svg";
-import { slideToggle } from "../../utils/slideToggle";
+import sprite from '../../icons/sprite.svg'
 
 const HeaderSwitcherCurrent = ({ isOpen, setIsOpen }) => {
-  const toggleSwitcher = e => {
-    setIsOpen(prev => !prev)
-
-    let dropdown = e.currentTarget.nextElementSibling
-
-    slideToggle(dropdown, 300)
-  }
-
   return (
     <div className={`header-switcher__current ${isOpen ? 'open' : ''}`}
-         onClick={toggleSwitcher}>
+         onClick={() => setIsOpen(prev => !prev)}>
       <div className="header-switcher__text">
         RUS
       </div>

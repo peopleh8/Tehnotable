@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-import  { Pagination, EffectFade, Autoplay } from 'swiper'
+import  { Pagination, EffectFade } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import gsap from 'gsap'
@@ -12,6 +12,7 @@ import 'swiper/scss/effect-fade'
 
 import introBg from '../../../images/intro-bg.jpg'
 import benefitsTab1 from '../../../images/benefits-tab-1.jpg'
+import video from '../../../videos/Intro_2.mp4'
 
 import sprite from '../../../icons/sprite.svg'
 
@@ -22,28 +23,29 @@ const IntroSlider = () => {
       isBtn: true,
       playBtnText: 'Watch video',
       btnText: 'Our intro',
-      imgSrc: introBg
+      src: video,
+      poster: introBg
     },
     {
       title: 'The furniture of <span>yesterday</span>',
       isBtn: false,
       playBtnText: '',
       btnText: 'next banner name',
-      imgSrc: benefitsTab1
+      src: benefitsTab1
     },
     {
       title: 'The furniture of <span>today</span>',
       isBtn: false,
       playBtnText: '',
       btnText: 'next banner name',
-      imgSrc: introBg
+      src: introBg
     },
     {
       title: 'The furniture of <span>after 2 days</span>',
       isBtn: false,
       playBtnText: '',
       btnText: 'next banner name',
-      imgSrc: benefitsTab1
+      src: benefitsTab1
     }
   ]);
 
@@ -58,15 +60,12 @@ const IntroSlider = () => {
   return (
     <Swiper
       className="intro__slider intro-slider"
-      modules={[Pagination, EffectFade, Autoplay]}
+      modules={[Pagination, EffectFade]}
       spaceBetween={0}
       slidesPerView={1}
       effect="fade"
       speed={500}
       allowTouchMove={false}
-      autoplay={{
-        delay: 8000
-      }}
       pagination={{
         clickable: true,
         el: '.intro-slider__pagination-inner',
@@ -101,7 +100,13 @@ const IntroSlider = () => {
         slider.map((slide, index) => {
           return (
             <SwiperSlide className="intro-slider__item">
-              <img src={slide.imgSrc} alt=""/>
+              {
+                index === 0
+                  ? <video poster={slide.poster} muted={true} loop={true} autoPlay={true} controls={false} width={1920} height={740}>
+                      <source src={slide.src} type="video/mp4" />
+                    </video>
+                  : <img src={slide.src} alt="" width={1920} height={740} />
+              }
               <div className="container">
                 {
                   index === 0

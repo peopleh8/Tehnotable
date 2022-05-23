@@ -8,7 +8,7 @@ import './Fullpage.scss'
 
 import { isBrowser } from '../../../utils/isBrowser'
 
-import DrawLogo from './DrawLogo'
+import DrawLogo from '../../DrawLogo/DrawLogo'
 import FullpageSlider from './FullpageSlider'
 
 const Fullpage = React.forwardRef((props, ref) => {
@@ -27,40 +27,46 @@ const Fullpage = React.forwardRef((props, ref) => {
   const checkFullpage = e => {
     if (e.wheelDelta > 0 && wheelOrientation.current === 'up' && (slider.current.offsetTop - window.scrollY) <= 0) {
       if (upWheel.current > 1) {
-        gsap.to(window, {duration: 1, scrollTo: sectionOne.current, ease: "Power1.easeInOut"});
+        gsap.to(window, {duration: 1, scrollTo: sectionOne.current, ease: "Power1.easeInOut"})
 
         setTimeout(() => {
-          document.body.style.overflow = '';
-          sectionWrapperOne.current.style.overflowY = '';
-          sectionWrapperTwo.current.style.overflowY = '';
+          document.body.style.overflow = ''
+          sectionWrapperOne.current.style.overflowY = ''
+          sectionWrapperTwo.current.style.overflowY = ''
 
           setIsDraw(false);
+
+          props.setIsHideHeaderFullpage(false)
         }, 1000);
 
-        sectionWrapperOne.current.style.overflowY = 'scroll';
-        sectionWrapperTwo.current.style.overflowY = 'scroll';
+        sectionWrapperOne.current.style.overflowY = 'scroll'
+        sectionWrapperTwo.current.style.overflowY = 'scroll'
 
-        upWheel.current = 1;
+        upWheel.current = 1
       }
-      upWheel.current++;
+      upWheel.current++
+
     } else if (e.wheelDelta < 0 && wheelOrientation.current === 'down' && (slider.current.offsetTop - window.scrollY) >= 0) {
       if (downWheel.current > 1) {
-        gsap.to(window, {duration: 1, scrollTo: sectionTwo.current, ease: "Power1.easeInOut"});
+        gsap.to(window, {duration: 1, scrollTo: sectionTwo.current, ease: "Power1.easeInOut"})
 
         setTimeout(() => {
-          document.body.style.overflow = '';
-          sectionWrapperOne.current.style.overflowY = '';
-          sectionWrapperTwo.current.style.overflowY = '';
+          document.body.style.overflow = ''
+          sectionWrapperOne.current.style.overflowY = ''
+          sectionWrapperTwo.current.style.overflowY = ''
 
-          setIsDraw(false);
+          setIsDraw(false)
+
+          props.setIsHideHeaderFullpage(false)
         }, 1000);
 
-        sectionWrapperOne.current.style.overflowY = 'scroll';
-        sectionWrapperTwo.current.style.overflowY = 'scroll';
+        sectionWrapperOne.current.style.overflowY = 'scroll'
+        sectionWrapperTwo.current.style.overflowY = 'scroll'
 
-        downWheel.current = 1;
+        downWheel.current = 1
       }
-      downWheel.current++;
+      downWheel.current++
+
     }
   }
 
@@ -76,11 +82,11 @@ const Fullpage = React.forwardRef((props, ref) => {
   }
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollToPlugin);
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollToPlugin)
+    gsap.registerPlugin(ScrollTrigger)
 
-    let tlStart = null;
-    let tlEnd = null;
+    let tlStart = null
+    let tlEnd = null
 
     if (isBrowser()) {
       window.addEventListener('wheel', checkFullpage);
@@ -91,16 +97,20 @@ const Fullpage = React.forwardRef((props, ref) => {
           start: "bottom bottom",
           onEnter: () => {
             setTimeout(() => {
-              gsap.to(window, {duration: 1, scrollTo: slider.current, ease: "Power1.easeInOut"});
-            }, 150);
+              gsap.to(window, {duration: 1, scrollTo: slider.current, ease: "Power1.easeInOut"})
+            }, 150)
 
-            document.body.style.overflow = 'hidden';
-            sectionWrapperOne.current.style.overflowY = 'scroll';
-            sectionWrapperTwo.current.style.overflowY = 'scroll';
+            document.body.style.overflow = 'hidden'
+            sectionWrapperOne.current.style.overflowY = 'scroll'
+            sectionWrapperTwo.current.style.overflowY = 'scroll'
 
             setTimeout(() => {
-              setIsDraw(true);
-            }, 850);
+              props.setIsHideHeaderFullpage(true)
+            }, 1)
+
+            setTimeout(() => {
+              setIsDraw(true)
+            }, 850)
           }
         }
       })
@@ -111,16 +121,20 @@ const Fullpage = React.forwardRef((props, ref) => {
           start: "top top",
           onLeaveBack: () => {
             setTimeout(() => {
-              gsap.to(window, {duration: 1, scrollTo: slider.current, ease: "Power1.easeInOut"});
-            }, 150);
+              gsap.to(window, {duration: 1, scrollTo: slider.current, ease: "Power1.easeInOut"})
+            }, 150)
 
-            document.body.style.overflow = 'hidden';
-            sectionWrapperOne.current.style.overflowY = 'scroll';
-            sectionWrapperTwo.current.style.overflowY = 'scroll';
+            document.body.style.overflow = 'hidden'
+            sectionWrapperOne.current.style.overflowY = 'scroll'
+            sectionWrapperTwo.current.style.overflowY = 'scroll'
 
             setTimeout(() => {
-              setIsDraw(true);
-            }, 850);
+              props.setIsHideHeaderFullpage(true)
+            }, 1)
+
+            setTimeout(() => {
+              setIsDraw(true)
+            }, 850)
           }
         }
       })
@@ -131,8 +145,8 @@ const Fullpage = React.forwardRef((props, ref) => {
         tlStart.kill()
         tlEnd.kill()
 
-        window.removeEventListener('wheel', checkFullpage);
-        window.removeEventListener('scroll', resizeWindow);
+        window.removeEventListener('wheel', checkFullpage)
+        window.removeEventListener('scroll', resizeWindow)
       }
     }
   }, []);

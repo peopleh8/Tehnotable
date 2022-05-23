@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link } from "gatsby";
+import { Link } from 'gatsby'
 
 import './Logo.scss'
 
-import logo from "../../images/logo.svg";
+import logo from '../../images/logo.svg'
 
 const Logo = (props) => {
   return (

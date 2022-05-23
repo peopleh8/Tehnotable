@@ -2,25 +2,32 @@ import React, {useState} from 'react'
 
 import './SearchPanel.scss'
 
+import { fieldChange } from '../../utils/fieldChange'
+import { fieldBlur } from '../../utils/fieldBlur'
+
 import sprite from '../../icons/sprite.svg'
 
 const SearchPanel = (props) => {
   let [searchValue, setSearchValue] = useState('');
 
   return (
-    <div className={`search-panel ${props.isSearchOpen && 'open'}`}>
+    <div className={`search-panel ${props.isSearchOpen ? 'open' : ''}`}>
       <div className="container">
-        <form className="search-panel__form">
+        <form className="search-panel__form" action="/search/" method="get">
           <div className="search-panel__inp-wrapper">
             <input
               className="search-panel__inp"
               type="text"
               autoComplete="off"
-              placeholder="start type for Search"
-              name="search"
+              name="s"
               value={searchValue}
-              onChange={e => setSearchValue(e.target.value)}
+              onChange={e => {
+                setSearchValue(e.target.value)
+                fieldChange(e)
+              }}
+              onBlur={fieldBlur}
             />
+            <span className="search-panel__placeholder">start type for Search</span>
           </div>
           <div className="search-panel__btn-wrapper">
             <button className="search-panel__btn" type="submit">

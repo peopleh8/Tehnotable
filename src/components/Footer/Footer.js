@@ -4,10 +4,10 @@ import FooterBot from "./FooterBot";
 
 import './Footer.scss'
 
-const Footer = () => {
+const Footer = ({ isHiddenFooterTop }) => {
   return (
     <footer className="footer">
-      <FooterTop />
+      {!isHiddenFooterTop && <FooterTop />}
       <FooterBot />
     </footer>
   )
