@@ -38,10 +38,16 @@
     }
     &__logo {
       position: absolute;
-      left: 0;
       top: 70px;
+      left: -100px;
       z-index: -1;
       pointer-events: none;
+      opacity: .5;
+      max-width: 870px;
+      width: 100%;
+      * {
+        width: 100% !important;
+      }
     }
     &__item {
       width: 100%;

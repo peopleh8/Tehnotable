@@ -5,14 +5,14 @@ const DrawLogo = ({ isDraw }) => {
   return (
     <div className='fullpage-slider__logo'>
       {isDraw && <DrawSVG strokeWidth="3" easing="easeInQuad" duration="2700">
-        <svg className='slider-logo__svg' width="946" height="703" viewBox="0 0 946 703" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path className='slider-logo__path' opacity="0.3" d="M-42.9648 1L411.819 5.21886L944.043 292.101L822.955 307.571L445.611 99.4401L134.443 107.878L-42.9648 1Z" stroke="#807F7F"/>
-          <path className='slider-logo__path' opacity="0.3" d="M732.809 530.023L855.325 502.037L944.043 290.748L822.935 306.14L732.809 530.023Z" stroke="#807F7F"/>
-          <path className='slider-logo__path' opacity="0.3" d="M445.954 98.2061L368.287 308.506L734.028 530.022L824.404 305.702L445.954 98.2061Z" stroke="#807F7F"/>
-          <path className='slider-logo__path' opacity="0.3" d="M135.462 106.618L57.9795 344.958L369.318 308.506L446.801 98.2061L135.462 106.618Z" stroke="#807F7F"/>
-          <path className='slider-logo__path' opacity="0.3" d="M-42.3633 1L-114 230.305L57.3661 344.957L134.621 107.263L-42.3633 1Z" stroke="#807F7F"/>
-          <path className='slider-logo__path' opacity="0.3" d="M74.8027 593.66L162.284 333.36L368.288 309.44L227.189 702L74.8027 593.66Z" stroke="#807F7F"/>
-          <path className='slider-logo__path' opacity="0.3" d="M362.039 668.232L228.088 702L369.089 309.44L474.84 372.757L362.039 668.232Z" stroke="#807F7F"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="874" height="579" viewBox="0 0 874 579" fill="none">
+          <path opacity="0.3" d="M59.4688 1L433.805 4.47258L871.884 240.608L772.215 253.341L461.62 82.0269L205.495 88.9721L59.4688 1Z" stroke="#fff"/>
+          <path opacity="0.3" d="M698.016 436.444L798.86 413.409L871.885 239.495L772.2 252.164L698.016 436.444Z" stroke="#fff"/>
+          <path opacity="0.3" d="M461.905 81.0107L397.977 254.11L699.021 436.442L773.411 251.802L461.905 81.0107Z" stroke="#fff"/>
+          <path opacity="0.3" d="M206.335 87.9347L142.559 284.114L398.824 254.11L462.601 81.0107L206.335 87.9347Z" stroke="#fff"/>
+          <path opacity="0.3" d="M59.9647 1L1 189.743L142.053 284.114L205.642 88.4662L59.9647 1Z" stroke="#fff"/>
+          <path opacity="0.3" d="M156.402 488.824L228.409 274.569L397.973 254.88L281.833 578L156.402 488.824Z" stroke="#fff"/>
+          <path opacity="0.3" d="M392.834 550.205L282.578 578L398.637 254.88L485.682 306.996L392.834 550.205Z" stroke="#fff"/>
         </svg>
       </DrawSVG>}
     </div>

@@ -17,8 +17,12 @@ import Quote from '../components/Quote/Quote'
 import SeoBlock from '../components/SeoBlock/SeoBlock'
 import RecomendedProducts from '../components/RecomendedProducts/RecomendedProducts'
 import Discount from '../components/Discount/Discount'
+import PageLoader from "../components/PageLoader/PageLoader";
+
+import { isBrowser } from '../utils/isBrowser'
 
 const IndexPage = (props) => {
+  if (!isBrowser()) return null
   // const homePage = props.data.allWpPage.edges[0].node.homePage;
   let [ isHideHeaderFullpage, setIsHideHeaderFullpage ] = useState(false)
 
@@ -32,6 +36,7 @@ const IndexPage = (props) => {
   return (
     <Layout langPrefix={props.pageContext.prefix} isHideHeaderFullpage={isHideHeaderFullpage}>
       <Seo title="Home" lang={props.pageContext.lang} />
+      <PageLoader />
       <div className="section-wrapper" ref={sectionWrapperOne}>
         <Intro />
         <Category />

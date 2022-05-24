@@ -73,7 +73,7 @@ const ThanksIntro = ({ deliveryCode }) => {
             thanks <br/> for <span>your order</span>
           </h1>
           <div className="thanks-intro__number">
-            № <span>{deliveryCode || '1488'}</span>
+            № <span>{deliveryCode || 'Some delivery code'}</span>
           </div>
           <p className="thanks-intro__desc">
             Our manager will contact you

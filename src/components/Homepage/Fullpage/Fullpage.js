@@ -37,7 +37,7 @@ const Fullpage = React.forwardRef((props, ref) => {
           setIsDraw(false);
 
           props.setIsHideHeaderFullpage(false)
-        }, 1000);
+        }, 800);
 
         sectionWrapperOne.current.style.overflowY = 'scroll'
         sectionWrapperTwo.current.style.overflowY = 'scroll'
@@ -58,7 +58,7 @@ const Fullpage = React.forwardRef((props, ref) => {
           setIsDraw(false)
 
           props.setIsHideHeaderFullpage(false)
-        }, 1000);
+        }, 800);
 
         sectionWrapperOne.current.style.overflowY = 'scroll'
         sectionWrapperTwo.current.style.overflowY = 'scroll'
@@ -96,6 +96,8 @@ const Fullpage = React.forwardRef((props, ref) => {
           trigger: '.work-position-wrapper',
           start: "bottom bottom",
           onEnter: () => {
+            setIsDraw(true)
+
             setTimeout(() => {
               gsap.to(window, {duration: 1, scrollTo: slider.current, ease: "Power1.easeInOut"})
             }, 150)
@@ -107,10 +109,6 @@ const Fullpage = React.forwardRef((props, ref) => {
             setTimeout(() => {
               props.setIsHideHeaderFullpage(true)
             }, 1)
-
-            setTimeout(() => {
-              setIsDraw(true)
-            }, 850)
           }
         }
       })
@@ -120,6 +118,8 @@ const Fullpage = React.forwardRef((props, ref) => {
           trigger: '.discount-wrapper',
           start: "top top",
           onLeaveBack: () => {
+            setIsDraw(true)
+
             setTimeout(() => {
               gsap.to(window, {duration: 1, scrollTo: slider.current, ease: "Power1.easeInOut"})
             }, 150)
@@ -131,10 +131,6 @@ const Fullpage = React.forwardRef((props, ref) => {
             setTimeout(() => {
               props.setIsHideHeaderFullpage(true)
             }, 1)
-
-            setTimeout(() => {
-              setIsDraw(true)
-            }, 850)
           }
         }
       })

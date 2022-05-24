@@ -85,7 +85,7 @@ const IntroSlider = () => {
       }}
       onInit={() => {
         introTl
-          .from('.intro-slider__item.swiper-slide-active .intro-slider__item-title', .6, { opacity: 0, y: -120, delay: .3, onComplete() {
+          .from('.intro-slider__item.swiper-slide-active .intro-slider__item-title', .6, { opacity: 0, y: -120, delay: 5.2, onComplete() {
             introTl.set(this.targets(), { clearProps: 'all' })
           }})
           .from('.intro-slider__item.swiper-slide-active .intro-slider__item-btn > *', .5, { opacity: 0, x: -100, stagger: -.15, onComplete() {
