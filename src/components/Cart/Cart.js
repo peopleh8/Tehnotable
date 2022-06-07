@@ -1,8 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
-
 import gsap from 'gsap'
-
 import { Collapse } from 'react-collapse'
 
 import './Cart.scss'
@@ -10,7 +8,11 @@ import './Cart.scss'
 import CartList from './CartList'
 import CartBotList from './CartBotList'
 
+import { PrefixContext } from '../../context/PrefixProvider'
+
 const Cart = ({ isCartOpen, setIsCartOpen }) => {
+  let prefix = useContext(PrefixContext)
+
   const closeCart = () => {
     setIsCartOpen(false)
 
@@ -71,7 +73,7 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
                 <div className="cart-bot__info-cost">41 500 uah</div>
               </div>
               <div className="cart-bot__info-btn-wrapper">
-                <Link className="cart-bot__info-btn btn btn--small" to="/checkout/">
+                <Link className="cart-bot__info-btn btn btn--small" to={`${prefix}checkout/`}>
                   <span className="cart-bot__info-btn-inner btn__inner">check out</span>
                 </Link>
               </div>

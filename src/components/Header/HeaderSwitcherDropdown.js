@@ -3,26 +3,65 @@ import { Link } from 'gatsby'
 
 import { Collapse } from 'react-collapse'
 
-const HeaderSwitcherDropdown = ({ isOpen }) => {
+import { getPageName } from '../../utils/getPageName'
+
+const HeaderSwitcherDropdown = ({ isOpen, prefix }) => {
   return (
     <div className="header-switcher__dropdown">
       <Collapse isOpened={isOpen}>
-        <div className="header-switcher__dropdown-inner">
-          <Link
-            className="header-switcher__dropdown-item"
-            activeClassName="active"
-            to={`/uk/`}
-          >
-            UKR
-          </Link>
-          <Link
-            className="header-switcher__dropdown-item"
-            activeClassName="active"
-            to={`/en/`}
-          >
-            ENG
-          </Link>
-        </div>
+        {
+          prefix === '/'
+            ? <div className="header-switcher__dropdown-inner">
+                <Link
+                  className="header-switcher__dropdown-item"
+                  activeClassName="active"
+                  to={`/uk/${getPageName()}`}
+                >
+                  UKR
+                </Link>
+                <Link
+                  className="header-switcher__dropdown-item"
+                  activeClassName="active"
+                  to={`/en/${getPageName()}`}
+                >
+                  ENG
+                </Link>
+              </div>
+          : prefix === '/uk/'
+            ? <div className="header-switcher__dropdown-inner">
+                <Link
+                  className="header-switcher__dropdown-item"
+                  activeClassName="active"
+                  to={`/${getPageName()}`}
+                >
+                  RUS
+                </Link>
+                <Link
+                  className="header-switcher__dropdown-item"
+                  activeClassName="active"
+                  to={`/en/${getPageName()}`}
+                >
+                  ENG
+                </Link>
+              </div>
+            : <div className="header-switcher__dropdown-inner">
+                <Link
+                  className="header-switcher__dropdown-item"
+                  activeClassName="active"
+                  to={`/uk/${getPageName()}`}
+                >
+                  UKR
+                </Link>
+                <Link
+                  className="header-switcher__dropdown-item"
+                  activeClassName="active"
+                  to={`/${getPageName()}`}
+                >
+                  RUS
+                </Link>
+              </div>
+        }
+
       </Collapse>
     </div>
   )

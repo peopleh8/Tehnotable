@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -215,7 +215,7 @@ const CategoryProducts = () => {
     }
   }, [])
 
-  const changeVariability = (parentId, childId, event) => {
+  const changeVariability = useCallback((parentId, childId, event) => {
     let img = event.currentTarget.parentElement.parentElement,
         newImg = event.currentTarget.dataset.imgSrc
 
@@ -241,27 +241,27 @@ const CategoryProducts = () => {
         }))
       }, 150)
     }
-  }
+  }, [list])
 
-  const toggleColorFilter = colorId => {
+  const toggleColorFilter = useCallback(colorId => {
     setColorFilter(colorFilter.map(item => {
       return {
         ...item,
         isActive: colorId === item.id ? !item.isActive : item.isActive
       }
     }))
-  }
+  }, [colorFilter])
 
-  const toggleMaterialFilter = materialId => {
+  const toggleMaterialFilter = useCallback(materialId => {
     setMaterialFilter(materialFilter.map(item => {
       return {
         ...item,
         isActive: materialId === item.id ? !item.isActive : item.isActive
       }
     }))
-  }
+  }, [materialFilter])
 
-  const deleteChoice = choiceId => {
+  const deleteChoice = useCallback(choiceId => {
     setChoice(choice.filter(item => choiceId !== item.id))
 
     setColorFilter(colorFilter.map(item => {
@@ -277,9 +277,9 @@ const CategoryProducts = () => {
         isActive: choiceId === item.id ? !item.isActive : item.isActive
       }
     }))
-  }
+  }, [choice])
 
-  const changeSort = (sortId, event) => {
+  const changeSort = useCallback((sortId, event) => {
     let parent = event.currentTarget.parentElement.parentElement
 
     parent.classList.add('fade')
@@ -299,7 +299,7 @@ const CategoryProducts = () => {
       }, 200)
     }
     setIsOpenDropdown(false)
-  }
+  }, [secSortList, isOpenDropdown])
 
   return (
     <section className="category-products">

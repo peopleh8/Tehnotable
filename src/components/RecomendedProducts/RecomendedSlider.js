@@ -18,6 +18,7 @@ const RecomendedSlider = ({ slider, changeVariability }) => {
       spaceBetween={30}
       slidesPerView={4}
       speed={500}
+      loop={true}
       autoplay={{
         delay: 5000,
         pauseOnMouseEnter: true,
@@ -27,7 +28,6 @@ const RecomendedSlider = ({ slider, changeVariability }) => {
         prevEl: '.recomended__slider-prev',
         nextEl: '.recomended__slider-prev-next',
       }}
-      loop={true}
       onSlideChange={() => {
         gsap.from('.recomended-slider__item.swiper-slide-duplicate-active.swiper-slide-duplicate .recomended-slider__item-inner > *:not(.recomended-slider__item-link)', .6, { opacity: 0, y: 50, stagger: .1, onComplete() {
           gsap.set(this.targets(), { clearProps: 'all' })

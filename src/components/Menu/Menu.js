@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from "gatsby";
 
 import './Menu.scss'
 
+import SubMenu from './SubMenu'
+
+import { PrefixContext } from '../../context/PrefixProvider'
+
 import sprite from '../../icons/sprite.svg'
-import SubMenu from "./SubMenu";
 
 const Menu = (props) => {
+  let prefix = useContext(PrefixContext)
+
   return (
     <nav className="menu">
       <ul className="menu__list menu-list">
@@ -16,7 +21,7 @@ const Menu = (props) => {
           onMouseLeave={() => props.setIsItemHover(false)}
         >
           <Link
-            to={`${props.langPrefix}catalog/`}
+            to={`${prefix}catalog/`}
             className="menu-list__link"
             activeClassName="active"
           >
@@ -32,7 +37,7 @@ const Menu = (props) => {
         </li>
         <li className="menu-list__item">
           <Link
-            to={`#`}
+            to={`${prefix}#`}
             className="menu-list__link"
           >
             Configurator
@@ -45,7 +50,7 @@ const Menu = (props) => {
           onMouseLeave={() => props.setIsItemHover(false)}
         >
           <Link
-            to={`${props.langPrefix}about/`}
+            to={`${prefix}about/`}
             className="menu-list__link"
             activeClassName="active"
           >
@@ -61,7 +66,7 @@ const Menu = (props) => {
         </li>
         <li className="menu-list__item">
           <Link
-            to={`${props.langPrefix}blog/`}
+            to={`${prefix}blog/`}
             className="menu-list__link"
             activeClassName="active"
           >
@@ -71,7 +76,7 @@ const Menu = (props) => {
         </li>
         <li className="menu-list__item">
           <Link
-            to={`${props.langPrefix}contacts/`}
+            to={`${prefix}contacts/`}
             className="menu-list__link"
             activeClassName="active"
           >

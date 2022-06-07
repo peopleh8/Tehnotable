@@ -44,13 +44,12 @@ const BenefitsSlider = () => {
   ])
 
   let section = useRef(),
-      wrapper = useRef(),
-      tlBenefitsSlider = null;
+      wrapper = useRef()
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
-    tlBenefitsSlider = gsap.timeline({
+    let tlBenefitsSlider = gsap.timeline({
       scrollTrigger: {
         trigger: ".benefits-slider__marquee",
         scrub: 0.5,

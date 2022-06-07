@@ -1,27 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
+import { PrefixContext } from '../../context/PrefixProvider'
+
 const FooterBotLinks = () => {
+  let prefix = useContext(PrefixContext)
+
   return (
     <div className="footer-bot__links">
       <Link
         className="footer-bot__link"
         activeClassName="active"
-        to="/privacy/"
+        to={`${prefix}privacy/`}
       >
         Legal Notice
       </Link>
       <Link
         className="footer-bot__link"
         activeClassName="active"
-        to="/terms/"
+        to={`${prefix}terms/`}
       >
         Terms & Conditions
       </Link>
       <Link
         className="footer-bot__link"
         activeClassName="active"
-        to="/sitemap/"
+        to={`${prefix}sitemap/`}
       >
         Site Map
       </Link>

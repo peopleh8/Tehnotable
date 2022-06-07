@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-
 import gsap from 'gsap'
 
 const PrivacyIntro = () => {

@@ -46,7 +46,6 @@ const Header = (props) => {
         { !props.isShowenHeaderCheckout && <HeaderTop /> }
         {
           !props.isShowenHeaderCheckout && <HeaderBot
-            langPrefix={props.langPrefix}
             setIsItemHover={setIsItemHover}
             isSearchOpen={isSearchOpen}
             setIsSearchOpen={setIsSearchOpen}

@@ -70,21 +70,6 @@ const Story = () => {
       .from('.story__title', .5, { y: '100%', onComplete() {
         storyTl.set(this.targets(), { clearProps: 'all' })
       }})
-      .from('.story__slider-nav > *', .5, { scale: 0, stagger: .1, ease: 'back', onComplete() {
-        storyTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.story-slider__item.swiper-slide-active .story-slider__item-content > *', .6, { y: -70, opacity: 0, stagger: -.1, onComplete() {
-        storyTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.5')
-      .from('.story-slider__item.swiper-slide-active .story-slider__item-photo img', 1.5, { x: '-120%', ease: 'Expo.easeInOut', onComplete() {
-        storyTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.5')
-      .from('.story-slider__item.swiper-slide-active .story-slider__item-photo img', .6, { scale: 1.3, onComplete() {
-        storyTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.8')
-      .from('.story-slider__pagination-item', .3, { opacity: 0, x: -20, stagger: .1, onComplete() {
-        storyTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.2')
 
     return () => {
       storyTl.kill()

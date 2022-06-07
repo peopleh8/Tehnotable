@@ -187,6 +187,39 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   languages.forEach(lang => {
     createPage({
+      path: `${lang.path}delivery/`,
+      component: path.resolve("./src/templates/Delivery.js"),
+      context: {
+        lang: lang.code,
+        prefix: lang.path,
+      },
+    })
+  })
+
+  languages.forEach(lang => {
+    createPage({
+      path: `${lang.path}faq/`,
+      component: path.resolve("./src/templates/Faq.js"),
+      context: {
+        lang: lang.code,
+        prefix: lang.path,
+      },
+    })
+  })
+
+  languages.forEach(lang => {
+    createPage({
+      path: `${lang.path}gallery/`,
+      component: path.resolve("./src/templates/Gallery.js"),
+      context: {
+        lang: lang.code,
+        prefix: lang.path,
+      },
+    })
+  })
+
+  languages.forEach(lang => {
+    createPage({
       path: `${lang.path}search/`,
       component: path.resolve("./src/templates/Search.js"),
       context: {
@@ -228,4 +261,15 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       },
     })
   })
+}
+
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage, deletePage } = actions
+  if (page.path.match(/^\/[a-z]{2}\/404\/$/)) {
+    const oldPage = { ...page }
+    const langCode = page.path.split(`/`)[1]
+    page.matchPath = `/${langCode}/*`
+    deletePage(oldPage)
+    createPage(page)
+  }
 }

@@ -1,17 +1,24 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import { Link } from 'gatsby'
-
 import gsap from 'gsap'
 
 import './Intro.scss'
 
+import { PrefixContext } from '../../../context/PrefixProvider'
+
 import { isBrowser } from '../../../utils/isBrowser'
 
-import errorBg from '../../../images/bg.jpg'
+import wall from '../../../images/wall.jpg'
+import table from '../../../images/tabel.png'
+
 
 const ErrorIntro = () => {
+  let prefix = useContext(PrefixContext)
+
   const bg = useRef()
+  const tableBg = useRef()
   const forIntro = 17
+  const forTable = 5
   const speed = .05
 
   let positionX = 0,
@@ -27,6 +34,7 @@ const ErrorIntro = () => {
     positionY = positionY + (disY * speed)
 
     if (bg.current) bg.current.style = `transform: translate(${positionX / forIntro}%, ${positionY / forIntro}%) scale(1.1)`
+    if (tableBg.current) tableBg.current.style = `transform: translate(${positionX / forTable}%, ${positionY / forTable}%)`
 
     requestAnimationFrame(setMouseParallaxStyle)
   }
@@ -65,7 +73,7 @@ const ErrorIntro = () => {
   return (
     <section className="intro error-intro general-page section">
       <div className="error-intro__bg general-page__bg" ref={bg}>
-        <img src={errorBg} alt="" width={1920} height={1180}/>
+        <img src={wall} alt="" width={1920} height={1180}/>
       </div>
       <div className="container">
         <div className="error-intro__inner general-page__inner">
@@ -74,10 +82,11 @@ const ErrorIntro = () => {
               404
             </text>
           </svg>
-          <Link className="error-intro__btn form-btn" to="/">
+          <Link className="error-intro__btn form-btn" to={prefix}>
             <span>Back homepage</span>
             <span>Back homepage</span>
           </Link>
+          <img src={table} alt="" ref={tableBg} />
         </div>
       </div>
     </section>

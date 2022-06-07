@@ -111,7 +111,9 @@ const AccountAccordion = () => {
                     }
                   </div>
                 </div>
-                <div className="account-intro-tabs__content-accordion-icon" />
+                <div className="account-intro-tabs__content-accordion-icon accordion-icon">
+                  <svg><use href={`${sprite}#accordion-arrow`}/></svg>
+                </div>
               </div>
               <div className="account-intro-tabs__content-accordion-body-wrapper">
                 <Collapse isOpened={item.isActive}>

@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import SingleProductModal from './SingleProductModal'
+import ModalThanks from '../../ModalThanks/ModalThanks'
 
 import sprite from '../../../icons/sprite.svg'
 
 const SingleProductTabReviews = () => {
-  let [ isVisible, setIsVisible ] = useState(false)
+  let thanksBtn = useRef()
+  let [ isSubmited, setSubmited ] = useState(false)
+
+  useEffect(() => {
+    isSubmited && thanksBtn.current.click()
+  }, [isSubmited])
 
   return (
     <div className="single-product-content-tabs__body-reviews">
@@ -48,14 +54,26 @@ const SingleProductTabReviews = () => {
           <button
             className="single-product-content-tabs__body-btn form-btn"
             type="button"
-            data-fancybox
+            data-fancybox="comment"
             data-src="#review-modal"
           >
             <span>Add a comment</span>
             <span>Add a comment</span>
           </button>
+          <button
+            className="single-product-content-tabs__body-btn-hidden"
+            ref={thanksBtn}
+            type="button"
+            data-fancybox="thanks"
+            data-src="#thanks-modal"
+            style={{ display: 'none' }}
+          >
+            Thanks
+          </button>
         </div>
       </div>
+      <SingleProductModal setSubmited={setSubmited} />
+      <ModalThanks />
     </div>
   )
 }

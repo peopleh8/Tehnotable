@@ -17,6 +17,15 @@ module.exports = {
       },
     },
     // {
+    //   resolve: `gatsby-plugin-nprogress`,
+    //   options: {
+    //     color: `#133BFE`,
+    //     showSpinner: false,
+    //     trickle: false,
+    //     minimum: 0.1,
+    //   },
+    // },
+    // {
     //   resolve: "gatsby-source-wordpress",
     //   options: {
     //     url: 'https://gatsby-new.saprit.com/graphql',

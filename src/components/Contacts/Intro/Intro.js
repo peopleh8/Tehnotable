@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from  'react'
-
+import React, { useState, useEffect } from 'react'
 import gsap from 'gsap'
-
 import GoogleMap from 'google-map-react';
-
 import  { Pagination, EffectFade } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -17,9 +14,7 @@ import Marker from './Marker'
 
 import { styles } from './map-styles'
 
-import contactsInst from '../../../images/contacts-inst.svg'
-import contactsYoutube from '../../../images/contacts-youtube.svg'
-import contactsFb from '../../../images/contacts-fb.svg'
+import sprite from '../../../icons/sprite.svg'
 
 const ContactsIntro = () => {
   let [ addresses ] = useState([
@@ -131,17 +126,17 @@ const ContactsIntro = () => {
                   <ul className="contacts-intro__info-social">
                     <li className="contacts-intro__info-social-item">
                       <a className="contacts-intro__info-social-link" href="#" target="_blank" rel="noreferrer">
-                        <img src={contactsInst} alt="Instagram"/>
+                        <svg><use href={`${sprite}#youtube`} /></svg>
                       </a>
                     </li>
                     <li className="contacts-intro__info-social-item">
                       <a className="contacts-intro__info-social-link" href="#" target="_blank" rel="noreferrer">
-                        <img src={contactsYoutube} alt="YouTube"/>
+                        <svg><use href={`${sprite}#facebook`} /></svg>
                       </a>
                     </li>
                     <li className="contacts-intro__info-social-item">
                       <a className="contacts-intro__info-social-link" href="#" target="_blank" rel="noreferrer">
-                        <img src={contactsFb} alt="Facebook"/>
+                        <svg><use href={`${sprite}#instagram`} /></svg>
                       </a>
                     </li>
                   </ul>

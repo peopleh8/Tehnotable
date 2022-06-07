@@ -632,57 +632,9 @@
   }
   &-modal {
     max-width: 610px;
-    width: 100%;
-    background: #000;
-    color: #fff;
     padding: 135px 65px 65px;
     .carousel__button.is-close {
-      border: none !important;
-      outline: none !important;
-      opacity: 0;
       animation: visible .3s ease 2s 1 forwards !important;
-      &:active,
-      &:focus {
-        border: none !important;
-        outline: none !important;
-      }
-      top: 30px;
-      right: 30px;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: #EEEEEE;
-      box-shadow: none !important;
-      @media (min-width: 1024px) {
-        transition: background .2s ease;
-        &:hover {
-          background: #133BFE;
-          svg {
-            color: #fff;
-          }
-        }
-      }
-      @media (max-width: 1024px) {
-        transition: background .1s ease;
-        &:active {
-          background: #133BFE;
-          svg {
-            color: #fff;
-          }
-        }
-      }
-      svg {
-        width: 15px;
-        height: 15px;
-        color: #000;
-        filter: none !important;
-        @media (min-width: 1024px) {
-          transition: color .2s ease;
-        }
-        @media (max-width: 1024px) {
-          transition: color .1s ease;
-        }
-      }
     }
     &__title-wrapper {
       margin-bottom: 50px;
@@ -713,13 +665,6 @@
     &__textarea {
       font-size: 16px;
       letter-spacing: 0.08em;
-      border: none !important;
-      outline: none !important;
-      &:active,
-      &:focus {
-        border: none !important;
-        outline: none !important;
-      }
     }
     &__inp {
       padding: 0 25px;
@@ -821,14 +766,5 @@
         }
       }
     }
-  }
-}
-
-@keyframes visible {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }

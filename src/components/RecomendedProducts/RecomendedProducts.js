@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -103,7 +103,7 @@ const RecomendedProducts = () => {
     }
   }, [])
 
-  const changeVariability = (parentId, childId, event) => {
+  const changeVariability = useCallback((parentId, childId, event) => {
     let img = event.currentTarget.parentElement.parentElement.previousElementSibling,
         newImg = event.currentTarget.dataset.imgSrc
 
@@ -112,7 +112,7 @@ const RecomendedProducts = () => {
     if (isBrowser()) {
       setTimeout(() => {
         img.classList.remove('fade')
-      }, 250)
+      }, 255)
 
       setTimeout(() => {
         setSlider(slider.map(slide => {
@@ -129,7 +129,7 @@ const RecomendedProducts = () => {
         }))
       }, 155)
     }
-  }
+  }, [slider])
 
   return (
     <section className="recomended">

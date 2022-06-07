@@ -10,10 +10,15 @@ import './Intro.scss'
 import AccountAccordion from './AccountAccordion'
 import AccountInfo from './AccountInfo'
 
+import { isBrowser } from '../../../utils/isBrowser'
+
 import sprite from '../../../icons/sprite.svg'
 
 const AccountIntro = () => {
   let intro = useRef()
+  let itemInformation = useRef()
+  let itemHistory = useRef()
+  let hash = isBrowser() && window.location.hash
 
   useEffect(() => {
     intro.current.parentElement.parentElement.classList.add('disable-overflow')
@@ -41,12 +46,24 @@ const AccountIntro = () => {
         accountInfoTl.set(this.targets(), { clearProps: 'all' })
       }}, '-=.2')
 
-
-    // account-intro-tabs__content-btn-wrapper
     return () => {
       accountInfoTl.kill()
     }
   }, [])
+
+  useEffect(() => {
+    hash
+      ? hash === '#information' ? itemInformation.current.click() : itemHistory.current.click()
+      : itemInformation.current.click()
+  }, [hash])
+
+  const hashChange = (e, hash) => {
+    console.log(e.nativeEvent)
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
+
+    if (isBrowser()) window.location.hash = hash
+  }
 
   const Logout = e => {
     e.stopPropagation()
@@ -61,21 +78,25 @@ const AccountIntro = () => {
         </div>
         <Tabs className="account-intro__tabs account-intro-tabs" settings={{fadeTime: '200'}}>
           <Nav className="account-intro-tabs__nav">
-            <div className="account-intro-tabs__nav-item">
-              <span className="account-intro-tabs__nav-icon">
-                <svg>
-                  <use href={`${sprite}#user`} />
-                </svg>
-              </span>
-              <span className="account-intro-tabs__nav-text">Personal information</span>
+            <div className="account-intro-tabs__nav-item" ref={itemInformation}>
+              <div className="account-intro-tabs__nav-inner" onClick={e => hashChange(e, '#information')}>
+                <span className="account-intro-tabs__nav-icon">
+                  <svg>
+                    <use href={`${sprite}#user`} />
+                  </svg>
+                </span>
+                <span className="account-intro-tabs__nav-text">Personal information</span>
+              </div>
             </div>
-            <div className="account-intro-tabs__nav-item">
-              <span className="account-intro-tabs__nav-icon">
-                <svg>
-                  <use href={`${sprite}#history`} />
-                </svg>
-              </span>
-              <span className="account-intro-tabs__nav-text">Order history</span>
+            <div className="account-intro-tabs__nav-item" ref={itemHistory}>
+              <div className="account-intro-tabs__nav-inner" onClick={e => hashChange(e, '#history')}>
+                <span className="account-intro-tabs__nav-icon">
+                  <svg>
+                    <use href={`${sprite}#history`} />
+                  </svg>
+                </span>
+               <span className="account-intro-tabs__nav-text">Order history</span>
+              </div>
             </div>
             <div className="account-intro-tabs__nav-item">
               <span className="account-intro-tabs__nav-text" onClick={Logout}>Logout</span>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import { Link } from 'gatsby'
 
 import { isBrowser } from '../utils/isBrowser'
@@ -14,10 +14,12 @@ import SingleProductAuthor from '../components/SingleProduct/SingleProductAuthor
 import RecomendedProducts from '../components/RecomendedProducts/RecomendedProducts'
 import Discount from '../components/Discount/Discount'
 
+import PrefixProvider from '../context/PrefixProvider'
+
 import sliderItem1 from '../images/single-product-item1.jpg'
 import deg360 from '../images/deg360.jpg'
 
-const SingleProduct = (props) => {
+const SingleProduct = ({ pageContext }) => {
   /* Intro, Sidebar */
   let [ slider ] = useState([
     {
@@ -116,7 +118,7 @@ const SingleProduct = (props) => {
     }
   ])
 
-  const changeDropdownOne = (sortId, event) => {
+  const changeDropdownOne = useCallback((sortId, event) => {
     let parent = event.currentTarget.parentElement.parentElement
 
     parent.classList.add('fade')
@@ -136,9 +138,9 @@ const SingleProduct = (props) => {
       }, 200)
     }
     setIsOpenDropdownOne(false)
-  }
+  }, [isOpenDropdownOne, dropdownOneList])
 
-  const changeDropdownTwo = (sortId, event) => {
+  const changeDropdownTwo = useCallback((sortId, event) => {
     let parent = event.currentTarget.parentElement.parentElement
 
     parent.classList.add('fade')
@@ -158,9 +160,9 @@ const SingleProduct = (props) => {
       }, 200)
     }
     setIsOpenDropdownTwo(false)
-  }
+  }, [isOpenDropdownTwo, dropdownTwoList])
 
-  const changeDropdownThree = (sortId, event) => {
+  const changeDropdownThree = useCallback((sortId, event) => {
     let parent = event.currentTarget.parentElement.parentElement
 
     parent.classList.add('fade')
@@ -180,9 +182,9 @@ const SingleProduct = (props) => {
       }, 200)
     }
     setIsOpenDropdownThree(false)
-  }
+  }, [isOpenDropdownThree, dropdownThreeList])
 
-  const checkCounter = event => {
+  const checkCounter = useCallback(event => {
     let value = event.currentTarget.value
 
     if (value.match(/[^0-9]/g)) setCounter(value.replace(/[^0-9]/g, ''))
@@ -191,7 +193,7 @@ const SingleProduct = (props) => {
     if (value === '') setCounter(1)
 
     if (parseInt(value) > 100) setCounter(100)
-  }
+  }, [counter])
 
   /* Details */
   let [ details, setDetails ] = useState([
@@ -239,7 +241,7 @@ const SingleProduct = (props) => {
 
   let [ isInfoWindowClosed, setInfoWindowClose ] = useState(false)
 
-  const changeDetails = (dotId, event) => {
+  const changeDetails = useCallback((dotId, event) => {
     let parent = event.currentTarget.parentElement
 
     !isInfoWindowClosed && parent.classList.add('fade')
@@ -269,9 +271,9 @@ const SingleProduct = (props) => {
     }
 
     setInfoWindowClose(false)
-  }
+  }, [details])
 
-  const closeInfoWindow = () => {
+  const closeInfoWindow = useCallback(() => {
     if (isBrowser()) {
       setTimeout(() => {
         setDetails(details.map(item => {
@@ -284,81 +286,83 @@ const SingleProduct = (props) => {
     }
 
     setInfoWindowClose(true)
-  }
+  }, [isInfoWindowClosed])
 
   return (
-    <Layout langPrefix={props.pageContext.prefix}>
-      <Seo title={`Contacts Page`} lang={props.pageContext.lang} />
-      <nav className="breadcrumbs single-product-breadcrumbs">
-        <div className="container">
-          <ul className="breadcrumbs__list breadcrumbs-list">
-            <li className="breadcrumbs-list__item">
-              <Link className="breadcrumbs-list__link" to="#">Home</Link>
-            </li>
-            <li className="breadcrumbs-list__item">
-              <span className="breadcrumbs-list__separator" />
-            </li>
-            <li className="breadcrumbs-list__item">
-              <Link className="breadcrumbs-list__link" to="#">Catalog</Link>
-            </li>
-            <li className="breadcrumbs-list__item">
-              <span className="breadcrumbs-list__separator" />
-            </li>
-            <li className="breadcrumbs-list__item">
-              <Link className="breadcrumbs-list__link" to="#">Category</Link>
-            </li>
-            <li className="breadcrumbs-list__item">
-              <span className="breadcrumbs-list__separator" />
-            </li>
-            <li className="breadcrumbs-list__item">
-              <span className="breadcrumbs-list__current">Single Product</span>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <SingleProductIntro
-        slider={slider}
-        counter={counter}
-        setCounter={setCounter}
-        checkCounter={checkCounter}
-        dropdownOneList={dropdownOneList}
-        isOpenDropdownOne={isOpenDropdownOne}
-        setIsOpenDropdownOne={setIsOpenDropdownOne}
-        changeDropdownOne={changeDropdownOne}
-        dropdownTwoList={dropdownTwoList}
-        isOpenDropdownTwo={isOpenDropdownTwo}
-        setIsOpenDropdownTwo={setIsOpenDropdownTwo}
-        changeDropdownTwo={changeDropdownTwo}
-        dropdownThreeList={dropdownThreeList}
-        isOpenDropdownThree={isOpenDropdownThree}
-        setIsOpenDropdownThree={setIsOpenDropdownThree}
-        changeDropdownThree={changeDropdownThree}
-      />
-      <SingleProductContent
-        counter={counter}
-        setCounter={setCounter}
-        checkCounter={checkCounter}
-        dropdownOneList={dropdownOneList}
-        isOpenDropdownOne={isOpenDropdownOne}
-        setIsOpenDropdownOne={setIsOpenDropdownOne}
-        changeDropdownOne={changeDropdownOne}
-        dropdownTwoList={dropdownTwoList}
-        isOpenDropdownTwo={isOpenDropdownTwo}
-        setIsOpenDropdownTwo={setIsOpenDropdownTwo}
-        changeDropdownTwo={changeDropdownTwo}
-        dropdownThreeList={dropdownThreeList}
-        isOpenDropdownThree={isOpenDropdownThree}
-        setIsOpenDropdownThree={setIsOpenDropdownThree}
-        changeDropdownThree={changeDropdownThree}
-        details={details}
-        changeDetails={changeDetails}
-        isInfoWindowClosed={isInfoWindowClosed}
-        closeInfoWindow={closeInfoWindow}
-      />
-      <SingleProductAuthor />
-      <RecomendedProducts />
-      <Discount />
-    </Layout>
+    <PrefixProvider prefix={pageContext.prefix}>
+      <Layout>
+        <Seo title={`Contacts Page`} lang={pageContext.lang} />
+        <nav className="breadcrumbs single-product-breadcrumbs">
+          <div className="container">
+            <ul className="breadcrumbs__list breadcrumbs-list">
+              <li className="breadcrumbs-list__item">
+                <Link className="breadcrumbs-list__link" to="#">Home</Link>
+              </li>
+              <li className="breadcrumbs-list__item">
+                <span className="breadcrumbs-list__separator" />
+              </li>
+              <li className="breadcrumbs-list__item">
+                <Link className="breadcrumbs-list__link" to="#">Catalog</Link>
+              </li>
+              <li className="breadcrumbs-list__item">
+                <span className="breadcrumbs-list__separator" />
+              </li>
+              <li className="breadcrumbs-list__item">
+                <Link className="breadcrumbs-list__link" to="#">Category</Link>
+              </li>
+              <li className="breadcrumbs-list__item">
+                <span className="breadcrumbs-list__separator" />
+              </li>
+              <li className="breadcrumbs-list__item">
+                <span className="breadcrumbs-list__current">Single Product</span>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <SingleProductIntro
+          slider={slider}
+          counter={counter}
+          setCounter={setCounter}
+          checkCounter={checkCounter}
+          dropdownOneList={dropdownOneList}
+          isOpenDropdownOne={isOpenDropdownOne}
+          setIsOpenDropdownOne={setIsOpenDropdownOne}
+          changeDropdownOne={changeDropdownOne}
+          dropdownTwoList={dropdownTwoList}
+          isOpenDropdownTwo={isOpenDropdownTwo}
+          setIsOpenDropdownTwo={setIsOpenDropdownTwo}
+          changeDropdownTwo={changeDropdownTwo}
+          dropdownThreeList={dropdownThreeList}
+          isOpenDropdownThree={isOpenDropdownThree}
+          setIsOpenDropdownThree={setIsOpenDropdownThree}
+          changeDropdownThree={changeDropdownThree}
+        />
+        <SingleProductContent
+          counter={counter}
+          setCounter={setCounter}
+          checkCounter={checkCounter}
+          dropdownOneList={dropdownOneList}
+          isOpenDropdownOne={isOpenDropdownOne}
+          setIsOpenDropdownOne={setIsOpenDropdownOne}
+          changeDropdownOne={changeDropdownOne}
+          dropdownTwoList={dropdownTwoList}
+          isOpenDropdownTwo={isOpenDropdownTwo}
+          setIsOpenDropdownTwo={setIsOpenDropdownTwo}
+          changeDropdownTwo={changeDropdownTwo}
+          dropdownThreeList={dropdownThreeList}
+          isOpenDropdownThree={isOpenDropdownThree}
+          setIsOpenDropdownThree={setIsOpenDropdownThree}
+          changeDropdownThree={changeDropdownThree}
+          details={details}
+          changeDetails={changeDetails}
+          isInfoWindowClosed={isInfoWindowClosed}
+          closeInfoWindow={closeInfoWindow}
+        />
+        <SingleProductAuthor />
+        <RecomendedProducts />
+        <Discount />
+      </Layout>
+    </PrefixProvider>
   )
 }
 

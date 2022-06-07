@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 import  { Pagination, EffectFade } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'

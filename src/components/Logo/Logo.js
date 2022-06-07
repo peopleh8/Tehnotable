@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 
 import './Logo.scss'
 
+import { PrefixContext } from '../../context/PrefixProvider'
+
 import logo from '../../images/logo.svg'
 
-const Logo = (props) => {
+const Logo = () => {
+  let prefix = useContext(PrefixContext)
+
   return (
     <div className="logo">
-      <Link to={props.langPrefix} className="logo__link">
-        <img src={logo} alt=""/>
+      <Link className="logo__link" to={prefix}>
+        <img src={logo} alt="Logo" width={180} height={25} />
       </Link>
     </div>
   )

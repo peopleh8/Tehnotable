@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import gsap from 'gsap'
 
@@ -397,9 +397,28 @@ const SearchIntro = ({ query }) => {
 
   let [ isLoading, setIsLoading ] = useState(true)
 
-  const changeVariability = (parentId, childId, event) => {
+  useEffect(() => {
+    let searchIntroTl = gsap.timeline()
+
+    searchIntroTl
+      .from('.search-intro__title', .5, { delay: .4, y: '100%', onComplete() {
+        searchIntroTl.set(this.targets(), { clearProps: 'all' })
+      }})
+
+    if (isBrowser()) {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 5000)
+    }
+
+    return () => {
+      searchIntroTl.kill()
+    }
+  }, [])
+
+  const changeVariability = useCallback((parentId, childId, event) => {
     let img = event.currentTarget.parentElement.parentElement,
-        newImg = event.currentTarget.dataset.imgSrc
+      newImg = event.currentTarget.dataset.imgSrc
 
     img.classList.add('fade')
 
@@ -423,31 +442,12 @@ const SearchIntro = ({ query }) => {
         }))
       }, 150)
     }
-  }
-
-  useEffect(() => {
-    let searchIntroTl = gsap.timeline()
-
-    searchIntroTl
-      .from('.search-intro__title', .5, { delay: .4, y: '100%', onComplete() {
-        searchIntroTl.set(this.targets(), { clearProps: 'all' })
-      }})
-
-    if (isBrowser()) {
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 5000)
-    }
-
-    return () => {
-      searchIntroTl.kill()
-    }
-  }, [])
+  }, [list])
 
   return (
     <section className="intro search-intro">
       <div className="container">
-        <div className="search-intro__title-wrapper title-wrapper" style={{ marginBottom: !query && '0' }}>
+        <div className="search-intro__title-wrapper title-wrapper">
           {
             query
               ? <h1 className="search-intro__title title title--big">Search result for <span>“{query}”</span></h1>

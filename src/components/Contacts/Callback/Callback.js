@@ -6,6 +6,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import './Callback.scss'
 
 import CallBackForm from './CallbackForm'
+import ModalThanks from '../../ModalThanks/ModalThanks'
 
 const Callback = () => {
   useEffect(() => {
@@ -44,6 +45,7 @@ const Callback = () => {
           <div className="callback__title title title--small">Write to us</div>
         </div>
         <CallBackForm />
+        <ModalThanks />
       </div>
     </section>
   )

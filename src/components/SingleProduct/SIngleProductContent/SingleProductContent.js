@@ -2,7 +2,6 @@ import React  from 'react'
 
 import SingleProductBox from './SingleProductBox'
 import SingleProductSidebar from './SingleProductSidebar'
-import SingleProductModal from './SingleProductModal'
 
 import './SingleProductContent.scss'
 
@@ -54,7 +53,6 @@ const SingleProductContent = ({
             setIsOpenDropdownThree={setIsOpenDropdownThree}
             changeDropdownThree={changeDropdownThree}
           />
-          <SingleProductModal />
         </div>
       </div>
     </section>

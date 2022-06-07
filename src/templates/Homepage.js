@@ -17,12 +17,14 @@ import Quote from '../components/Quote/Quote'
 import SeoBlock from '../components/SeoBlock/SeoBlock'
 import RecomendedProducts from '../components/RecomendedProducts/RecomendedProducts'
 import Discount from '../components/Discount/Discount'
-import PageLoader from "../components/PageLoader/PageLoader";
+import PageLoader from '../components/PageLoader/PageLoader'
+
+import PrefixProvider from '../context/PrefixProvider'
 
 import { isBrowser } from '../utils/isBrowser'
 
-const IndexPage = (props) => {
-  if (!isBrowser()) return null
+
+const IndexPage = ({ pageContext }) => {
   // const homePage = props.data.allWpPage.edges[0].node.homePage;
   let [ isHideHeaderFullpage, setIsHideHeaderFullpage ] = useState(false)
 
@@ -33,32 +35,36 @@ const IndexPage = (props) => {
 
   const fullpageRef = { sectionWrapperOne, sectionWrapperTwo, sectionOne, sectionTwo }
 
+  if (!isBrowser()) return null
+
   return (
-    <Layout langPrefix={props.pageContext.prefix} isHideHeaderFullpage={isHideHeaderFullpage}>
-      <Seo title="Home" lang={props.pageContext.lang} />
-      <PageLoader />
-      <div className="section-wrapper" ref={sectionWrapperOne}>
-        <Intro />
-        <Category />
-        <MainAbout />
-        <RecomendedProducts />
-        <BenefitsSlider />
-        <MainOrder />
-        <BenefitsTab />
-        <div className="work-position-wrapper" ref={sectionOne}>
-          <WorkPosition />
+    <PrefixProvider prefix={pageContext.prefix}>
+      <Layout isHideHeaderFullpage={isHideHeaderFullpage}>
+        <Seo title="Home" lang={pageContext.lang} />
+        <PageLoader />
+        <div className="section-wrapper" ref={sectionWrapperOne}>
+          <Intro />
+          <Category />
+          <MainAbout />
+          <RecomendedProducts />
+          <BenefitsSlider />
+          <MainOrder />
+          <BenefitsTab />
+          <div className="work-position-wrapper" ref={sectionOne}>
+            <WorkPosition />
+          </div>
         </div>
-      </div>
-      <Fullpage setIsHideHeaderFullpage={setIsHideHeaderFullpage} ref={fullpageRef} />
-      <div className="section-wrapper" ref={sectionWrapperTwo}>
-        <div className="discount-wrapper" ref={sectionTwo}>
-          <Discount />
+        <Fullpage setIsHideHeaderFullpage={setIsHideHeaderFullpage} ref={fullpageRef} />
+        <div className="section-wrapper" ref={sectionWrapperTwo}>
+          <div className="discount-wrapper" ref={sectionTwo}>
+            <Discount />
+          </div>
+          <Gallery />
+          <Quote />
+          <SeoBlock />
         </div>
-        <Gallery />
-        <Quote />
-        <SeoBlock />
-      </div>
-    </Layout>
+      </Layout>
+    </PrefixProvider>
   )
 }
 

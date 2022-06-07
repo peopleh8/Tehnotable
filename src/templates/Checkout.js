@@ -5,12 +5,16 @@ import Seo from '../components/seo'
 
 import CheckoutIntro from '../components/Checkout/Intro/Intro'
 
-const Checkout = (props) => {
+import PrefixProvider from '../context/PrefixProvider'
+
+const Checkout = ({ pageContext }) => {
   return (
-    <Layout langPrefix={props.pageContext.prefix} isHiddenFooterTop={true} isShowenHeaderCheckout={true}>
-      <Seo title={`Checkout Page`} lang={props.pageContext.lang} />
-      <CheckoutIntro />
-    </Layout>
+    <PrefixProvider prefix={pageContext.prefix}>
+      <Layout isHiddenFooterTop={true} isShowenHeaderCheckout={true}>
+        <Seo title={`Checkout Page`} lang={pageContext.lang} />
+        <CheckoutIntro />
+      </Layout>
+    </PrefixProvider>
   )
 }
 

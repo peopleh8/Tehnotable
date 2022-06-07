@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
-
 import gsap from 'gsap'
+
+import { PrefixContext } from '../../context/PrefixProvider'
+
+import { isBrowser } from '../../utils/isBrowser'
 
 import sprite from '../../icons/sprite.svg'
 
 const HeaderControls = (props) => {
+  let prefix = useContext(PrefixContext)
+
   const openCart = () => {
     props.setIsCartOpen(true)
 
@@ -31,16 +36,33 @@ const HeaderControls = (props) => {
 
   return (
     <div className="header-controls">
-      <div className="header-controls__item">
+      <div className="header-controls__item logged-in">
         <Link
           className="header-controls__link"
-          to="/login/"
+          to={`${prefix}login/`}
           activeClassName="active"
         >
           <svg>
             <use href={`${sprite}#user`} />
           </svg>
         </Link>
+        <div>
+          <div className="controls-dropdown">
+            <Link
+              className={`controls-dropdown__link ${isBrowser() && (window.location.hash === '#information' || (!window.location.hash && window.location.pathname.includes('account'))) ? 'active' : ''}`}
+              to={`${prefix}account/#information`}
+            >
+              Personal information
+            </Link>
+            <Link
+              className={`controls-dropdown__link ${isBrowser() && window.location.hash === '#history' ? 'active' : ''}`}
+              to={`${prefix}account/#history`}
+            >
+              Order history
+            </Link>
+            <button className="controls-dropdown__link" onClick={() => alert('Logout')}>Logout</button>
+          </div>
+        </div>
       </div>
       <div className="header-controls__item">
         <button

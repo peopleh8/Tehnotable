@@ -86,7 +86,8 @@ const ParallaxSlider = () => {
         waitForTransition={true}
         controller={{ control: controlledSlider }}
         autoplay={{
-          delay: 5000
+          delay: 5000,
+          disableOnInteraction: false
         }}
         pagination={{
           clickable: true,
@@ -133,14 +134,15 @@ const ParallaxSlider = () => {
           }
         }}
         onSlideChange={(swiper) => {
-          let index = swiper.realIndex + 1
-
-          gsap.to(curnum.current, .2, { force3D: true, y: -10, opacity: 0, ease: 'Power2.easeOut', onComplete: () => {
+          if (swiper.initialized || swiper.runCallbacksOnInit) {
+            let index = swiper.realIndex + 1
+            gsap.to(curnum.current, .2, { force3D: true, y: -10, opacity: 0, ease: 'Power2.easeOut', onComplete: () => {
               gsap.to(curnum.current, .1, { force3D: true, y: 10 })
-
               curnum.current.innerHTML = index < 10 ? `0${index}` : index
-            }});
-          gsap.to(curnum.current, .2, { force3D: true, y: 0, opacity: 1, ease: 'Power2.easeOut', delay: .3 })
+            }})
+            gsap.to(curnum.current, .2, { force3D: true, y: 0, opacity: 1, ease: 'Power2.easeOut', delay: .3 })
+          }
+
         }}
       >
         {

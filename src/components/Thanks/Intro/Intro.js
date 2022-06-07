@@ -1,15 +1,18 @@
-import React, {useEffect, useRef} from 'react'
+import React, { useEffect, useRef, useContext } from 'react'
 import { Link } from 'gatsby'
-
 import gsap from 'gsap'
 
 import './Intro.scss'
+
+import { PrefixContext } from '../../../context/PrefixProvider'
 
 import { isBrowser } from '../../../utils/isBrowser'
 
 import errorBg from '../../../images/bg.jpg'
 
 const ThanksIntro = ({ deliveryCode }) => {
+  let prefix = useContext(PrefixContext)
+
   const bg = useRef()
   const forIntro = 17
   const speed = .05
@@ -78,7 +81,7 @@ const ThanksIntro = ({ deliveryCode }) => {
           <p className="thanks-intro__desc">
             Our manager will contact you
           </p>
-          <Link className="thanks-intro__btn form-btn" to="/">
+          <Link className="thanks-intro__btn form-btn" to={prefix}>
             <span>Back homepage</span>
             <span>Back homepage</span>
           </Link>

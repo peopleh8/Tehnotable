@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-
-import './SeoBlock.scss'
-import { isBrowser } from '../../utils/isBrowser'
-
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+
+import './SeoBlock.scss'
+
+import { isBrowser } from '../../utils/isBrowser'
 
 const SeoBlock = () => {
   let [isOpen, setIsOpen] = useState(false)

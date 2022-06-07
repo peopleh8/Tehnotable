@@ -1,44 +1,17 @@
-import React, { useEffect } from 'react'
-
+import React, { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import './Subscribe.scss'
 
+import ModalThanks from '../../ModalThanks/ModalThanks'
+
 import { fieldChange } from '../../../utils/fieldChange'
 import { fieldBlur } from '../../../utils/fieldBlur'
 
 const Subscribe = () => {
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
-
-    let subscribeTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.subscribe',
-        start: 'center bottom'
-      }
-    })
-
-    subscribeTl
-      .from('.subscribe__form-label', .5, { y: -30, opacity: 0, onComplete() {
-        subscribeTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.subscribe__form-inp-inner', .5, { y: -30, opacity: 0, onComplete() {
-        subscribeTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.4')
-      .from('.subscribe__form-btn-wrapper', .5, { y: -30, opacity: 0, onComplete() {
-        subscribeTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.5')
-      .from('.subscribe__desc', .5, { y: -30, opacity: 0, onComplete() {
-        subscribeTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.4')
-
-    return () => {
-      subscribeTl.kill()
-    }
-  }, [])
+  let thanksBtn = useRef()
 
   const {
     register,
@@ -62,6 +35,39 @@ const Subscribe = () => {
   const formError = (error, e) => {
     console.error(error)
   }
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    let subscribeTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.subscribe',
+        start: 'center bottom'
+      }
+    })
+
+    subscribeTl
+      .from('.subscribe__form-label', .5, { y: -30, opacity: 0, onComplete() {
+          subscribeTl.set(this.targets(), { clearProps: 'all' })
+        }})
+      .from('.subscribe__form-inp-inner', .5, { y: -30, opacity: 0, onComplete() {
+          subscribeTl.set(this.targets(), { clearProps: 'all' })
+        }}, '-=.4')
+      .from('.subscribe__form-btn-wrapper', .5, { y: -30, opacity: 0, onComplete() {
+          subscribeTl.set(this.targets(), { clearProps: 'all' })
+        }}, '-=.5')
+      .from('.subscribe__desc', .5, { y: -30, opacity: 0, onComplete() {
+          subscribeTl.set(this.targets(), { clearProps: 'all' })
+        }}, '-=.4')
+
+    return () => {
+      subscribeTl.kill()
+    }
+  }, [])
+
+  useEffect(() => {
+    isSubmitSuccessful && thanksBtn.current.click()
+  }, [isSubmitSuccessful])
 
   return (
     <section className="subscribe" onSubmit={handleSubmit(formSubmit, formError)}>
@@ -93,9 +99,23 @@ const Subscribe = () => {
                 </div>
               </div>
               <div className="subscribe__form-btn-wrapper">
-                <button className={`subscribe__form-btn form-btn ${isSubmitSuccessful ? 'disabled' : ''}`} type="submit" disabled={isSubmitSuccessful}>
+                <button
+                  className={`subscribe__form-btn form-btn ${isSubmitSuccessful ? 'disabled' : ''}`}
+                  type="submit"
+                  disabled={isSubmitSuccessful}
+                >
                   <span>subscribe</span>
                   <span>subscribe</span>
+                </button>
+                <button
+                  className="subscribe__form-btn-hidden"
+                  ref={thanksBtn}
+                  type="button"
+                  data-fancybox="thanks"
+                  data-src="#thanks-modal"
+                  style={{ display: 'none' }}
+                >
+                  Thanks
                 </button>
               </div>
             </form>
@@ -103,6 +123,7 @@ const Subscribe = () => {
           </div>
         </div>
       </div>
+      <ModalThanks />
     </section>
   )
 }

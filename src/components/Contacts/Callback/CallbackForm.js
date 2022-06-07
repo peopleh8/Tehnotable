@@ -1,17 +1,13 @@
-import React from 'react'
-
+import React, { useEffect, useRef } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-
 import InputMask from 'react-input-mask'
 
 import { fieldChange } from '../../../utils/fieldChange'
 import { fieldBlur } from '../../../utils/fieldBlur'
+import { phoneBlur } from '../../../utils/phoneBlur'
 
 const CallBackForm = () => {
-  const phoneBlur = e =>
-    e.currentTarget.value === '+380 (__) ___-__-__' || !e.currentTarget.value
-      ? e.currentTarget.nextElementSibling.classList.remove('focused')
-      : e.currentTarget.nextElementSibling.classList.add('focused')
+  let thanksBtn = useRef()
 
   const {
     register,
@@ -36,6 +32,10 @@ const CallBackForm = () => {
   const formError = (error, e) => {
     console.error(error)
   }
+
+  useEffect(() => {
+    isSubmitSuccessful && thanksBtn.current.click()
+  }, [isSubmitSuccessful])
 
   return (
     <form className="callback__form callback-form" onSubmit={handleSubmit(formSubmit, formError)}>
@@ -143,6 +143,16 @@ const CallBackForm = () => {
           <button className={`callback-form__btn form-btn ${isSubmitSuccessful ? 'disabled' : ''}`} type="submit" disabled={isSubmitSuccessful}>
             <span>Submit</span>
             <span>Submit</span>
+          </button>
+          <button
+            className="callback-form__btn-hidden"
+            ref={thanksBtn}
+            type="button"
+            data-fancybox="thanks"
+            data-src="#thanks-modal"
+            style={{ display: 'none' }}
+          >
+            Thanks
           </button>
         </div>
       </div>

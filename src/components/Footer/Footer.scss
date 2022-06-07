@@ -17,24 +17,6 @@
         border: 1px solid #807F7F;
         border-radius: 4px;
         transition: background .2s ease;
-        &:nth-of-type(1) {
-          .footer-top__social-icon svg {
-            width: 18px;
-            height: 15px;
-          }
-        }
-        &:nth-of-type(2) {
-          .footer-top__social-icon svg {
-            width: 6px;
-            height: 15px;
-          }
-        }
-        &:nth-of-type(3) {
-          .footer-top__social-icon svg {
-            width: 14px;
-            height: 14px;
-          }
-        }
         & + & {
           margin-left: 15px;
         }
@@ -46,6 +28,33 @@
             }
           }
         }
+        @media (max-width: 1024px) {
+          &:active {
+            background: #000;
+            .footer-top__social-icon svg {
+              fill: #F3F3F3;
+            }
+          }
+        }
+      }
+      &-icon {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+          display: block;
+          width: 60%;
+          height: 60%;
+          fill: #000;
+          @media (min-width: 1024px) {
+            transition: fill .2s ease;
+          }
+          @media (max-width: 1024px) {
+            transition: fill .1s ease;
+          }
+        }
       }
       &-link {
         display: flex;
@@ -53,13 +62,6 @@
         height: 100%;
         justify-content: center;
         align-items: center;
-      }
-      &-icon {
-        display: block;
-        svg {
-          display: block;
-          transition: fill .2s ease;
-        }
       }
     }
     &__left {
@@ -213,16 +215,20 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #000000;
-    transition: color .2s ease;
     @media (min-width: 1024px) {
+      transition: color .2s ease;
       &:hover {
         color: #133BFE;
       }
     }
     @media (max-width: 1024px) {
+      transition: color .1s ease;
       &:active {
         color: #133BFE;
       }
+    }
+    &.active {
+      color: #133BFE;
     }
   }
 }

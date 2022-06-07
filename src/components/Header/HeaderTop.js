@@ -1,7 +1,9 @@
 import React from 'react'
-import HeaderSwitcher from "./HeaderSwitcher";
-import HeaderSlider from "./HeaderSlider";
-import HeaderPhones from "./HeaderPhones";
+
+import HeaderSwitcher from './HeaderSwitcher'
+import HeaderSlider from './HeaderSlider'
+import HeaderPhones from './HeaderPhones'
+import HeaderSocial from "./HeaderSocial";
 
 const HeaderTop = () => {
   return (
@@ -11,6 +13,7 @@ const HeaderTop = () => {
           <HeaderSwitcher />
           <HeaderSlider />
           <HeaderPhones />
+          <HeaderSocial />
         </div>
       </div>
     </div>

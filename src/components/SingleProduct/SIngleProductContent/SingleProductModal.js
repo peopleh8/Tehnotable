@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { useForm } from 'react-hook-form'
-
 import gsap from 'gsap'
-
 import { Fancybox } from '@fancyapps/ui'
 import '@fancyapps/ui/dist/fancybox.css'
 
@@ -12,7 +10,7 @@ import { getScrollbarWidth } from '../../../utils/getScrollbarWidth'
 
 import sprite from '../../../icons/sprite.svg'
 
-const SingleProductModal = () => {
+const SingleProductModal = ({ setSubmited }) => {
   let commentModalTl = null
   let [ rating, setRating ] = useState(0)
 
@@ -29,50 +27,63 @@ const SingleProductModal = () => {
     alert(JSON.stringify({...data, rating: rating}))
     reset()
     setRating(0)
+    Fancybox.close()
+
+    if (isBrowser()) {
+      setTimeout(() => {
+        setSubmited(true)
+      }, 100)
+    }
   }
 
   const formError = (error, e) => {
     console.error(error)
   }
 
-  Fancybox.bind("[data-fancybox]", {
-    showClass: 'fancybox-fadeIn',
-    hideClass: 'fancybox-fadeOut',
-    dragToClose: false,
-    parentEl: isBrowser() && document.querySelector('#___gatsby'),
-    on: {
-      init: () => {
-        if (isBrowser()) document.querySelector('.header__bot').style.paddingRight = getScrollbarWidth()
-      },
-      ready: () => {
-        commentModalTl = gsap.timeline()
+  useEffect(() => {
+    Fancybox.bind("[data-fancybox='comment']", {
+      showClass: 'fancybox-fadeIn',
+      hideClass: 'fancybox-fadeOut',
+      dragToClose: false,
+      parentEl: isBrowser() && document.querySelector('#___gatsby'),
+      on: {
+        init: () => {
+          if (isBrowser()) document.querySelector('.header__bot').style.paddingRight = getScrollbarWidth()
+        },
+        ready: () => {
+          commentModalTl = gsap.timeline()
 
-        commentModalTl
-          .from('.single-product-content-modal__title', .5, { delay: .2, y: '100%', onComplete() {
-            commentModalTl.set(this.targets(), { clearProps: 'all' })
-          }})
-          .from('.field-inner', .5, { y: 20, opacity: 0, stagger: .1, onComplete() {
-            commentModalTl.set(this.targets(), { clearProps: 'all' })
-          }}, '-=.2')
-          .from('.single-product-content-modal__rating-inner > svg', .5, { x: -30, opacity: 0, stagger: .1, onComplete() {
-            commentModalTl.set(this.targets(), { clearProps: 'all' })
-          }}, '-=.3')
-          .from('.single-product-content-modal__label', .5, { y: -20, opacity: 0, stagger: .1, onComplete() {
-            commentModalTl.set(this.targets(), { clearProps: 'all' })
-          }}, '-=.3')
-          .from('.single-product-content-modal__btn-wrapper', .5, { y: 20, opacity: 0, onComplete() {
-            commentModalTl.set(this.targets(), { clearProps: 'all' })
-          }}, '-=.2')
-      },
-      destroy: () => {
-        commentModalTl.kill()
-        if (isBrowser()) document.querySelector('.header__bot').style.paddingRight = '0'
+          commentModalTl
+            .from('.single-product-content-modal__title', .5, { delay: .2, y: '100%', onComplete() {
+                commentModalTl.set(this.targets(), { clearProps: 'all' })
+              }})
+            .from('.field-inner', .5, { y: 20, opacity: 0, stagger: .1, onComplete() {
+                commentModalTl.set(this.targets(), { clearProps: 'all' })
+              }}, '-=.2')
+            .from('.single-product-content-modal__rating-inner > svg', .5, { x: -30, opacity: 0, stagger: .1, onComplete() {
+                commentModalTl.set(this.targets(), { clearProps: 'all' })
+              }}, '-=.3')
+            .from('.single-product-content-modal__label', .5, { y: -20, opacity: 0, stagger: .1, onComplete() {
+                commentModalTl.set(this.targets(), { clearProps: 'all' })
+              }}, '-=.3')
+            .from('.single-product-content-modal__btn-wrapper', .5, { y: 20, opacity: 0, onComplete() {
+                commentModalTl.set(this.targets(), { clearProps: 'all' })
+              }}, '-=.2')
+        },
+        destroy: () => {
+          commentModalTl.kill()
+          if (isBrowser()) document.querySelector('.header__bot').style.paddingRight = !isSubmitSuccessful && '0'
+        }
       }
+    })
+
+    return () => {
+      Fancybox.destroy()
     }
-  });
+  }, [])
 
   return (
-    <div className="single-product-content__modal single-product-content-modal" id="review-modal" style={{ display: 'none' }}>
+    <div className="single-product-content__modal single-product-content-modal modal" id="review-modal" style={{ display: 'none' }}>
       <div className="single-product-content-modal__title-wrapper title-wrapper">
         <div className="single-product-content-modal__title title title--big">Add a comment</div>
       </div>
@@ -154,7 +165,7 @@ const SingleProductModal = () => {
           </div>
         </div>
         <div className="single-product-content-modal__btn-wrapper">
-          <button className="single-product-content-modal__btn form-btn" type="submit">
+          <button className={`single-product-content-modal__btn form-btn ${isSubmitSuccessful ? 'disabled' : ''}`} type="submit">
             <span>Add a comment</span>
             <span>Add a comment</span>
           </button>

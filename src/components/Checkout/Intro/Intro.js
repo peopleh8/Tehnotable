@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { navigate } from 'gatsby'
-
 import { useForm } from 'react-hook-form'
-
 import gsap from 'gsap'
 
 import './Intro.scss'
@@ -17,9 +15,13 @@ import DeliveryInfo from './DeliveryInfo'
 
 import { isBrowser } from '../../../utils/isBrowser'
 
+import { PrefixContext } from '../../../context/PrefixProvider'
+
 import checkout1 from '../../../images/checkout-1.png'
 
 const CheckoutIntro = () => {
+  let prefix = useContext(PrefixContext)
+
   let [ items, setItems ] = useState([
     {
       id: 1,
@@ -63,7 +65,7 @@ const CheckoutIntro = () => {
     }
   ])
 
-  const deleteItem = (id, e) => {
+  const deleteItem = useCallback((id, e) => {
     e.currentTarget.parentElement.parentElement.parentElement.classList.add('hide')
 
     if (isBrowser()) {
@@ -71,7 +73,7 @@ const CheckoutIntro = () => {
         setItems(items.filter(item => item.id !== id))
       },250)
     }
-  }
+  }, [items])
 
   useEffect(() => {
     let checkoutIntroTl = gsap.timeline()
@@ -117,7 +119,7 @@ const CheckoutIntro = () => {
   const formSubmit = (data, e) => {
     alert(JSON.stringify({...data, ...items}))
 
-    navigate('/thanks/', { state: { deliveryCode: '11111' } })
+    navigate(`${prefix}thanks/`, { state: { deliveryCode: '11111' } })
   }
 
   const formError = (error, e) => {

@@ -31,7 +31,7 @@ const RecoveryContent = () => {
       <div className="intro-login-content__inner">
         {
           isSubmitSuccessful && <div className="intro-login__sent">
-            <div className="intro-login__sent-icon">
+            <div className="intro-login__sent-icon check-icon">
               <svg viewBox="0 0 133 133" version="1.1">
                 <g id="check-group" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                   <circle id="filled-circle" fill="#000" cx="66.5" cy="66.5" r="54.5" />

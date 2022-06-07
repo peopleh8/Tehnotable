@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 import HeaderSwitcherCurrent from './HeaderSwitcherCurrent'
 import HeaderSwitcherDropdown from './HeaderSwitcherDropdown'
+
+import { PrefixContext } from '../../context/PrefixProvider'
 
 import { isBrowser } from '../../utils/isBrowser'
 
 const HeaderSwitcher = () => {
   let [ isOpen, setIsOpen ] = useState(false)
+  let prefix = useContext(PrefixContext)
 
   useEffect(() => {
     const closeDropdown = e => {
@@ -26,8 +29,8 @@ const HeaderSwitcher = () => {
 
   return (
     <div className="header__top-switcher header-switcher">
-      <HeaderSwitcherCurrent isOpen={isOpen} setIsOpen={setIsOpen} />
-      <HeaderSwitcherDropdown isOpen={isOpen} />
+      <HeaderSwitcherCurrent isOpen={isOpen} setIsOpen={setIsOpen} prefix={prefix} />
+      <HeaderSwitcherDropdown isOpen={isOpen} prefix={prefix} />
     </div>
   )
 }

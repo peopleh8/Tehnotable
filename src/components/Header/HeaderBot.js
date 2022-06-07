@@ -47,8 +47,8 @@ const HeaderBot = (props) => {
     }>
       <div className="container">
         <div className="header__bot-inner">
-          <Logo langPrefix={props.langPrefix} />
-          <Menu langPrefix={props.langPrefix} setIsItemHover={props.setIsItemHover} />
+          <Logo />
+          <Menu setIsItemHover={props.setIsItemHover} />
           <HeaderControls
             isSearchOpen={props.isSearchOpen}
             setIsSearchOpen={props.setIsSearchOpen}

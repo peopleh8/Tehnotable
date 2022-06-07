@@ -9,34 +9,38 @@ import Seo from '../components/seo'
 import Intro from '../components/SinglePost/Intro/Intro'
 import Similar from '../components/SinglePost/Similar/Similar'
 
-const SinglePost = (props) => {
+import PrefixProvider from '../context/PrefixProvider'
+
+const SinglePost = ({ pageContext }) => {
   return (
-    <Layout langPrefix={props.pageContext.prefix}>
-      <Seo title={`Contacts Page`} lang={props.pageContext.lang} />
-      <nav className="breadcrumbs single-post-breadcrumbs">
-        <div className="container">
-          <ul className="breadcrumbs__list breadcrumbs-list">
-            <li className="breadcrumbs-list__item">
-              <Link className="breadcrumbs-list__link" to="#">Home</Link>
-            </li>
-            <li className="breadcrumbs-list__item">
-              <span className="breadcrumbs-list__separator" />
-            </li>
-            <li className="breadcrumbs-list__item">
-              <Link className="breadcrumbs-list__link" to="#">Blog</Link>
-            </li>
-            <li className="breadcrumbs-list__item">
-              <span className="breadcrumbs-list__separator" />
-            </li>
-            <li className="breadcrumbs-list__item">
-              <span className="breadcrumbs-list__current">Single Post</span>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <Intro />
-      <Similar />
-    </Layout>
+    <PrefixProvider prefix={pageContext.prefix}>
+      <Layout>
+        <Seo title={`Contacts Page`} lang={pageContext.lang} />
+        <nav className="breadcrumbs single-post-breadcrumbs">
+          <div className="container">
+            <ul className="breadcrumbs__list breadcrumbs-list">
+              <li className="breadcrumbs-list__item">
+                <Link className="breadcrumbs-list__link" to="#">Home</Link>
+              </li>
+              <li className="breadcrumbs-list__item">
+                <span className="breadcrumbs-list__separator" />
+              </li>
+              <li className="breadcrumbs-list__item">
+                <Link className="breadcrumbs-list__link" to="#">Blog</Link>
+              </li>
+              <li className="breadcrumbs-list__item">
+                <span className="breadcrumbs-list__separator" />
+              </li>
+              <li className="breadcrumbs-list__item">
+                <span className="breadcrumbs-list__current">Single Post</span>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <Intro />
+        <Similar />
+      </Layout>
+    </PrefixProvider>
   )
 }
 

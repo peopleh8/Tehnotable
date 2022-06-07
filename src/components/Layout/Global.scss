@@ -619,7 +619,6 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-
     img {
       width: 100%;
       height: 100%;
@@ -634,5 +633,155 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+  }
+}
+
+#nprogress{
+  position: fixed;
+  z-index: 999;
+  .bar {
+    background: #133BFE !important;
+  }
+}
+
+.modal {
+  background: #000 !important;
+  color: #fff !important;
+  width: 100%;
+  .carousel__button.is-close {
+    border: none !important;
+    outline: none !important;
+    opacity: 0;
+    &:active,
+    &:focus {
+      border: none !important;
+      outline: none !important;
+    }
+    top: 30px !important;
+    right: 30px !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #EEEEEE;
+    box-shadow: none !important;
+    @media (min-width: 1024px) {
+      transition: background .2s ease;
+      &:hover {
+        background: #133BFE;
+        svg {
+          color: #fff;
+        }
+      }
+    }
+    @media (max-width: 1024px) {
+      transition: background .1s ease;
+      &:active {
+        background: #133BFE;
+        svg {
+          color: #fff;
+        }
+      }
+    }
+    svg {
+      width: 15px;
+      height: 15px;
+      color: #000;
+      filter: none !important;
+      @media (min-width: 1024px) {
+        transition: color .2s ease;
+      }
+      @media (max-width: 1024px) {
+        transition: color .1s ease;
+      }
+    }
+  }
+  input,
+  textarea,
+  button {
+    border: none !important;
+    outline: none !important;
+    &:active,
+    &:focus {
+      border: none !important;
+      outline: none !important;
+    }
+  }
+}
+
+.accordion-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: #eee;
+  svg {
+    stroke: #000;
+    display: block;
+    height: 10px;
+    width: 18px;
+    transition: all .2s ease;
+  }
+}
+
+$radius: 55px;
+$circumf: 3.1416 * $radius * 2;
+$check-len: 75px;
+
+.check-icon {
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    #outline {
+      animation: .38s ease-in outline;
+      transform: rotate(0deg);
+      transform-origin: center;
+    }
+    #white-circle {
+      animation: .35s ease-in .35s forwards circle;
+      transform: none;
+      transform-origin: center;
+    }
+    #check {
+      animation: .35s ease-in-out .8s forwards check;
+      stroke-dasharray: 0, $check-len;
+    }
+  }
+}
+
+@keyframes visible {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes outline {
+  from {
+    stroke-dasharray: 0, $circumf;
+  }
+  to {
+    stroke-dasharray: $circumf, $circumf;
+  }
+}
+
+@keyframes circle {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0);
+  }
+}
+
+@keyframes check {
+  from {
+    stroke-dasharray: 0, $check-len;
+  }
+  to {
+    stroke-dasharray: $check-len, $check-len;
   }
 }

@@ -22,8 +22,6 @@
       padding: 30px 15px 65px;
       &-item {
         padding: 0 !important;
-        display: flex !important;
-        align-items: center;
         width: 260px;
         & + & {
           margin-top: 15px;
@@ -53,6 +51,7 @@
           border-radius: 0 !important;
           background: transparent !important;
           color: #133BFE;
+          pointer-events: none;
           .account-intro-tabs__nav-icon svg {
             fill: #133BFE;
           }
@@ -65,6 +64,10 @@
           left: 15px;
           bottom: 30px;
         }
+      }
+      &-inner {
+        display: flex;
+        align-items: center;
       }
       &-icon {
         margin-right: 8px;
@@ -224,12 +227,8 @@
             margin-top: 15px;
           }
           &.open {
-            .account-intro-tabs__content-accordion-icon::before {
-              transform: translate(-50%,-50%) rotate(-90deg);
-              opacity: 0;
-            }
-            .account-intro-tabs__content-accordion-icon::after {
-              transform: translate(-50%,-50%) rotate(0);
+            .account-intro-tabs__content-accordion-icon svg {
+              transform: rotate(-180deg);
             }
             .account-intro-tabs__content-accordion-elem:nth-child(3) .account-intro-tabs__content-accordion-value {
               color: #133BFE;
@@ -409,30 +408,6 @@
                 transition: color .1s ease;
               }
             }
-          }
-        }
-        &-icon {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          background: #000;
-          position: relative;
-          &::before,
-          &::after {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 2px;
-            background: #fff;
-            left: 50%;
-            top: 50%;
-            transition: opacity .3s ease, transform .3s ease;
-          }
-          &::before {
-            transform: translate(-50%, -50%);
-          }
-          &::after {
-            transform: translate(-50%, -50%) rotate(90deg);
           }
         }
       }

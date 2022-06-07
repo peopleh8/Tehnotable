@@ -5,12 +5,16 @@ import Seo from '../components/seo'
 
 import ThanksIntro from '../components/Thanks/Intro/Intro'
 
-const Thanks = (props) => {
+import PrefixProvider from '../context/PrefixProvider'
+
+const Thanks = ({ pageContext, location }) => {
   return (
-    <Layout langPrefix={props.pageContext.prefix} isHiddenFooterTop={true}>
-      <Seo title={`Thanks Page`} lang={props.pageContext.lang} />
-      <ThanksIntro deliveryCode={props?.location?.state?.deliveryCode} />
-    </Layout>
+    <PrefixProvider prefix={pageContext.prefix}>
+      <Layout isHiddenFooterTop={true}>
+        <Seo title={`Thanks Page`} lang={pageContext.lang} />
+        <ThanksIntro deliveryCode={location?.state?.deliveryCode} />
+      </Layout>
+    </PrefixProvider>
   )
 }
 

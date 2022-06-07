@@ -1,5 +1,7 @@
 import React from 'react'
-import { Link } from "gatsby";
+import { Link } from 'gatsby'
+
+import { getPageName } from '../../utils/getPageName'
 
 const FooterSwitcher = () => {
   return (
@@ -7,21 +9,21 @@ const FooterSwitcher = () => {
       <Link
         className="footer-switcher__item"
         activeClassName="active"
-        to={`/`}
+        to={`/${getPageName()}`}
       >
         RUS
       </Link>
       <Link
         className="footer-switcher__item"
         activeClassName="active"
-        to={`/uk/`}
+        to={`/uk/${getPageName()}`}
       >
         UKR
       </Link>
       <Link
         className="footer-switcher__item"
         activeClassName="active"
-        to={`/en/`}
+        to={`/en/${getPageName()}`}
       >
         ENG
       </Link>

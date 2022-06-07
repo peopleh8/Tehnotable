@@ -1,6 +1,10 @@
 .error-intro {
+  .container {
+    height: 100%;
+  }
   &__title {
     width: 100%;
+    transform: translateY(-20%);
     text {
       text-transform: uppercase;
       animation: stroke 5s 1;
@@ -8,21 +12,37 @@
       font-weight: 700;
       stroke: #fff;
       fill: #fff;
-      font-size: 240px;
+      font-size: 300px;
     }
   }
-  &__btn   {
+  &__inner {
+    position: relative;
+    justify-content: center;
+    height: 100%;
+    img {
+      pointer-events: none;
+      position: absolute;
+      width: 60%;
+      height: auto;
+      left: 25%;
+      bottom: -6%;
+    }
+  }
+  &__btn {
+    transform: translateY(-110%);
+    position: relative;
+    z-index: 2;
     display: block;
     width: 225px;
     height: 70px;
     white-space: nowrap;
-    background: #fff;
-    span {
-      color: #000;
-    }
+    background: #133BFE;
     @media (min-width: 1024px) {
-      &:hover span {
-        color: #fff;
+      &:hover {
+        background: #fff;
+        span {
+          color: #000;
+        }
       }
     }
   }
