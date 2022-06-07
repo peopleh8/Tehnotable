@@ -22,7 +22,7 @@ const RecomendedProducts = () => {
       id: 1,
       imgSrc: product1,
       title: 'Table for schoolchildren',
-      link: '#',
+      link: '/single-product/',
       cat: 'Height-adjustable tables',
       price: '40 000 uah – 41 500 uah',
       variability: [
@@ -44,7 +44,7 @@ const RecomendedProducts = () => {
       id: 2,
       imgSrc: product2,
       title: 'Work station WPN',
-      link: '#',
+      link: '/single-product/',
       cat: 'Height-adjustable tables',
       price: '40 000 uah – 41 500 uah'
     },
@@ -52,7 +52,7 @@ const RecomendedProducts = () => {
       id: 3,
       imgSrc: product3,
       title: 'Balancing board',
-      link: '#',
+      link: '/single-product/',
       cat: 'Complementary options',
       price: '2 000 uah'
     },
@@ -60,7 +60,7 @@ const RecomendedProducts = () => {
       id: 4,
       imgSrc: product4,
       title: 'Table for schoolchildren',
-      link: '#',
+      link: '/single-product/',
       cat: 'Height-adjustable tables',
       price: '40 000 uah – 41 500 uah',
       variability: [
