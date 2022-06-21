@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import Draggable from 'gsap/Draggable'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import InertiaPlugin from '../../../../node_modules/gsap/InertiaPlugin'
-import { Fancybox } from '@fancyapps/ui'
-import '@fancyapps/ui/dist/fancybox.css'
+// import InertiaPlugin from '../../../../node_modules/gsap/InertiaPlugin'
+// import { Fancybox } from '@fancyapps/ui'
+// import '@fancyapps/ui/dist/fancybox.css'
 
 import './GalleryIntro.scss'
 
@@ -54,7 +54,8 @@ const GalleryIntro = () => {
   }
 
   useEffect(() => {
-    gsap.registerPlugin(Draggable, InertiaPlugin, ScrollTrigger)
+    // gsap.registerPlugin(Draggable, InertiaPlugin, ScrollTrigger)
+    gsap.registerPlugin(Draggable, ScrollTrigger)
 
     gsap.from('.gallery-intro__wrapper', 3, { delay: .5, opacity: 0, scale: .9 })
 
@@ -67,7 +68,7 @@ const GalleryIntro = () => {
       '(max-width: 1024px)': () => {
         Draggable.create('.gallery-intro__inner', {
           bounds: '.gallery-intro',
-          inertia: true
+          // inertia: true
         })
       }
     })
