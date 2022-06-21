@@ -4,10 +4,10 @@ import './Skeleton.scss'
 
 import SkeletonItem from './SkeletonItem'
 
-const Skeleton = ({ type, length, imgWidth, imgHeight }) => {
+const Skeleton = ({ length, imgWidth, imgHeight }) => {
   return (
     <div className="skeleton">
-      {new Array(length).fill('', 0, length).map(() => <SkeletonItem type={type} imgWidth={imgWidth} imgHeight={imgHeight} />)}
+      { new Array(length).fill('', 0, length).map(() => <SkeletonItem imgWidth={imgWidth} imgHeight={imgHeight} />) }
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import gsap from 'gsap'
 import { Fancybox } from '@fancyapps/ui'
+
 import '@fancyapps/ui/dist/fancybox.css'
 
 import './ModalThanks.scss'
@@ -20,7 +21,7 @@ const ModalThanks = () => {
       on: {
         init: () => {
           if (isBrowser()) {
-            document.querySelector('.header__top').style.paddingRight = getScrollbarWidth()
+            if (document.querySelector('.header__top')) document.querySelector('.header__top').style.paddingRight = getScrollbarWidth()
             document.querySelector('.header__bot').style.paddingRight = getScrollbarWidth()
           }
         },
@@ -38,7 +39,7 @@ const ModalThanks = () => {
         destroy: () => {
           thanksModalTl.kill()
           if (isBrowser()) {
-            document.querySelector('.header__top').style.paddingRight = '0'
+            if (document.querySelector('.header__top')) document.querySelector('.header__top').style.paddingRight = '0'
             document.querySelector('.header__bot').style.paddingRight = '0'
           }
         }

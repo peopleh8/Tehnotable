@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-
 import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import IntroCategories from './IntroCategories'
 import IntroList from './IntroList'
@@ -133,23 +133,49 @@ const Intro = () => {
   useEffect(() => {
     let blogIntroTl = gsap.timeline()
 
-    blogIntroTl
-      .from('.intro-blog__title', .5, { delay: .2, y: '100%', onComplete() {
-        blogIntroTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.intro-blog__categories-title', .5, { y: -20, opacity: 0, onComplete() {
-        blogIntroTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.intro-blog__categories-item', .6, { x: -20, opacity: 0, stagger: .05, onComplete() {
-        blogIntroTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .to('.intro-blog__item-inner', 1.2, { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', stagger: .1, ease: 'Expo.easeInOut'}, '-=.2')
-      .from('.intro-blog__item-inner img', .6, { scale: 1.3, stagger: .1, onComplete() {
-        blogIntroTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=1.6')
-      .from('.intro-blog__item-icon', .4, { scale: 0, stagger: .1, ease: 'back', onComplete() {
-        blogIntroTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=1')
+    ScrollTrigger.matchMedia({
+      '(min-width: 1025px)': () => {
+        blogIntroTl
+          .from('.intro-blog__title', .5, { delay: .2, y: '100%', onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.intro-blog__categories-title', .5, { y: -20, opacity: 0, onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.intro-blog__categories-item', .6, { x: -20, opacity: 0, stagger: .05, onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .to('.intro-blog__item-inner', 1.2, { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', stagger: .1, ease: 'Expo.easeInOut'}, '-=.2')
+          .from('.intro-blog__item-inner img', .6, { scale: 1.3, stagger: .1, onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=1.6')
+          .from('.intro-blog__item-icon', .4, { scale: 0, stagger: .1, ease: 'back', onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=1')
+      },
+      '(max-width: 1024px)': () => {
+        blogIntroTl
+          .from('.intro-blog__title', .5, { delay: .2, y: '100%', onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.intro-blog__categories-title', .5, { y: -20, opacity: 0, onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.intro-blog__categories-item', .6, { x: -20, opacity: 0, stagger: .05, onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .to('.intro-blog__item-preview', 1.2, { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', stagger: .1, ease: 'Expo.easeInOut'}, '-=.2')
+          .from('.intro-blog__item-inner img', .6, { scale: 1.3, stagger: .1, onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=1.6')
+          .from('.intro-blog__item-info > *', .5, { y: -30, opacity: 0, stagger: .05, onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=1.4')
+          .from('.intro-blog__item-icon', .4, { scale: 0, stagger: .1, ease: 'back', onComplete() {
+            blogIntroTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=1')
+      }
+    })
 
     return () => {
       blogIntroTl.kill()
@@ -165,7 +191,6 @@ const Intro = () => {
     }))
 
     // setIsLoading(true)
-    //
     // setTimeout(() => {
     //   setIsLoading(false)
     // }, 5000)
@@ -188,7 +213,7 @@ const Intro = () => {
             isLoading={isLoading}
           />
         </div>
-        {!isLoading && <IntroPagination />}
+        { !isLoading && <IntroPagination /> }
       </div>
     </section>
   )

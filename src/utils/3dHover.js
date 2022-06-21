@@ -15,6 +15,10 @@ const getDirectionKey = (ev, node) => {
 }
 
 export const update = (ev, prefix) => {
-  ev.currentTarget.classList.remove(...classNames);
-  ev.currentTarget.classList.add(`${prefix}-${directions[getDirectionKey(ev, ev.currentTarget)]}`);
+  if (isBrowser()) {
+    if (window.innerWidth > 1024) {
+      ev.currentTarget.classList.remove(...classNames)
+      ev.currentTarget.classList.add(`${prefix}-${directions[getDirectionKey(ev, ev.currentTarget)]}`)
+    }
+  }
 }

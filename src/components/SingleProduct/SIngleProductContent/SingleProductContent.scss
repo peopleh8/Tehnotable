@@ -4,8 +4,7 @@
     display: flex;
   }
   &-box {
-    max-width: 860px;
-    width: 100%;
+    width: calc(100% - 480px - 160px);
   }
   &-tabs {
     font-family: "Montserrat" !important;
@@ -20,6 +19,10 @@
       padding-bottom: 10px;
       margin-bottom: 30px;
       z-index: 0 !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 680px;
       #marker {
         padding: 0 !important;
         position: absolute;
@@ -39,9 +42,9 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: #807F7F;
-        & + & {
-          margin-left: 50px;
-        }
+        //& + & {
+        //  margin-left: 50px;
+        //}
         @media (min-width: 1024px) {
           transition: color .2s ease;
           &:hover {
@@ -67,11 +70,10 @@
       &-desc,
       &-payment {
         p {
+          font-size: inherit !important;
+          line-height: 160% !important;
           font-weight: 400;
-          font-size: 20px;
-          line-height: 160%;
-          color: #000000;
-          margin-bottom: 20px;
+          color: #000;
         }
       }
       &-info {
@@ -90,6 +92,9 @@
           line-height: 160%;
           letter-spacing: -0.01em;
           width: 100%;
+          & + & {
+            margin-left: 20px;
+          }
           &:nth-child(1) {
             color: #807F7F;
             max-width: 165px;
@@ -102,9 +107,9 @@
       }
       &-reviews {
         &-item {
-          padding-bottom: 25px;
           & + & {
             padding-top: 25px;
+            margin-top: 25px;
             border-top: 1px solid #E7E7E7;
           }
         }
@@ -224,7 +229,7 @@
     height: 20px;
     cursor: pointer;
     & + & {
-      margin-left: 30px;
+      margin-left: 15px;
     }
     svg {
       display: block;
@@ -252,12 +257,19 @@
     }
     &__preview {
       position: relative;
+    }
+    &__photo {
+      position: relative;
       border: 1px solid #E7E7E7;
       &.fade {
-        .single-product-content-details__info-title,
-        .single-product-content-details__info-desc {
+        & + * .single-product-content-details__info-title,
+        & + * .single-product-content-details__info-desc {
           opacity: 0;
         }
+      }
+      img {
+        width: 100%;
+        height: auto;
       }
     }
     &__info {
@@ -764,6 +776,230 @@
             color: #000;
           }
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 1366px) {
+  .single-product-content {
+    padding: 40px 0 80px;
+    &-box {
+      width: calc(100% - 455px - 30px);
+    }
+    &-sidebar {
+      margin-left: 30px;
+      &__inner {
+        width: 455px;
+        position: static;
+      }
+    }
+    &-tabs {
+      margin-bottom: 80px;
+      &__nav {
+        max-width: 610px;
+      }
+    }
+    &__slider-wrapper {
+      margin-bottom: 80px;
+    }
+    &-slider {
+      &__item {
+        height: 470px;
+      }
+    }
+    &-details {
+      &__info {
+        left: 15px;
+        top: 15px;
+        max-width: 310px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1124px) {
+  .single-product-content {
+    &-tabs {
+      &__nav {
+        max-width: 100%;
+        overflow: auto;
+        &-item {
+          white-space: nowrap;
+          & + & {
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+    &-details {
+      &__info {
+        position: relative;
+        left: 0;
+        top: 0;
+        margin-top: 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .single-product-content {
+    padding: 40px 0 55px;
+    &-box {
+      width: 100%;
+    }
+    &-sidebar {
+      display: none;
+    }
+    &-tabs {
+      &__nav {
+        justify-content: flex-start;
+        &-item {
+          & + & {
+            margin-left: 25px;
+          }
+        }
+      }
+      &__body {
+        &-info {
+          &-item {
+            padding: 10px 40px 10px 20px;
+          }
+        }
+      }
+    }
+    &-details {
+      &__info {
+        position: absolute;
+        left: 15px;
+        top: 15px;
+        margin-top: 0;
+      }
+    }
+  }
+  .single-product-content-modal {
+    padding: 135px 45px 45px;
+    max-width: 530px;
+  }
+}
+
+@media (max-width: 745px) {
+  .single-product-content {
+    padding: 40px 0 0;
+  }
+}
+
+@media (max-width: 610px) {
+  .single-product-content {
+    &-details {
+      &__title-wrapper {
+        margin-bottom: 25px;
+      }
+      &__info {
+        position: relative;
+        left: 0;
+        top: 0;
+        max-width: 100%;
+        border-top: none;
+        padding: 20px 15px;
+        &-title {
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 595px) {
+  .single-product-content {
+    &-slider {
+      &__item {
+        height: 360px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .single-product-content {
+    padding: 40px 0 0;
+    #marker {
+      left: 20px;
+    }
+    &-tabs {
+      margin: 0 -20px 80px;
+      &__nav {
+        padding: 0 20px 10px;
+      }
+      &__body {
+        &-desc,
+        &-payment {
+          padding: 0 20px;
+        }
+        &-info {
+          &-item {
+            padding: 8px 20px;
+            flex-direction: column;
+          }
+          &-side {
+            max-width: 100% !important;
+            width: 100%;
+            & + & {
+              margin-left: 0;
+              margin-top: 8px;
+            }
+          }
+        }
+        &-reviews {
+          padding: 0 20px;
+          &-item {
+            margin-top: 15px !important;
+            padding-top: 15px !important;
+          }
+          &-info {
+            margin-bottom: 15px;
+          }
+          &-text {
+            font-size: 16px !important;
+            line-height: 160%;
+          }
+        }
+        &-btn-wrapper {
+          margin-top: 35px;
+        }
+        &-btn {
+          height: 48px;
+        }
+      }
+    }
+    &__slider-wrapper {
+      display: none;
+    }
+  }
+  .single-product-content-modal {
+    padding: 135px 20px 40px;
+    &__title-wrapper {
+      margin-bottom: 60px;
+    }
+    &__inp-wrapper,
+    &__textarea-wrapper {
+      margin-bottom: 20px;
+    }
+    &__textarea-inner {
+      height: 95px;
+    }
+    &__label {
+      font-size: 9px;
+      line-height: 12px;
+    }
+    &__rating {
+      .single-product-content-modal__label {
+        margin-bottom: 15px;
+      }
+      &-inner svg {
+        width: 60px;
+        height: 60px;
       }
     }
   }

@@ -1,7 +1,40 @@
 .team {
   padding: 155px 0;
-  &__title-wrapper {
+  &__top {
     margin-bottom: 50px;
+  }
+  &-slider {
+    display: none;
+    &__nav {
+      display: none;
+      align-items: center;
+    }
+    &__btn {
+      width: 26px;
+      height: 20px;
+      & + & {
+        margin-left: 15px;
+      }
+      &:active svg {
+        stroke: #133BFE;
+      }
+      svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        stroke: #000;
+        transition: stroke .1s ease;
+      }
+    }
+    &__item {
+      .team-item {
+        padding: 0;
+        width: 100%;
+      }
+      .team-item__list-item + .team-item__list-item {
+        margin-left: 25px !important;
+      }
+    }
   }
   &__inner {
     display: flex;
@@ -95,7 +128,7 @@
             }
           }
         }
-        @media (min-width: 1024px) {
+        @media (max-width: 1024px) {
           &:active {
             svg {
               fill: rgba(#fff, .7);
@@ -114,6 +147,100 @@
             transition: fill .1s ease;
           }
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 1366px) {
+  .team {
+    padding: 120px 0 125px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .team {
+    &__inner {
+      margin: 0 -3px;
+    }
+    &-item {
+      padding: 0 3px;
+      &__list {
+        &-item {
+          & + & {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .team {
+    padding: 80px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .team {
+    &__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    &__inner {
+      display: none;
+    }
+    &-slider {
+      display: block;
+      &__nav {
+        display: flex;
+      }
+    }
+  }
+}
+
+@media (max-width: 745px) {
+  .team-slider__item {
+    .team-item__list-item + .team-item__list-item {
+      margin-left: 20px !important;
+    }
+  }
+}
+
+
+@media (max-width: 480px) {
+  .team {
+    &__inner {
+      display: flex;
+    }
+    &-slider {
+      display: none;
+      &__nav {
+        display: none;
+      }
+    }
+    &__inner {
+      flex-wrap: wrap;
+      margin: 0;
+    }
+    &-item {
+      width: 100%;
+      padding: 0;
+      &__name {
+        margin-bottom: 8px;
+      }
+      &__list {
+        &-item {
+          & + & {
+            margin-left: 20px;
+          }
+        }
+      }
+      & + & {
+        margin-top: 30px;
       }
     }
   }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useContext } from 'react'
 import { navigate } from 'gatsby'
 import { useForm } from 'react-hook-form'
 import gsap from 'gsap'
+// import ApiNovaPochta from 'yz-react-deliveri-newpochta'
 
 import './Intro.scss'
 
@@ -9,9 +10,9 @@ import CustomerInfo from './CustomerInfo'
 import ShippingAddress from './ShippingAddress'
 import ShippingMethod from './ShippingMethod'
 import PaymentInfo from './PaymentInfo'
-
 import DeliveryList from './DeliveryList'
 import DeliveryInfo from './DeliveryInfo'
+import BackButton from './BackButton'
 
 import { isBrowser } from '../../../utils/isBrowser'
 
@@ -64,6 +65,7 @@ const CheckoutIntro = () => {
       imgSrc: checkout1
     }
   ])
+  let [ areas, setAreas ] = useState([])
 
   const deleteItem = useCallback((id, e) => {
     e.currentTarget.parentElement.parentElement.parentElement.classList.add('hide')
@@ -75,8 +77,26 @@ const CheckoutIntro = () => {
     }
   }, [items])
 
+  // function feedback() {
+  //   const apiKey = 'f8720725518b68dc905857ce659337e5'
+  //
+  //   const cb = (data) => {
+  //     console.log(data)
+  //     setAreas(data.data)
+  //     // тут должен быть обработчик полученого результата
+  //   }
+  //
+  //   const np = new ApiNovaPochta
+  //   np.getAreas(cb, apiKey)
+  //   // np.getCities(cb, apiKey)
+  //   // np.getWarehouses(cb, apiKey)
+  //
+  // }
+
   useEffect(() => {
     let checkoutIntroTl = gsap.timeline()
+
+    // feedback()
 
     checkoutIntroTl
       .from('.intro-checkout-content__item', .6, { delay: .2, y: 70, opacity: 0, stagger: .1, onComplete() {
@@ -130,6 +150,7 @@ const CheckoutIntro = () => {
     <section className="intro intro-checkout">
       <div className="container">
         <form className="intro-checkout__inner" onSubmit={handleSubmit(formSubmit, formError)}>
+          <BackButton prefix={prefix} />
           <div className="intro-checkout__content intro-checkout-content">
             <CustomerInfo
               register={register}

@@ -224,6 +224,22 @@ const SingleProductInfo = ({
             </div>
           </div>
         </div>
+        <div className="single-product-intro-info__instruction">
+          <div className="single-product-intro-info__instruction-inner">
+            <a className="single-product-intro-info__instruction-item" download href={`#`}>
+              <span className="single-product-intro-info__instruction-icon">
+                <svg><use href={`${sprite}#download`} /></svg>
+              </span>
+              <span className="single-product-intro-info__instruction-text">Download 3D</span>
+            </a>
+            <a className="single-product-intro-info__instruction-item" href="https://google.com" target="_blank" rel="noreferrer">
+              <span className="single-product-intro-info__instruction-icon">
+                <svg><use href={`${sprite}#pdf`} /></svg>
+              </span>
+              <span className="single-product-intro-info__instruction-text">instruction</span>
+            </a>
+          </div>
+        </div>
         <ul className="single-product-intro-info__list">
           <li className="single-product-intro-info__list-item">
             <div className="single-product-intro-info__list-item-icon">

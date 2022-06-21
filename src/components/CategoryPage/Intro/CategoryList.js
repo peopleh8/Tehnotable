@@ -16,6 +16,7 @@ const CategoryList = ({ list }) => {
                   imgSrc1={item.imgSrc1}
                   imgSrc2={item.imgSrc2}
                   imgSrc3={item.imgSrc3}
+                  imgMobile={item.imgMobile}
                   isActive={item.isActive}
                   key={item.id}
                 />

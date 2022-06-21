@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-
-import  { Pagination, EffectFade } from 'swiper'
+import  { Pagination, Navigation, EffectFade } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
 import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import './Intro.scss'
 import 'swiper/scss'
 import 'swiper/scss/pagination'
+import 'swiper/scss/navigation'
 import 'swiper/scss/effect-fade'
 
 import introBg from '../../../images/intro-bg.jpg'
@@ -17,7 +17,7 @@ import video from '../../../videos/Intro_2.mp4'
 import sprite from '../../../icons/sprite.svg'
 
 const IntroSlider = () => {
-  const [slider] = useState([
+  const [ slider ] = useState([
     {
       title: 'The furniture of <span>tomorrow</span>',
       isBtn: true,
@@ -52,6 +52,35 @@ const IntroSlider = () => {
   let introTl = gsap.timeline()
 
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    ScrollTrigger.matchMedia({
+      '(min-width: 991px)': () => {
+        introTl
+          .from('.intro-slider__item.swiper-slide-active .intro-slider__item-title', .6, { opacity: 0, y: -120, delay: 5.2, onComplete() {
+            introTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.intro-slider__item.swiper-slide-active .intro-slider__item-btn > *', .5, { opacity: 0, x: -100, stagger: -.15, onComplete() {
+            introTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.intro-slider__pagination-item', .6, { opacity: 0, x: -50, stagger: .05, onComplete() {
+            introTl.set(this.targets(), { clearProps: 'all' })
+          }})
+      },
+      '(max-width: 990px)': () => {
+        introTl
+          .from('.intro-slider__item.swiper-slide-active .intro-slider__item-title', .6, { opacity: 0, y: -120, delay: 5.2, onComplete() {
+            introTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.intro-slider__item.swiper-slide-active .intro-slider__item-btn > *', .5, { opacity: 0, x: -100, stagger: -.15, onComplete() {
+            introTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.intro-slider__nav > *', .5, { scale: 0, stagger: .1, ease: 'back', onComplete() {
+            introTl.set(this.targets(), { clearProps: 'all' })
+          }})
+      }
+    })
+
     return () => {
       introTl.kill()
     }
@@ -60,12 +89,16 @@ const IntroSlider = () => {
   return (
     <Swiper
       className="intro__slider intro-slider"
-      modules={[Pagination, EffectFade]}
+      modules={[Pagination, Navigation, EffectFade]}
       spaceBetween={0}
       slidesPerView={1}
       effect="fade"
       speed={500}
       allowTouchMove={false}
+      navigation={{
+        prevEl: '.intro-slider__nav-prev',
+        nextEl: '.intro-slider__nav-next',
+      }}
       pagination={{
         clickable: true,
         el: '.intro-slider__pagination-inner',
@@ -83,18 +116,6 @@ const IntroSlider = () => {
         `)
         }
       }}
-      onInit={() => {
-        introTl
-          .from('.intro-slider__item.swiper-slide-active .intro-slider__item-title', .6, { opacity: 0, y: -120, delay: 5.2, onComplete() {
-            introTl.set(this.targets(), { clearProps: 'all' })
-          }})
-          .from('.intro-slider__item.swiper-slide-active .intro-slider__item-btn > *', .5, { opacity: 0, x: -100, stagger: -.15, onComplete() {
-            introTl.set(this.targets(), { clearProps: 'all' })
-          }})
-          .from('.intro-slider__pagination-item', .6, { opacity: 0, x: -50, stagger: .05, onComplete() {
-            introTl.set(this.targets(), { clearProps: 'all' })
-          }})
-      }}
     >
       {
         slider.map((slide, index) => {
@@ -102,7 +123,7 @@ const IntroSlider = () => {
             <SwiperSlide className="intro-slider__item">
               {
                 index === 0
-                  ? <video poster={slide.poster} muted={true} loop={true} autoPlay={true} controls={false} width={1920} height={740}>
+                  ? <video poster={slide.poster} muted={true} loop={true} autoPlay={true} controls={false} width={1920} height={740} playsInline={true}>
                       <source src={slide.src} type="video/mp4" />
                     </video>
                   : <img src={slide.src} alt="" width={1920} height={740} />
@@ -133,6 +154,18 @@ const IntroSlider = () => {
       }
       <div className="intro-slider__pagination">
         <div className="intro-slider__pagination-inner" />
+      </div>
+      <div className="intro-slider__nav">
+        <div className="intro-slider__nav-btn intro-slider__nav-prev">
+          <svg>
+            <use href={`${sprite}#prev-arrow`} />
+          </svg>
+        </div>
+        <div className="intro-slider__nav-btn intro-slider__nav-next">
+          <svg>
+            <use href={`${sprite}#next-arrow`} />
+          </svg>
+        </div>
       </div>
     </Swiper>
   )

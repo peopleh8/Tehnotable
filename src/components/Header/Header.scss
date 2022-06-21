@@ -57,6 +57,7 @@
     background: #000;
     color: #fff;
     padding: 10px 0;
+    position: relative;
     &-inner {
       display: flex;
       align-items: center;
@@ -99,6 +100,15 @@
         pointer-events: none !important;
       }
     }
+    &.super-visible {
+      transform: translateY(100%) !important;
+      .submenu {
+        pointer-events: auto !important;
+      }
+      .controls-dropdown {
+        pointer-events: auto !important;
+      }
+    }
     &-inner {
       display: flex;
       justify-content: space-between;
@@ -116,6 +126,9 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #807F7F;
+  &.open {
+    z-index: 9999999;
+  }
   &__current {
     transition: color .2s ease;
     position: relative;
@@ -305,6 +318,9 @@
     height: 25px;
     transition: opacity .2s ease;
     position: relative;
+    &:last-child {
+      display: none;
+    }
     @media (min-width: 1024px) {
       &:hover {
         .header-controls__link svg {
@@ -522,6 +538,102 @@
       }
       @media (max-width: 1024px) {
         transition: fill .1s ease;
+      }
+    }
+  }
+}
+
+@media (max-width: 1366px) {
+  .header {
+    &-slider {
+      transform: translateX(0);
+    }
+  }
+}
+
+@media (max-width: 850px) and (orientation:landscape) {
+  .header {
+    &__top {
+      display: none;
+    }
+  }
+  .breadcrumbs {
+    padding-top: 75px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header {
+    &-slider {
+      max-width: 100%;
+      transition: transform .35s ease;
+      &.open {
+        transform: translateX(-120%);
+        pointer-events: none;
+      }
+    }
+    &-phones {
+      &__item {
+        & + & {
+          margin-left: 35px;
+        }
+      }
+    }
+    &-social {
+      margin-left: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header-checkout {
+    .header-switcher {
+      margin: 0 10px 0 auto;
+    }
+    .header-phones__item {
+      font-size: 9px;
+      &:not(:first-child) {
+        margin-left: 10px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 745px) {
+  .header-phones__item + .header-phones__item {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-checkout {
+    .header-switcher,
+    .header-phones__item {
+      display: none;
+    }
+    .header-checkout__inner {
+      justify-content: center;
+    }
+    .logo {
+      margin: 0;
+    }
+  }
+  .header {
+    &__top {
+      display: none;
+    }
+    &-controls {
+      &__item {
+        & + & {
+          margin-left: 25px;
+        }
+        &:nth-child(1),
+        &:nth-child(2) {
+          display: none;
+        }
+        &:last-child {
+          display: block;
+        }
       }
     }
   }

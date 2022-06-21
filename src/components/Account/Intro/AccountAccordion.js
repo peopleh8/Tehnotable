@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect } from 'react'
 import { Collapse } from 'react-collapse'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import sprite from '../../../icons/sprite.svg'
 
@@ -55,6 +56,20 @@ const AccountAccordion = () => {
       ]
     }
   ])
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    ScrollTrigger.matchMedia({
+      '(min-width: 1461px)': () => setItemsVisible(6),
+      '(max-width: 1460px) and (min-width: 1367px)': () => setItemsVisible(4),
+      '(max-width: 1366px) and (min-width: 1089px)': () => setItemsVisible(2),
+      '(max-width: 1088px) and (min-width: 992px)': () => setItemsVisible(1),
+      '(max-width: 991px) and (min-width: 769px)': () => setItemsVisible(2),
+      '(max-width: 768px) abd (min-width: 666px)': () => setItemsVisible(1),
+      '(max-width: 665px)': () => setItemsVisible(4)
+    })
+  }, [])
 
   const openAccordion = accId => {
     setAccordion(accordion.map(item => {

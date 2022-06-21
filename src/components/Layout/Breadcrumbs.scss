@@ -4,7 +4,8 @@
   &-list {
     display: flex;
     align-items: center;
-    padding: 10px 0;
+    margin: 0 -20px;
+    padding: 10px 20px;
     overflow: auto;
     &__item {
       font-weight: 400;
@@ -60,4 +61,36 @@
 .search-breadcrumbs ~ .quote .quote__wrapper {
   padding-bottom: 155px;
   border-bottom: none;
+}
+
+@media (max-width: 1366px) {
+  .single-product-breadcrumbs {
+    & ~ .recomended {
+      padding-top: 80px;
+      .recomended-slider__item {
+        padding-bottom: 80px;
+      }
+    }
+
+    & ~ .discount {
+      padding-bottom: 80px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .breadcrumbs {
+    padding-top: 75px;
+  }
+  .catalog-breadcrumbs ~ .category {
+    padding: 30px 0 0;
+  }
+
+  .single-product-breadcrumbs {
+    & ~ .recomended {
+      .recomended-slider__item {
+        padding-bottom: 30px;
+      }
+    }
+  }
 }

@@ -7,6 +7,9 @@ const MainAboutPhoto = () => {
   return (
     <div className="main-about__photo">
       <MainAboutMarquee />
+      <div className="main-about__title-mobile title title--small">
+        STANDING AND SITTING DESKS: WITH CARE FOR YOUR HEALTH
+      </div>
       <div className="main-about__photo-inner">
         <div className="main-about__photo-btn video-btn">
           <div className="main-about__photo-icon video-btn__icon">

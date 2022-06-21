@@ -1,13 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { Navigation, Autoplay } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 import './BenefitsSlider.scss'
+import 'swiper/scss'
+import 'swiper/scss/navigation'
+import 'swiper/scss/autoplay'
 
 import benefitsSlider1 from '../../../images/benefits-slider-1.jpg'
 import benefitsSlider2 from '../../../images/benefits-slider-2.jpg'
 import benefitsSlider3 from '../../../images/benefits-slider-3.jpg'
+
+import sprite from '../../../icons/sprite.svg'
 
 const BenefitsSlider = () => {
   let [ slider ] = useState([
@@ -18,7 +24,7 @@ const BenefitsSlider = () => {
     },
     {
       imgSrc: benefitsSlider2,
-      title: 'The condition of the <br/> reproductive system improves',
+      title: 'The condition of the <br/> reproductive',
       desc: 'The load on the spine in a standing position is 40% lower than sitting.'
     },
     {
@@ -33,7 +39,7 @@ const BenefitsSlider = () => {
     },
     {
       imgSrc: benefitsSlider2,
-      title: 'The condition of the <br/> reproductive system improves',
+      title: 'The condition of the <br/> reproductive',
       desc: 'The load on the spine in a standing position is 40% lower than sitting.'
     },
     {
@@ -42,9 +48,7 @@ const BenefitsSlider = () => {
       desc: 'The load on the spine in a standing position is 40% lower than sitting.'
     }
   ])
-
-  let section = useRef(),
-      wrapper = useRef()
+  let [ isMobileSlider, setMobileSlider ] = useState(false)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -56,10 +60,21 @@ const BenefitsSlider = () => {
       }
     })
 
-    tlBenefitsSlider.to('.benefits-slider__marquee', {
-      xPercent: -200,
-      ease: "none",
+    ScrollTrigger.matchMedia({
+      '(min-width: 745px)': () => {
+        setMobileSlider(false)
+
+        tlBenefitsSlider.to('.benefits-slider__marquee', {
+          xPercent: -200,
+          ease: "none",
+        })
+      },
+      '(max-width: 744px)': () => {
+        setMobileSlider(true)
+      }
     })
+
+
 
     return () => {
       tlBenefitsSlider.kill()
@@ -67,22 +82,67 @@ const BenefitsSlider = () => {
   }, [])
 
   return (
-    <section className="benefits-slider" ref={section}>
-      <div className="benefits-slider__marquee" ref={wrapper}>
-        {
-          slider.map((slide, index) => {
-            return (
-              <div className="benefits-slider__marquee-item benefits-slider-item" key={index}>
-                <div className="benefits-slider-item__title title title--small" dangerouslySetInnerHTML={{ __html: slide.title }} />
-                <p className="benefits-slider-item__desc">{slide.desc}</p>
-                <div className="benefits-slider-item__photo">
-                  <img src={slide.imgSrc} alt="" width={480} height={670} />
+    <section className="benefits-slider">
+      {
+        !isMobileSlider
+          ? <div className="benefits-slider__marquee">
+            {
+              slider.map((slide, index) => {
+                return (
+                  <div className="benefits-slider__marquee-item benefits-slider-item" key={index}>
+                    <div className="benefits-slider-item__title title title--small" dangerouslySetInnerHTML={{ __html: slide.title }} />
+                    <p className="benefits-slider-item__desc">{slide.desc}</p>
+                    <div className="benefits-slider-item__photo">
+                      <img src={slide.imgSrc} alt="" width={480} height={670} />
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+        : <Swiper
+            className="benefits-slider__marquee"
+            modules={[Navigation, Autoplay]}
+            spaceBetween={30}
+            slidesPerView={1}
+            speed={500}
+            loop={true}
+            navigation={{
+              prevEl: '.benefits-slider__nav-prev',
+              nextEl: '.benefits-slider__nav-next',
+            }}
+            autoplay={{
+              delay: 5000,
+              pauseOnMouseEnter: true,
+              disableOnInteraction: false
+            }}
+          >
+            {
+              slider.map((slide, index) => {
+                return (
+                  <SwiperSlide className="benefits-slider__marquee-item benefits-slider-item" key={index}>
+                    <div className="benefits-slider-item__title title title--small" dangerouslySetInnerHTML={{ __html: slide.title }} />
+                    <p className="benefits-slider-item__desc">{slide.desc}</p>
+                    <div className="benefits-slider-item__photo">
+                      <img src={slide.imgSrc} alt="" width={480} height={670} />
+                    </div>
+                  </SwiperSlide>
+                )
+              })
+            }
+          </Swiper>
+      }
+      {
+        isMobileSlider
+          && <div className="benefits-slider__nav">
+                <div className="benefits-slider__nav-btn benefits-slider__nav-prev">
+                  <svg><use href={`${sprite}#prev-arrow`} /></svg>
                 </div>
-              </div>
-            )
-          })
-        }
-      </div>
+                <div className="benefits-slider__nav-btn benefits-slider__nav-next">
+                  <svg><use href={`${sprite}#next-arrow`} /></svg>
+                </div>
+             </div>
+      }
     </section>
   )
 }

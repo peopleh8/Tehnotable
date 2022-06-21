@@ -41,7 +41,8 @@
     "react-tiny-tabs": "^0.1.2",
     "sass": "^1.49.4",
     "simplebar-react": "^2.3.7",
-    "swiper": "^8.0.1"
+    "swiper": "^8.0.1",
+    "yz-react-deliveri-newpochta": "^1.0.33"
   },
   "devDependencies": {
     "prettier": "^2.5.1"

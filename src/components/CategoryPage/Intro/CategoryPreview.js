@@ -1,6 +1,6 @@
-import React  from 'react'
+import React from 'react'
 
-import { Parallax } from "react-parallax";
+import { Parallax } from 'react-parallax'
 
 import categoryBg from '../../../images/category-bg.jpg'
 

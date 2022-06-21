@@ -36,7 +36,7 @@ const Quote = () => {
         <div className="quote__wrapper">
           <div className="quote__inner">
             <div className="quote__content quote-content">
-              <div className="quote-content__title">
+              <div className="quote-content__title title title--big">
                 <span>ORDER</span> A HEIGHT ADJUSTABLE STANDING DESK TO WORK WHEN SITTING AND STANDING UP NOW
               </div>
               <button className="quote-content__btn btn btn--big">

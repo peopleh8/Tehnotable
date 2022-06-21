@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
+
+import sprite from '../../icons/sprite.svg'
 
 import cart1 from '../../images/cart-1.jpg'
 
@@ -47,7 +48,12 @@ const CartList = () => {
             <div className="cart-item__photo">
               <img src={cart1} alt="" width={140} height={115}/>
             </div>
-            <button className="cart-item__btn" type="button">delete</button>
+            <button className="cart-item__btn" type="button">
+              <span className="cart-item__btn-icon">
+                <svg><use href={`${sprite}#thrash`} /></svg>
+              </span>
+              <span className="cart-item__btn-text">delete</span>
+            </button>
           </div>
         </div>
       </div>
@@ -72,7 +78,12 @@ const CartList = () => {
             <div className="cart-item__photo">
               <img src={cart1} alt="" width={140} height={115}/>
             </div>
-            <button className="cart-item__btn" type="button">delete</button>
+            <button className="cart-item__btn" type="button">
+              <span className="cart-item__btn-icon">
+                <svg><use href={`${sprite}#thrash`} /></svg>
+              </span>
+              <span className="cart-item__btn-text">delete</span>
+            </button>
           </div>
         </div>
       </div>
@@ -97,7 +108,12 @@ const CartList = () => {
             <div className="cart-item__photo">
               <img src={cart1} alt="" width={140} height={115}/>
             </div>
-            <button className="cart-item__btn" type="button">delete</button>
+            <button className="cart-item__btn" type="button">
+              <span className="cart-item__btn-icon">
+                <svg><use href={`${sprite}#thrash`} /></svg>
+              </span>
+              <span className="cart-item__btn-text">delete</span>
+            </button>
           </div>
         </div>
       </div>
@@ -122,7 +138,12 @@ const CartList = () => {
             <div className="cart-item__photo">
               <img src={cart1} alt="" width={140} height={115}/>
             </div>
-            <button className="cart-item__btn" type="button">delete</button>
+            <button className="cart-item__btn" type="button">
+              <span className="cart-item__btn-icon">
+                <svg><use href={`${sprite}#thrash`} /></svg>
+              </span>
+              <span className="cart-item__btn-text">delete</span>
+            </button>
           </div>
         </div>
       </div>
@@ -147,7 +168,12 @@ const CartList = () => {
             <div className="cart-item__photo">
               <img src={cart1} alt="" width={140} height={115}/>
             </div>
-            <button className="cart-item__btn" type="button">delete</button>
+            <button className="cart-item__btn" type="button">
+              <span className="cart-item__btn-icon">
+                <svg><use href={`${sprite}#thrash`} /></svg>
+              </span>
+              <span className="cart-item__btn-text">delete</span>
+            </button>
           </div>
         </div>
       </div>

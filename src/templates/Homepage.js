@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 import Layout from '../components/Layout/Layout'
 import Seo from '../components/seo'
@@ -28,13 +28,6 @@ const IndexPage = ({ pageContext }) => {
   // const homePage = props.data.allWpPage.edges[0].node.homePage;
   let [ isHideHeaderFullpage, setIsHideHeaderFullpage ] = useState(false)
 
-  const sectionWrapperOne = useRef();
-  const sectionWrapperTwo = useRef();
-  const sectionOne = useRef();
-  const sectionTwo = useRef();
-
-  const fullpageRef = { sectionWrapperOne, sectionWrapperTwo, sectionOne, sectionTwo }
-
   if (!isBrowser()) return null
 
   return (
@@ -42,7 +35,7 @@ const IndexPage = ({ pageContext }) => {
       <Layout isHideHeaderFullpage={isHideHeaderFullpage}>
         <Seo title="Home" lang={pageContext.lang} />
         <PageLoader />
-        <div className="section-wrapper" ref={sectionWrapperOne}>
+        <div className="section-wrapper">
           <Intro />
           <Category />
           <MainAbout />
@@ -50,13 +43,13 @@ const IndexPage = ({ pageContext }) => {
           <BenefitsSlider />
           <MainOrder />
           <BenefitsTab />
-          <div className="work-position-wrapper" ref={sectionOne}>
+          <div className="work-position-wrapper">
             <WorkPosition />
           </div>
         </div>
-        <Fullpage setIsHideHeaderFullpage={setIsHideHeaderFullpage} ref={fullpageRef} />
-        <div className="section-wrapper" ref={sectionWrapperTwo}>
-          <div className="discount-wrapper" ref={sectionTwo}>
+        <Fullpage setIsHideHeaderFullpage={setIsHideHeaderFullpage} />
+        <div className="section-wrapper">
+          <div className="discount-wrapper">
             <Discount />
           </div>
           <Gallery />

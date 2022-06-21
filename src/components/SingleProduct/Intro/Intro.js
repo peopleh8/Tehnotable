@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react'
-
 import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import './Intro.scss'
 
 import SingleProductInfo from './SingleProductInfo'
 import SingleProductSlider from './SingleProductSlider'
+import SingleProductMobile from './SingleProductMobile'
 
 import { isBrowser } from '../../../utils/isBrowser'
 
@@ -35,37 +36,110 @@ const SingleProductIntro = ({
 
     let singleProductInfo = gsap.timeline()
 
-    singleProductInfo
-      .from('.single-product-intro-info__title', .5, { delay: .2, y: '100%', onComplete() {
-        singleProductInfo.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.single-product-intro-info__desc', .5, { y: 40, opacity: 0, onComplete() {
-        singleProductInfo.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.2')
-      .from('.single-product-intro-info__chars', .5, { y: 40, opacity: 0, onComplete() {
-        singleProductInfo.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.4')
-      .from('.single-product-intro-info__price', .5, { y: 40, opacity: 0, onComplete() {
-        singleProductInfo.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.4')
-      .from('.single-product-intro-info__controls', .5, { y: 40, opacity: 0, onComplete() {
-        singleProductInfo.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.4')
-      .from('.single-product-intro-info__list', .5, { y: 40, opacity: 0, onComplete() {
-        singleProductInfo.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.4')
-      .from('.single-product-intro__slider-pagination-item', .6, { y: -40, opacity: 0, stagger: -.05, onComplete() {
-        singleProductInfo.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.3')
-      .from('.single-product-intro__slider', .5, { opacity: 0, pointerEvents: 'none', onComplete() {
-        singleProductInfo.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.2')
-      .from('.single-product-intro-slider__item-elem', .5, { opacity: 0, stagger: .1, onComplete() {
-        singleProductInfo.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.1')
-      .from('.single-product-intro-slider__item-line', .5, { opacity: 0, stagger: .1, onComplete() {
-        singleProductInfo.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.2')
+    ScrollTrigger.matchMedia({
+      '(min-width: 992px)': () => {
+        singleProductInfo
+          .from('.single-product-intro-info__title', .5, { delay: .2, y: '100%', onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.single-product-intro-info__desc', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.2')
+          .from('.single-product-intro-info__chars', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro-info__price', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro-info__controls', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro-info__list', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro__slider-pagination-item', .6, { y: -40, opacity: 0, stagger: -.05, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.3')
+          .from('.single-product-intro__slider', .5, { opacity: 0, pointerEvents: 'none', onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.2')
+          .from('.single-product-intro-slider__controls-elem', .5, { opacity: 0, stagger: .1, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.1')
+          .from('.single-product-intro-slider__item-line', .5, { opacity: 0, stagger: .1, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.2')
+      },
+      '(max-width: 991px) and (min-width: 481px)': () => {
+        singleProductInfo
+          .from('.single-product-intro__mobile-title', .5, { delay: .2, y: '100%', onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.single-product-intro__desc-mobile', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.2')
+          .from('.single-product-intro__slider-pagination-item', .6, { y: -40, opacity: 0, stagger: -.05, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.3')
+          .from('.single-product-intro__slider', .5, { opacity: 0, pointerEvents: 'none', onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.2')
+          .from('.single-product-intro-slider__controls-elem', .5, { opacity: 0, stagger: .1, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.1')
+          .from('.single-product-intro-slider__item-line', .5, { opacity: 0, stagger: .1, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.2')
+          .from('.single-product-intro-info__chars', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro-info__price', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro-info__controls', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro-info__list', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+      },
+      '(max-width: 480px)': () => {
+        singleProductInfo
+          .from('.single-product-intro__mobile-title', .5, { delay: .2, y: '100%', onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.single-product-intro__slider-pagination-item', .6, { y: -40, opacity: 0, stagger: -.05, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.single-product-intro__slider', .5, { opacity: 0, pointerEvents: 'none', onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.single-product-intro-slider__nav > *', .5, { scale: 0, stagger: .1, ease: 'back', onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.1')
+          .from('.single-product-intro-slider__item-line', .5, { opacity: 0, stagger: .1, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.2')
+          .from('.single-product-intro-info__desc', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.2')
+          .from('.single-product-intro-info__chars', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro-info__price', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro-info__controls', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro-info__instruction', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-intro-info__list', .5, { y: 40, opacity: 0, onComplete() {
+            singleProductInfo.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+      }
+    })
 
     const checkDropdown = e => {
       if (isBrowser()) {
@@ -110,10 +184,9 @@ const SingleProductIntro = ({
   return (
     <section className="single-product-intro intro" ref={intro}>
       <div className="container">
+        <SingleProductMobile />
         <div className="single-product-intro__inner">
-          <SingleProductSlider
-            slider={slider}
-          />
+          <SingleProductSlider slider={slider} />
           <SingleProductInfo
             counter={counter}
             setCounter={setCounter}

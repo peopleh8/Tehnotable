@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
@@ -39,7 +38,21 @@ const SingleProductDetails = ({ details, changeDetails, isInfoWindowClosed, clos
         <div className="single-product-content-details__title title title--small">Details</div>
       </div>
       <div className="single-product-content-details__preview">
-        <img src={item} alt="" width={865} height={630} />
+        <div className="single-product-content-details__photo">
+          <img src={item} alt="" width={865} height={630} />
+          {
+            details.map(item => {
+              return (
+                <span
+                  className={`single-product-content-details__dot ${item.isActive ? 'active' : ''}`}
+                  style={item.coords}
+                  key={item.id}
+                  onClick={e => changeDetails(item.id, e)}
+                />
+              )
+            })
+          }
+        </div>
         <div
           className={
             `single-product-content-details__info 
@@ -57,18 +70,6 @@ const SingleProductDetails = ({ details, changeDetails, isInfoWindowClosed, clos
             onClick={closeInfoWindow}
           />
         </div>
-        {
-          details.map(item => {
-            return (
-              <span
-                className={`single-product-content-details__dot ${item.isActive ? 'active' : ''}`}
-                style={item.coords}
-                key={item.id}
-                onClick={e => changeDetails(item.id, e)}
-              />
-            )
-          })
-        }
       </div>
     </div>
   )

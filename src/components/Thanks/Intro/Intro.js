@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useContext } from 'react'
 import { Link } from 'gatsby'
 import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import './Intro.scss'
 
@@ -18,9 +19,9 @@ const ThanksIntro = ({ deliveryCode }) => {
   const speed = .05
 
   let positionX = 0,
-    positionY = 0,
-    coordXpercent = 0,
-    coordYpercent = 0
+      positionY = 0,
+      coordXpercent = 0,
+      coordYpercent = 0
 
   const setMouseParallaxStyle = () => {
     const disX = coordXpercent - positionX
@@ -46,7 +47,9 @@ const ThanksIntro = ({ deliveryCode }) => {
   }
 
   useEffect(() => {
-    setMouseParallaxStyle()
+    ScrollTrigger.matchMedia({
+      '(min-width: 1025px)': () => setMouseParallaxStyle()
+    })
 
     let thanksIntroTl = gsap.timeline()
 

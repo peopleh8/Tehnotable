@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import './Team.scss'
+
+import TeamList from './TeamList'
+import TeamSlider from './TeamSlider'
 
 import sprite from '../../../icons/sprite.svg'
 
@@ -56,24 +58,69 @@ const Team = () => {
       }
     }
   ])
+  let [ isHiddenSlider, setHiddenSlider ] = useState(true)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
-    let teamTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.team',
-        start: 'center bottom'
+    let teamTl = null
+
+    ScrollTrigger.matchMedia({
+      '(min-width: 769px)': () => {
+        setHiddenSlider(true)
+
+        teamTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.team',
+            start: 'center bottom'
+          }
+        })
+
+        teamTl
+          .from('.team__title', .5, { y: '100%', onComplete() {
+            teamTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.team-item', .6, { y: 100, opacity: 0, stagger: .1, onComplete() {
+            teamTl.set(this.targets(), { clearProps: 'all' })
+          }})
+      },
+      '(min-width: 481px) and (max-width: 768px)': () => {
+        setHiddenSlider(false)
+
+        teamTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.team',
+            start: 'center bottom'
+          }
+        })
+
+        teamTl
+          .from('.team__title', .5, { y: '100%', onComplete() {
+            teamTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.team-slider__nav > *', .5, { scale: 0, stagger: .1, ease: 'back', onComplete() {
+            teamTl.set(this.targets(), { clearProps: 'all' })
+          }})
+      },
+      '(max-width: 480px)': () => {
+        setHiddenSlider(true)
+
+        teamTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.team',
+            start: '200px bottom'
+          }
+        })
+
+        teamTl
+          .from('.team__title', .5, { y: '100%', onComplete() {
+            teamTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.team-item', .6, { y: 100, opacity: 0, stagger: .1, onComplete() {
+            teamTl.set(this.targets(), { clearProps: 'all' })
+          }})
       }
     })
-
-    teamTl
-      .from('.team__title', .5, { y: '100%', onComplete() {
-        teamTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.team-item', .6, { y: 100, opacity: 0, stagger: .1, onComplete() {
-        teamTl.set(this.targets(), { clearProps: 'all' })
-      }})
 
     return () => {
       teamTl.kill()
@@ -83,56 +130,21 @@ const Team = () => {
   return (
     <section className="team">
       <div className="container">
-        <div className="team__title-wrapper title-wrapper">
-          <div className="team__title title title--small">Our Team</div>
+        <div className="team__top">
+          <div className="team__title-wrapper title-wrapper">
+            <div className="team__title title title--small">Our Team</div>
+          </div>
+          <div className="team-slider__nav">
+            <div className="team-slider__btn team-slider__prev">
+              <svg><use href={`${sprite}#prev-arrow`} /></svg>
+            </div>
+            <div className="team-slider__btn team-slider__next">
+              <svg><use href={`${sprite}#next-arrow`} /></svg>
+            </div>
+          </div>
         </div>
-        <div className="team__inner">
-          {
-            list.map((item, index) => {
-              return (
-                <div className="team__item team-item" key={index}>
-                  <div className="team-item__inner">
-                    <div className="team-item__photo">
-                      <img src={item.imgSrc} alt=""/>
-                      <ul className="team-item__list">
-                        <li className="team-item__list-item">
-                          <a className="team-item__list-link" href={item.social.linkedin} rel="noreferrer" target="_blank">
-                            <svg>
-                              <use href={`${sprite}#social-linked-in`} />
-                            </svg>
-                          </a>
-                        </li>
-                        <li className="team-item__list-item">
-                          <a className="team-item__list-link" href={item.social.twitter} rel="noreferrer" target="_blank">
-                            <svg>
-                              <use href={`${sprite}#social-twitter`} />
-                            </svg>
-                          </a>
-                        </li>
-                        <li className="team-item__list-item">
-                          <a className="team-item__list-link" href={item.social.facebook} rel="noreferrer" target="_blank">
-                            <svg>
-                              <use href={`${sprite}#social-facebook`} />
-                            </svg>
-                          </a>
-                        </li>
-                        <li className="team-item__list-item">
-                          <a className="team-item__list-link" href={item.social.instagram} rel="noreferrer" target="_blank">
-                            <svg>
-                              <use href={`${sprite}#social-instagram`} />
-                            </svg>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="team-item__name">{item.name}</div>
-                    <div className="team-item__position">{item.position}</div>
-                  </div>
-                </div>
-              )
-            })
-          }
-        </div>
+        { isHiddenSlider && <TeamList list={list} /> }
+        { !isHiddenSlider && <TeamSlider list={list} /> }
       </div>
     </section>
   )

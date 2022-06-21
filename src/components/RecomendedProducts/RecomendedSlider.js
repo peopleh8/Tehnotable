@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'gatsby'
-
 import gsap from 'gsap'
-
+import ScrollTrigger from 'gsap/ScrollTrigger'
 import { Navigation, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -11,6 +10,10 @@ import 'swiper/scss/navigation'
 import 'swiper/scss/autoplay'
 
 const RecomendedSlider = ({ slider, changeVariability }) => {
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+  }, [])
+
   return (
     <Swiper
       className="recomended__slider recomended-slider"
@@ -28,10 +31,51 @@ const RecomendedSlider = ({ slider, changeVariability }) => {
         prevEl: '.recomended__slider-prev',
         nextEl: '.recomended__slider-prev-next',
       }}
-      onSlideChange={() => {
-        gsap.from('.recomended-slider__item.swiper-slide-duplicate-active.swiper-slide-duplicate .recomended-slider__item-inner > *:not(.recomended-slider__item-link)', .6, { opacity: 0, y: 50, stagger: .1, onComplete() {
-          gsap.set(this.targets(), { clearProps: 'all' })
-        }})
+      onSlideChange={swiper => {
+        if (swiper.initialized || swiper.runCallbacksOnInit) {
+          ScrollTrigger.matchMedia({
+            '(min-width: 991px)': () => {
+              gsap.from('.recomended-slider__item.swiper-slide-duplicate-active.swiper-slide-duplicate .recomended-slider__item-inner > *:not(.recomended-slider__item-link)', .6, { opacity: 0, y: 50, stagger: .1, onComplete() {
+                gsap.set(this.targets(), { clearProps: 'all' })
+              }})
+            },
+            '(max-width: 990px)': () => {
+              gsap.from('.recomended-slider__item.swiper-slide-next + * + * .recomended-slider__item-inner > *:not(.recomended-slider__item-link)', .6, { opacity: 0, y: 50, stagger: .1, onComplete() {
+                gsap.set(this.targets(), { clearProps: 'all' })
+              }})
+            },
+            '(max-width: 768px)': () => {
+              gsap.from('.recomended-slider__item.swiper-slide-next + * .recomended-slider__item-preview', .6, { opacity: 0, y: 50, onComplete() {
+                gsap.set(this.targets(), { clearProps: 'all' })
+              }})
+              gsap.from('.recomended-slider__item.swiper-slide-next + * .recomended-slider__item-cat', .6, { delay: .1, opacity: 0, y: 50, onComplete() {
+                gsap.set(this.targets(), { clearProps: 'all' })
+              }})
+              gsap.from('.recomended-slider__item.swiper-slide-next + * .recomended-slider__item-title', .6, { delay: .2, opacity: 0, y: 50, onComplete() {
+                gsap.set(this.targets(), { clearProps: 'all' })
+              }})
+              gsap.from('.recomended-slider__item.swiper-slide-next + * .recomended-slider__item-price', .6, { delay: .3, opacity: 0, y: 50, onComplete() {
+                gsap.set(this.targets(), { clearProps: 'all' })
+              }})
+              gsap.from('.recomended-slider__item.swiper-slide-next + * .recomended-slider__item-variability', .6, { delay: .4, opacity: 0, y: 50, onComplete() {
+                gsap.set(this.targets(), { clearProps: 'all' })
+              }})
+            }
+          })
+        }
+      }}
+      breakpoints={{
+        991: {
+          slidesPerView: 4,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 20
+        },
+        0: {
+          slidesPerView: 2,
+          spaceBetween: 10
+        }
       }}
     >
       {

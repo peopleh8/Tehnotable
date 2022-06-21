@@ -1,10 +1,31 @@
 import React from 'react'
 
+import Logo from '../../Logo/Logo'
+
 import sprite from '../../../icons/sprite.svg'
 
-const CategoryProductsDropdown = ({ secSortList, isOpenDropdown, setIsOpenDropdown, changeSort, isLoading }) => {
+const CategoryProductsDropdown = ({
+  secSortList,
+  isOpenDropdown,
+  setIsOpenDropdown,
+  changeSort,
+  isMobileSortOpen,
+  closeMobileSort,
+  isLoading
+}) => {
   return (
-    <div className={`category-products__dropdown category-products-dropdown dropdown ${isLoading ? 'disabled' : ''}`}>
+    <div className={`category-products__dropdown category-products-dropdown dropdown ${isLoading ? 'disabled' : ''} ${isMobileSortOpen ? 'open' : ''}`}>
+      <div className="category-products-dropdown__top category-products__mobile-top">
+        <button
+          className="category-products-dropdown__close category-products__mobile-close"
+          onClick={closeMobileSort}
+        >
+          <span className="category-products-dropdown__close-icon category-products__mobile-close-icon"><span /><span /></span>
+          <span className="category-products-dropdown__close-text category-products__mobile-close-text">Close</span>
+        </button>
+        <Logo className="logo-header" />
+      </div>
+      <div className="category-products-dropdown__title category-products__mobile-title">Sort</div>
       <div
         className={`category-products-dropdown__current dropdown__current ${isOpenDropdown ? 'open' : ''}`}
         onClick={() => setIsOpenDropdown(prev => !prev)}
@@ -27,6 +48,9 @@ const CategoryProductsDropdown = ({ secSortList, isOpenDropdown, setIsOpenDropdo
                 onClick={e => changeSort(item.id, e)}
                 key={item.id}
               >
+                <div className="category-products-dropdown__item-icon">
+                  <svg><use href={`${sprite}#sort`} /></svg>
+                </div>
                 {item.name}
               </div>
             )

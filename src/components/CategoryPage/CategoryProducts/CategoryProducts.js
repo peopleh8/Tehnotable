@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react'
-
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
@@ -7,7 +6,10 @@ import './CategoryProducts.scss'
 
 import CategoryProductsFilter from './CategoryProductsFilter'
 import CategoryProductsList from './CategoryProductsList'
+import CategoryProductsOverlay from './CategoryProductsOverlay'
 
+import { disableScrollbar } from '../../../utils/disableScrollbar'
+import { enableScrollbar } from '../../../utils/enableScrollbar'
 import { isBrowser } from '../../../utils/isBrowser'
 
 import product1 from '../../../images/product-1.jpg'
@@ -15,7 +17,7 @@ import product2 from '../../../images/product-2.jpg'
 import product3 from '../../../images/product-3.png'
 import product4 from '../../../images/product-4.jpg'
 
-const CategoryProducts = () => {
+const CategoryProducts = ({ setHideCategoryHeader }) => {
   let [ list, setList ] = useState([
     {
       id: 1,
@@ -102,7 +104,6 @@ const CategoryProducts = () => {
       ]
     },
   ])
-
   let [ colorFilter, setColorFilter ] = useState([
     {
       id: 1,
@@ -148,7 +149,6 @@ const CategoryProducts = () => {
     },
   ])
   let [ choice, setChoice ] = useState([])
-
   let [ isOpenDropdown, setIsOpenDropdown ] = useState(false)
   let [ secSortList, setSecSort ] = useState([
     {
@@ -167,7 +167,8 @@ const CategoryProducts = () => {
       isActive: false
     },
   ])
-
+  let [ isMobileFilterOpen, setMobileFilterOpen ] = useState(false)
+  let [ isMobileSortOpen, setMobileSortOpen ] = useState(false)
   let [ isLoading, setIsLoading ] = useState(false)
 
   useEffect(() => {
@@ -177,27 +178,48 @@ const CategoryProducts = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
-    let categoryProductsTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.category-products',
-        start: '600px bottom'
+    let categoryProductsTl = null
+
+    ScrollTrigger.matchMedia({
+      '(min-width: 992px)': () => {
+        categoryProductsTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.category-products',
+            start: '600px bottom'
+          }
+        })
+
+        categoryProductsTl
+          .from('.category-products-filter__items', .6, { y: -50, opacity: 0, onComplete() {
+            categoryProductsTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.category-products-filter__btn-wrapper', .6, { y: -50, opacity: 0, stagger: .1, onComplete() {
+            categoryProductsTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.3')
+          .from('.category-products-dropdown', .5, { y: -30, opacity: 0, onComplete() {
+            categoryProductsTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.2')
+          .from('.category-products-list__item', .6, { y: 100, opacity: 0, stagger: .1, onComplete() {
+            categoryProductsTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.1')
+      },
+      '(max-width: 991px)': () => {
+        categoryProductsTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.category-products',
+            start: '300px bottom'
+          }
+        })
+
+        categoryProductsTl
+          .from('.category-products-btns__item ', .5, { opacity: 0, stagger: .1, onComplete() {
+            categoryProductsTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.category-products-list__item', .6, { y: 100, opacity: 0, stagger: .1, onComplete() {
+            categoryProductsTl.set(this.targets(), { clearProps: 'all' })
+          }})
       }
     })
-
-    categoryProductsTl
-      .from('.category-products-filter__items', .6, { y: -50, opacity: 0, onComplete() {
-        categoryProductsTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.category-products-filter__btn-wrapper', .6, { y: -50, opacity: 0, stagger: .1, onComplete() {
-        categoryProductsTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.3')
-      .from('.category-products-dropdown', .5, { y: -30, opacity: 0, onComplete() {
-        categoryProductsTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.2')
-      .from('.category-products-list__item', .6, { y: 100, opacity: 0, stagger: .1, onComplete() {
-        categoryProductsTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.1')
-
 
     const checkDropdown = e => {
       if (isBrowser())
@@ -301,6 +323,66 @@ const CategoryProducts = () => {
     setIsOpenDropdown(false)
   }, [secSortList, isOpenDropdown])
 
+  const openMobileFilter = useCallback(() => {
+    setMobileFilterOpen(true)
+    setHideCategoryHeader(true)
+
+    let mobileFilterTl = gsap.timeline()
+
+    mobileFilterTl
+      .from('.category-products-filter__inner > *', .6, { delay: .4, opacity: 0, y: 30, stagger: .1, onComplete() {
+        mobileFilterTl.set(this.targets(), { clearProps: 'all' })
+      }})
+
+    disableScrollbar()
+  }, [isMobileFilterOpen])
+
+  const closeMobileFilter = useCallback(() => {
+    setMobileFilterOpen(false)
+    setHideCategoryHeader(false)
+
+    let mobileFilterTl = gsap.timeline()
+
+    mobileFilterTl
+      .fromTo('.category-products-filter__inner > *', .4, { opacity: 1, y: 0, onComplete() {
+        mobileFilterTl.set(this.targets(), { clearProps: 'all' })
+      }}, { opacity: 0, onComplete() {
+        mobileFilterTl.set(this.targets(), { clearProps: 'all' })
+      }})
+
+    enableScrollbar()
+  }, [isMobileFilterOpen])
+
+  const openMobileSort = useCallback(() => {
+    setMobileSortOpen(true)
+    setHideCategoryHeader(true)
+
+    let mobileSortTl = gsap.timeline()
+
+    mobileSortTl
+      .from('.category-products__dropdown > *', .6, { delay: .4, opacity: 0, y: 30, stagger: .1, onComplete() {
+        mobileSortTl.set(this.targets(), { clearProps: 'all' })
+      }})
+
+    disableScrollbar()
+  }, [isMobileSortOpen])
+
+  const closeMobileSort = useCallback(() => {
+    setMobileSortOpen(false)
+    setHideCategoryHeader(false)
+
+    let mobileSortTl = gsap.timeline()
+
+    mobileSortTl
+      .fromTo('.category-products__dropdown > *', .4, { opacity: 1, y: 0, onComplete() {
+          mobileSortTl.set(this.targets(), { clearProps: 'all' })
+        }}, { opacity: 0, onComplete() {
+          mobileSortTl.set(this.targets(), { clearProps: 'all' })
+        }})
+
+    enableScrollbar()
+  }, [isMobileSortOpen])
+
   return (
     <section className="category-products">
       <div className="container">
@@ -312,6 +394,8 @@ const CategoryProducts = () => {
             toggleColorFilter={toggleColorFilter}
             toggleMaterialFilter={toggleMaterialFilter}
             deleteChoice={deleteChoice}
+            isMobileFilterOpen={isMobileFilterOpen}
+            closeMobileFilter={closeMobileFilter}
             isLoading={isLoading}
           />
           <CategoryProductsList
@@ -321,7 +405,18 @@ const CategoryProducts = () => {
             setIsOpenDropdown={setIsOpenDropdown}
             changeSort={changeSort}
             changeVariability={changeVariability}
+            isMobileFilterOpen={isMobileFilterOpen}
+            openMobileFilter={openMobileFilter}
+            isMobileSortOpen={isMobileSortOpen}
+            openMobileSort={openMobileSort}
+            closeMobileSort={closeMobileSort}
             isLoading={isLoading}
+          />
+          <CategoryProductsOverlay
+            isMobileFilterOpen={isMobileFilterOpen}
+            closeMobileFilter={closeMobileFilter}
+            isMobileSortOpen={isMobileSortOpen}
+            closeMobileSort={closeMobileSort}
           />
         </div>
       </div>

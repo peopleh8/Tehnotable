@@ -84,6 +84,14 @@ const Gallery = () => {
           autoplay={{
             delay: 1,
           }}
+          breakpoints={{
+            991: {
+              spaceBetween: 30
+            },
+            0: {
+              spaceBetween: 20
+            }
+          }}
         >
           {
             slider.map((slide, index) => {

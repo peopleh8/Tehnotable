@@ -68,3 +68,17 @@
     }
   }
 }
+
+@media (max-width: 480px) {
+  .sitemap-intro {
+    &-list {
+      &::before {
+        top: 12px;
+        bottom: 14px;
+      }
+      &__link {
+        font-size: 11px;
+      }
+    }
+  }
+}

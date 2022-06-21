@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react'
-
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-
 import { Tabs, Nav, Content } from 'react-tiny-tabs'
+
 import 'react-tiny-tabs/dist/index.css'
 
 import SingleProductTabDesc from './SingleProductTabDesc'
@@ -19,23 +18,44 @@ const SingleProductTabs = () => {
 
     gsap.registerPlugin(ScrollTrigger)
 
-    let singleProductTabsTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.single-product-content-tabs',
-        start: 'center bottom'
+    let singleProductTabsTl = null
+
+    ScrollTrigger.matchMedia({
+      '(min-width: 992px)': () => {
+        singleProductTabsTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.single-product-content-tabs',
+            start: 'center bottom'
+          }
+        })
+
+        singleProductTabsTl
+          .from('.single-product-content-tabs__nav-item', .5, { x: -30, opacity: 0, stagger: .1, onComplete() {
+            singleProductTabsTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('#marker', .1, { width: 0, onComplete() {
+            singleProductTabsTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.4')
+          .from('.single-product-content-tabs__body-item.active', .4, { y: 70, opacity: 0, onComplete() {
+            singleProductTabsTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.3')
+      },
+      '(max-width: 991px)': () => {
+        singleProductTabsTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.single-product-intro',
+            start: 'bottom bottom'
+          }
+        })
+
+        singleProductTabsTl
+          .from('.single-product-content-box', .5, { delay: .1, y: 50, opacity: 0, onComplete() {
+            singleProductTabsTl.set(this.targets(), { clearProps: 'all' })
+          }})
       }
     })
 
-    singleProductTabsTl
-      .from('.single-product-content-tabs__nav-item', .5, { x: -30, opacity: 0, stagger: .1, onComplete() {
-        singleProductTabsTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('#marker', .1, { width: 0, onComplete() {
-        singleProductTabsTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.4')
-      .from('.single-product-content-tabs__body-item.active', .4, { y: 70, opacity: 0, onComplete() {
-        singleProductTabsTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.3')
+
 
     return () => {
       singleProductTabsTl.kill()

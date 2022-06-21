@@ -12,6 +12,13 @@ const SearchPanel = (props) => {
 
   return (
     <div className={`search-panel ${props.isSearchOpen ? 'open' : ''}`}>
+      <div
+        className="search-panel__close"
+        onClick={() => props.setIsSearchOpen(false)}
+      >
+        <div className="search-panel__close-icon"><span /><span /></div>
+        <div className="search-panel__close-text">Close</div>
+      </div>
       <div className="container">
         <form className="search-panel__form" action="/search/" method="get">
           <div className="search-panel__inp-wrapper">

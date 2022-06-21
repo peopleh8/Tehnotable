@@ -9,7 +9,7 @@ const HeaderCheckout = (props) => {
     <div className="header__checkout header-checkout">
       <div className="container">
         <div className="header-checkout__inner">
-          <Logo langPrefix={props.langPrefix} />
+          <Logo className='logo-header' />
           <HeaderSwitcher />
           <HeaderPhones />
         </div>

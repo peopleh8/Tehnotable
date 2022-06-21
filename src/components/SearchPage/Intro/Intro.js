@@ -401,9 +401,7 @@ const SearchIntro = ({ query }) => {
     let searchIntroTl = gsap.timeline()
 
     searchIntroTl
-      .from('.search-intro__title', .5, { delay: .4, y: '100%', onComplete() {
-        searchIntroTl.set(this.targets(), { clearProps: 'all' })
-      }})
+      .to('.search-intro__title', .5, { delay: .4, y: 0 })
 
     if (isBrowser()) {
       setTimeout(() => {

@@ -7,11 +7,11 @@ import { PrefixContext } from '../../context/PrefixProvider'
 
 import logo from '../../images/logo.svg'
 
-const Logo = () => {
+const Logo = ({ className }) => {
   let prefix = useContext(PrefixContext)
 
   return (
-    <div className="logo">
+    <div className={`logo ${className}`}>
       <Link className="logo__link" to={prefix}>
         <img src={logo} alt="Logo" width={180} height={25} />
       </Link>

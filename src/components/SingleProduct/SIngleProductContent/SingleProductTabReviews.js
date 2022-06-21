@@ -50,27 +50,27 @@ const SingleProductTabReviews = () => {
         <p className="single-product-content-tabs__body-reviews-text">
           TehnoTable’s gaming desk solves this problem as it can be turned into a standing platform by simply pressing a button. Just make sure the cords are long enough not to unplug when in standby mode.
         </p>
-        <div className="single-product-content-tabs__body-btn-wrapper">
-          <button
-            className="single-product-content-tabs__body-btn form-btn"
-            type="button"
-            data-fancybox="comment"
-            data-src="#review-modal"
-          >
-            <span>Add a comment</span>
-            <span>Add a comment</span>
-          </button>
-          <button
-            className="single-product-content-tabs__body-btn-hidden"
-            ref={thanksBtn}
-            type="button"
-            data-fancybox="thanks"
-            data-src="#thanks-modal"
-            style={{ display: 'none' }}
-          >
-            Thanks
-          </button>
-        </div>
+      </div>
+      <div className="single-product-content-tabs__body-btn-wrapper">
+        <button
+          className="single-product-content-tabs__body-btn form-btn"
+          type="button"
+          data-fancybox="comment"
+          data-src="#review-modal"
+        >
+          <span>Add a comment</span>
+          <span>Add a comment</span>
+        </button>
+        <button
+          className="single-product-content-tabs__body-btn-hidden"
+          ref={thanksBtn}
+          type="button"
+          data-fancybox="thanks"
+          data-src="#thanks-modal"
+          style={{ display: 'none' }}
+        >
+          Thanks
+        </button>
       </div>
       <SingleProductModal setSubmited={setSubmited} />
       <ModalThanks />

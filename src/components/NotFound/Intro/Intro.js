@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useContext } from 'react'
 import { Link } from 'gatsby'
 import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import './Intro.scss'
 
@@ -51,7 +52,9 @@ const ErrorIntro = () => {
   }
 
   useEffect(() => {
-    setMouseParallaxStyle()
+    ScrollTrigger.matchMedia({
+      '(min-width: 1025px)': () => setMouseParallaxStyle()
+    })
 
     let errorIntroTl = gsap.timeline()
 

@@ -56,6 +56,7 @@
         line-height: 15px;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+        max-width: 720px;
       }
     }
     &__body {
@@ -71,10 +72,9 @@
     margin-left: 70px;
     &__inner {
       width: 450px;
-      //padding: 40px 30px 50px;
     }
     &__title {
-      margin-bottom: 80px;
+      margin-bottom: 40px;
     }
     &__inp-wrapper {
       margin-bottom: 20px;
@@ -120,6 +120,95 @@
     }
     &__btn {
       width: 100%;
+    }
+  }
+}
+
+@media (max-width: 1366px) {
+  .faq-intro {
+    &-accordion {
+      &__head {
+        &-text {
+          max-width: 500px;
+        }
+      }
+    }
+    &-form {
+      margin-left: 40px;
+      &__inner {
+        width: 380px;
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .faq-intro {
+    padding: 40px 0 90px;
+    &__title-wrapper {
+      margin-bottom: 30px;
+    }
+    &__inner {
+      flex-wrap: wrap;
+    }
+    &-accordion {
+      width: 100%;
+      margin-bottom: 40px;
+      &__item {
+        padding: 0 20px;
+      }
+      &__head {
+        padding: 20px 0;
+        &-text {
+          max-width: 400px;
+        }
+      }
+      &__body-text {
+        padding-bottom: 20px;
+      }
+    }
+    &-form {
+      margin-left: 0;
+      width: 100%;
+      &__inner {
+        width: 100%;
+      }
+      &__title {
+        margin-bottom: 20px;
+      }
+      &__btn-wrapper {
+        margin-top: 30px;
+        display: flex;
+        justify-content: flex-start;
+      }
+      &__textarea {
+        height: 100px;
+      }
+      &__btn {
+        width: 140px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-intro {
+    padding: 30px 0 80px;
+    &-accordion {
+      &__head {
+        &-text {
+          max-width: 200px;
+          font-size: 13px
+        }
+      }
+      &__body-text {
+        font-size: 16px;
+      }
+    }
+    &-form {
+      &__btn {
+        width: 100%;
+      }
     }
   }
 }

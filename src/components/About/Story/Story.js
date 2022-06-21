@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useEffect, useState, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Autoplay } from 'swiper'
-
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
@@ -55,9 +53,12 @@ const Story = () => {
       imgSrc: story1
     }
   ])
+  let curnum = useRef()
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+
+    curnum.current.innerHTML = slider[0].btnText
 
     let storyTl = gsap.timeline({
       scrollTrigger: {
@@ -85,14 +86,10 @@ const Story = () => {
           </div>
           <div className="story__slider-nav">
             <div className="story__slider-btn story__slider-prev">
-              <svg>
-                <use href={`${sprite}#prev-arrow`} />
-              </svg>
+              <svg><use href={`${sprite}#prev-arrow`} /></svg>
             </div>
             <div className="story__slider-btn story__slider-next">
-              <svg>
-                <use href={`${sprite}#next-arrow`} />
-              </svg>
+              <svg><use href={`${sprite}#next-arrow`} /></svg>
             </div>
           </div>
         </div>
@@ -121,6 +118,16 @@ const Story = () => {
               `)
             }
           }}
+          onSlideChange={swiper => {
+            if (swiper.initialized || swiper.runCallbacksOnInit) {
+              let index = swiper.realIndex
+              gsap.to(curnum.current, .2, { force3D: true, y: -10, opacity: 0, ease: 'Power2.easeOut', onComplete: () => {
+                  gsap.to(curnum.current, .1, { force3D: true, y: 10 })
+                  curnum.current.innerHTML = slider[index].btnText
+                }})
+              gsap.to(curnum.current, .2, { force3D: true, y: 0, opacity: 1, ease: 'Power2.easeOut', delay: .3 })
+            }
+          }}
         >
           {
             slider.map((slide, index) => {
@@ -142,6 +149,7 @@ const Story = () => {
         </Swiper>
         <div className="story-slider__pagination" />
       </div>
+      <div className="story__counter" ref={curnum}>2017</div>
     </section>
   )
 }

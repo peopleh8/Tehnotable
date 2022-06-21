@@ -16,6 +16,40 @@
     background: #EEEEEE;
     z-index: -1;
   }
+  &__back {
+    display: none;
+    align-items: center;
+    margin-bottom: 35px;
+    &:active {
+      .intro-checkout__back-icon svg {
+        stroke: #133BFE;
+      }
+      .intro-checkout__back-text {
+        color: #133BFE;
+      }
+    }
+    &-icon {
+      display: block;
+      width: 12px;
+      height: 6px;
+      margin-right: 25px;
+      svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        stroke: #000;
+        transition: stroke .1s ease;
+        transform: rotate(90deg);
+      }
+    }
+    &-text {
+      display: block;
+      font-size: 12px;
+      line-height: 160%;
+      letter-spacing: -0.01em;
+      transition: color .1s ease;
+    }
+  }
   &__inner {
     display: flex;
     height: 100%;
@@ -93,7 +127,7 @@
   }
   &-delivery {
     width: 50%;
-    padding: 96px 0 0 130px;
+    padding: 96px 0 30px 130px;
     &__empty-title {
       font-size: 21px;
       line-height: 26px;
@@ -101,7 +135,7 @@
       transform: translateY(100%)
     }
     &__list {
-      max-height: 40vh;
+      max-height: calc(100vh - 75px - 96px - 60px - 75px - 314px);
       overflow: auto;
       &.has-padding {
         .simplebar-content {
@@ -303,11 +337,282 @@
   }
 }
 
+.checkout-elem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  & + & {
+    margin-top: 8px;
+  }
+  &__radio {
+    display: none;
+  }
+  &__radio:checked + &__label &__check {
+    border-color: #133BFE;
+  }
+  &__radio:checked + &__label &__check-inner {
+    opacity: 1;
+  }
+  &__radio:checked + &__label &__text {
+    color: #133BFE;
+  }
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    @media (min-width: 1024px) {
+      &:hover {
+        .checkout-elem__check {
+          border-color: #133BFE;
+        }
+        .checkout-elem__text {
+          color: #133BFE;
+        }
+      }
+    }
+    @media (max-width: 1024px) {
+      &:active {
+        .checkout-elem__check {
+          border-color: #133BFE;
+        }
+        .checkout-elem__text {
+          color: #133BFE;
+        }
+      }
+    }
+  }
+  &__icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    margin-right: 30px;
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__btn {
+    display: flex;
+    align-items: center;
+  }
+  &__check {
+    width: 23px;
+    height: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #807F7F;
+    border-radius: 50%;
+    margin-right: 15px;
+    &-inner {
+      display: block;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #133BFE;
+      opacity: 0;
+      transition: opacity .2s ease;
+    }
+    @media (min-width: 1024px) {
+      transition: border-color .2s ease;
+    }
+    @media (max-width: 1024px) {
+      transition: border-color .1s ease;
+    }
+  }
+  &__text {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    user-select: none;
+    @media (min-width: 1024px) {
+      transition: color .2s ease;
+    }
+    @media (max-width: 1024px) {
+      transition: color .1s ease;
+    }
+  }
+}
+
 @keyframes hide {
   from {
     transform: translateY(100%);
   }
   to {
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 1366px) {
+  .intro-checkout {
+    min-height: auto;
+    &-content {
+      &__item {
+        &-title-wrapper {
+          margin-bottom: 40px;
+        }
+        & + & {
+          padding-top: 30px;
+          margin-top: 30px;
+        }
+        &-inner {
+          margin: 0 !important;
+        }
+      }
+      &__inp-wrapper {
+        width: 100% !important;
+        padding: 0 !important;
+        & + & {
+          margin-top: 20px;
+        }
+      }
+    }
+    &-delivery {
+      padding: 95px 0 30px 95px;
+      &__item {
+        &-photo {
+          width: 100px;
+          height: 80px;
+        }
+      }
+      &__info {
+        &-discount {
+          margin-bottom: 45px;
+        }
+        &-title-wrapper {
+          margin-bottom: 40px;
+        }
+        &-cost {
+          margin-bottom: 70px;
+        }
+      }
+      &__list {
+        max-height: 51vh;
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .intro-checkout {
+    padding: 75px 0 0;
+    &::before {
+      display: none;
+    }
+    &__inner {
+      flex-wrap: wrap;
+    }
+    &-content {
+      width: 100%;
+      padding: 55px 0 0;
+      margin-bottom: 50px;
+      &__item {
+        &-title-wrapper {
+          margin-bottom: 30px;
+        }
+        & + & {
+          margin-top: 50px;
+          padding-top: 50px;
+        }
+      }
+    }
+    &-delivery {
+      width: 100%;
+      padding: 80px 0;
+      position: relative;
+      z-index: 2;
+      &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: -20px;
+        right: -20px;
+        background: #EEEEEE;
+      }
+      &__list {
+        max-height: 440px;
+      }
+      &__info {
+        margin-top: 40px;
+        &-title-wrapper {
+          margin-bottom: 30px;
+        }
+        &-cost {
+          margin-bottom: 40px;
+        }
+        &-discount {
+          margin-bottom: 30px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-checkout {
+    padding: 90px 0 0;
+    &__back {
+      display: inline-flex;
+    }
+    &-content {
+      padding-top: 0;
+      &__item {
+        &-title-wrapper {
+          margin-bottom: 25px;
+        }
+        & + & {
+          padding-top: 40px;
+          margin-top: 40px;
+        }
+      }
+    }
+    &-delivery {
+      padding: 25px 0 40px;
+      &__list {
+        max-height: 350px;
+      }
+      &__item {
+        padding-bottom: 20px;
+        &-inner {
+          flex-direction: column;
+        }
+        &-side {
+          width: 100%;
+          &:first-child {
+            margin-right: 0;
+            order: 2;
+            margin-top: 25px;
+            max-width: 100%;
+          }
+        }
+        &-photo {
+          width: 100%;
+          height: 165px;
+          img {
+            object-fit: contain;
+          }
+        }
+      }
+      &__info {
+        margin-top: 30px;
+        &-title-wrapper {
+          margin-bottom: 25px;
+        }
+        &-cost {
+          margin-bottom: 30px;
+        }
+        &-discount {
+          margin-bottom: 8px;
+        }
+        &-btn {
+          height: 48px;
+        }
+      }
+    }
   }
 }

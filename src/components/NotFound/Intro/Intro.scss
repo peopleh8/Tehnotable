@@ -4,7 +4,7 @@
   }
   &__title {
     width: 100%;
-    transform: translateY(-20%);
+    transform: translateY(-30%);
     text {
       text-transform: uppercase;
       animation: stroke 5s 1;
@@ -58,5 +58,81 @@
   100% {
     fill: rgba(#fff,1); stroke: rgba(#fff,1);
     stroke-dashoffset: -25%; stroke-dasharray: 50% 0; stroke-width: 2;
+  }
+}
+
+@media (max-width: 1024px) {
+  .error-intro {
+    &__inner {
+      img {
+        bottom: 0;
+      }
+    }
+    &__title {
+      text {
+        font-size: 340px;
+      }
+    }
+    &__btn {
+      transform: translateY(-90%);
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .error-intro {
+    &__inner {
+      img {
+        bottom: -5%;
+        width: 75%;
+        left: 20%;
+      }
+    }
+    &__title {
+      text {
+        font-size: 390px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .error-intro {
+    &__inner {
+      img {
+        width: 100%;
+        left: 10%;
+      }
+    }
+    &__btn {
+      transform: translateY(0)
+    }
+    &__title {
+      height: 200px;
+      text {
+        font-size: 450px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px)  {
+  .error-intro {
+    &__inner {
+      margin: 0 -20px;
+      padding: 0 20px;
+      img {
+        object-fit: cover;
+        left: 0;
+        bottom: 0;
+        height: 50%;
+      }
+    }
+    &__title {
+      transform: translateY(0);
+      text {
+        font-size: 610px;
+      }
+    }
   }
 }

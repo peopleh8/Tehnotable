@@ -1,11 +1,22 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
+import sprite from '../../icons/sprite.svg'
+
 import submenu from '../../images/submenu.jpg'
 
-const SubMenu = () => {
+const SubMenu = ({ closeSubmenu }) => {
   return (
     <div className="submenu">
+      <div
+        className="submenu__btn"
+        onClick={closeSubmenu}
+      >
+        <div className="submenu__btn-icon">
+          <svg><use href={`${sprite}#header-arrow`} /></svg>
+        </div>
+        <div className="submenu__btn-text">Back</div>
+      </div>
       <ul className="submenu__list submenu-list">
         <li className="submenu-list__item">
           <Link className="submenu-list__link" to={`#`}>About us</Link>

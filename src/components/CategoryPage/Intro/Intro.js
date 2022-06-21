@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
-
 import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import './Intro.scss'
 
@@ -11,6 +11,11 @@ import categoryList1 from '../../../images/category-list-1.jpg'
 import categoryList2 from '../../../images/category-list-2.jpg'
 import categoryList3 from '../../../images/category-list-3.jpg'
 
+import categoryMobile1 from '../../../images/category-1.jpg'
+import categoryMobile2 from '../../../images/category-2.jpg'
+import categoryMobile3 from '../../../images/category-3.jpg'
+import categoryMobile4 from '../../../images/category-4.jpg'
+
 const CategoryIntro = () => {
   let [ list ] = useState([
     {
@@ -20,6 +25,7 @@ const CategoryIntro = () => {
       imgSrc1: categoryList1,
       imgSrc2: categoryList2,
       imgSrc3: categoryList3,
+      imgMobile: categoryMobile1,
       isActive: true
     },
     {
@@ -29,6 +35,7 @@ const CategoryIntro = () => {
       imgSrc1: categoryList1,
       imgSrc2: categoryList2,
       imgSrc3: categoryList3,
+      imgMobile: categoryMobile2
     },
     {
       id: 3,
@@ -37,6 +44,7 @@ const CategoryIntro = () => {
       imgSrc1: categoryList1,
       imgSrc2: categoryList2,
       imgSrc3: categoryList3,
+      imgMobile: categoryMobile3
     },
     {
       id: 4,
@@ -45,6 +53,7 @@ const CategoryIntro = () => {
       imgSrc1: categoryList1,
       imgSrc2: categoryList2,
       imgSrc3: categoryList3,
+      imgMobile: categoryMobile4
     }
   ])
 

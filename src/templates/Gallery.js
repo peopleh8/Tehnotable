@@ -6,12 +6,14 @@ import '../components/Layout/Breadcrumbs.scss'
 import Layout from '../components/Layout/Layout'
 import Seo from '../components/seo'
 
+import GalleryIntro from "../components/GalleryPage/Intro/GalleryIntro";
+
 import PrefixProvider from '../context/PrefixProvider'
 
 const Gallery = ({ pageContext }) => {
   return (
     <PrefixProvider prefix={pageContext.prefix}>
-      <Layout>
+      <Layout isHiddenFooterTop={true}>
         <Seo title={`Gallery Page`} lang={pageContext.lang} />
         <nav className="breadcrumbs terms-breadcrumbs">
           <div className="container">
@@ -28,9 +30,7 @@ const Gallery = ({ pageContext }) => {
             </ul>
           </div>
         </nav>
-        <div className="container">
-          Is must be Gallery page here
-        </div>
+        <GalleryIntro />
       </Layout>
     </PrefixProvider>
   )

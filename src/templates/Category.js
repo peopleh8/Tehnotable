@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'gatsby'
 
 import '../components/Layout/Breadcrumbs.scss'
@@ -16,9 +16,10 @@ import SeoBlock from '../components/SeoBlock/SeoBlock'
 import PrefixProvider from '../context/PrefixProvider'
 
 const Category = ({ pageContext }) => {
+  let [ isHideCategoryHeader, setHideCategoryHeader ] = useState(false)
   return (
     <PrefixProvider prefix={pageContext.prefix}>
-      <Layout>
+      <Layout isHideCategoryHeader={isHideCategoryHeader}>
         <Seo title={`Category Page`} lang={pageContext.lang} />
         <nav className="breadcrumbs category-breadcrumbs">
           <div className="container">
@@ -42,7 +43,7 @@ const Category = ({ pageContext }) => {
           </div>
         </nav>
         <CategoryIntro />
-        <CategoryProducts />
+        <CategoryProducts setHideCategoryHeader={setHideCategoryHeader} />
         <Gallery />
         <Quote />
         <SeoBlock />

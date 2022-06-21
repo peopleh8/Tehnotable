@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Parallax, Controller, Autoplay } from 'swiper'
-
+import { Pagination, Navigation, Parallax, Controller, Autoplay } from 'swiper'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
@@ -10,9 +8,12 @@ import './ParallaxSlider.scss'
 
 import 'swiper/scss'
 import 'swiper/scss/pagination'
+import 'swiper/scss/navigation'
 import 'swiper/scss/parallax'
 
 import DrawLogo from '../../DrawLogo/DrawLogo'
+
+import sprite from '../../../icons/sprite.svg'
 
 import parallaxSlider1 from '../../../images/parallax-slider-1.jpg'
 
@@ -70,15 +71,23 @@ const ParallaxSlider = () => {
   return (
     <section className="parallax-slider">
       <div className="parallax-slider__pagination" />
-      <div className="parallax-slider__counter">
-        <div className="parallax-slider__counter-current" ref={curnum}>01</div>
-        <div className="parallax-slider__counter-separator">/</div>
-        <div className="parallax-slider__counter-total">05</div>
+      <div className="parallax-slider__interactive">
+        <div className="parallax-slider__btn parallax-slider__prev">
+          <svg><use href={`${sprite}#prev-arrow`} /></svg>
+        </div>
+        <div className="parallax-slider__counter">
+          <div className="parallax-slider__counter-current" ref={curnum}>01</div>
+          <div className="parallax-slider__counter-separator">/</div>
+          <div className="parallax-slider__counter-total">05</div>
+        </div>
+        <div className="parallax-slider__btn parallax-slider__next">
+          <svg><use href={`${sprite}#next-arrow`} /></svg>
+        </div>
       </div>
       <DrawLogo isDraw={isDraw} />
       <Swiper
         className="parallax-slider__text"
-        modules={[Pagination, Controller, Autoplay]}
+        modules={[Pagination, Navigation, Controller, Autoplay]}
         spaceBetween={0}
         slidesPerView={1}
         speed={1500}
@@ -88,6 +97,10 @@ const ParallaxSlider = () => {
         autoplay={{
           delay: 5000,
           disableOnInteraction: false
+        }}
+        navigation={{
+          prevEl: '.parallax-slider__prev',
+          nextEl: '.parallax-slider__next'
         }}
         pagination={{
           clickable: true,
@@ -142,7 +155,6 @@ const ParallaxSlider = () => {
             }})
             gsap.to(curnum.current, .2, { force3D: true, y: 0, opacity: 1, ease: 'Power2.easeOut', delay: .3 })
           }
-
         }}
       >
         {

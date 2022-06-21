@@ -2,9 +2,23 @@ import React from 'react'
 
 import CategoryProductsDropdown from './CategoryProductsDropdown'
 import CategoryProductsItem from './CategoryProductsItem'
-import Skeleton from "../../Skeleton/Skeleton";
+import CategoryProductsButtons from './CategoryProductsButtons'
+import Skeleton from '../../Skeleton/Skeleton'
 
-const CategoryProductsList = ({ list, secSortList, isOpenDropdown, setIsOpenDropdown, changeSort, changeVariability, isLoading }) => {
+const CategoryProductsList = ({
+  list,
+  secSortList,
+  isOpenDropdown,
+  setIsOpenDropdown,
+  changeSort,
+  changeVariability,
+  isMobileFilterOpen,
+  openMobileFilter,
+  isMobileSortOpen,
+  openMobileSort,
+  closeMobileSort,
+  isLoading
+}) => {
   return (
     <div className="category-products__list-wrapper category-products-list-wrapper">
       <CategoryProductsDropdown
@@ -12,6 +26,15 @@ const CategoryProductsList = ({ list, secSortList, isOpenDropdown, setIsOpenDrop
         isOpenDropdown={isOpenDropdown}
         setIsOpenDropdown={setIsOpenDropdown}
         changeSort={changeSort}
+        isMobileSortOpen={isMobileSortOpen}
+        closeMobileSort={closeMobileSort}
+        isLoading={isLoading}
+      />
+      <CategoryProductsButtons
+        isMobileFilterOpen={isMobileFilterOpen}
+        openMobileFilter={openMobileFilter}
+        isMobileSortOpen={isMobileSortOpen}
+        openMobileSort={openMobileSort}
         isLoading={isLoading}
       />
       {
@@ -37,7 +60,7 @@ const CategoryProductsList = ({ list, secSortList, isOpenDropdown, setIsOpenDrop
           Pagination
         </div>
       }
-      {isLoading && <Skeleton type={'product'} length={6} imgWidth={545} imgHeight={490} />}
+      { isLoading && <Skeleton length={6} imgWidth={545} imgHeight={490} /> }
     </div>
   )
 }

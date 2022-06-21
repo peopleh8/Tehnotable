@@ -52,3 +52,44 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .page-loader {
+    &__logo {
+      .react-svg-drawing {
+        width: 300px !important;
+      }
+      .fullpage-slider__logo {
+        svg {
+          width: 300px;
+          height: 300px;
+        }
+      }
+    }
+    &__progress {
+      right: 40px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .page-loader {
+    &__logo {
+      .react-svg-drawing {
+        width: 250px !important;
+      }
+      .fullpage-slider__logo {
+        svg {
+          width: 250px;
+          height: 250px;
+        }
+      }
+    }
+    &__progress {
+      right: 20px;
+      &-percentage {
+        font-size: 30px;
+      }
+    }
+  }
+}

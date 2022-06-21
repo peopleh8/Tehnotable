@@ -140,14 +140,10 @@ const RecomendedProducts = () => {
           </div>
           <div className="recomended__slider-nav">
             <div className="recomended__slider-btn recomended__slider-prev">
-              <svg>
-                <use href={`${sprite}#prev-arrow`} />
-              </svg>
+              <svg><use href={`${sprite}#prev-arrow`} /></svg>
             </div>
             <div className="recomended__slider-btn recomended__slider-prev-next">
-              <svg>
-                <use href={`${sprite}#next-arrow`} />
-              </svg>
+              <svg><use href={`${sprite}#next-arrow`} /></svg>
             </div>
           </div>
         </div>

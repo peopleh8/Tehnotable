@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import '../components/Layout/Breadcrumbs.scss'
 
@@ -24,6 +26,17 @@ import PrefixProvider from '../context/PrefixProvider'
 import { isBrowser } from '../utils/isBrowser'
 
 const About = ({ pageContext }) => {
+  let [ isHiddenQuote, setHiddenQuote ] = useState(false)
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    ScrollTrigger.matchMedia({
+      '(min-width: 1201px)': () => setHiddenQuote(false),
+      '(max-width: 1200px)': () => setHiddenQuote(true)
+    })
+  }, [])
+
   if (!isBrowser()) return null
 
   return (
@@ -48,10 +61,10 @@ const About = ({ pageContext }) => {
         <AboutIntro />
         <AboutInfo />
         <ParallaxSlider />
-        <AboutQuote />
+        { !isHiddenQuote && <AboutQuote /> }
         <Story />
         <Team />
-        <AboutInovation />
+        { !isHiddenQuote && <AboutInovation /> }
         <MainAbout />
         <Gallery />
         <Quote />

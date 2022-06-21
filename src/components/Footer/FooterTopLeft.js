@@ -6,7 +6,7 @@ import sprite from '../../icons/sprite.svg'
 const FooterTopLeft = () => {
   return (
     <div className="footer-top__left">
-      <Logo />
+      <Logo className='logo-footer' />
       <ul className="footer-top__social">
         <li className="footer-top__social-item">
           <a className="footer-top__social-link" href="https://youtube.com" rel="noreferrer" target="_blank">

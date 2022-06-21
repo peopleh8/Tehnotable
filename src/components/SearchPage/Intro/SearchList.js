@@ -27,7 +27,7 @@ const SearchList = ({ list, changeVariability, isLoading }) => {
     )
   } else {
     return (
-      <Skeleton type={'product'} length={20} imgWidth={545} imgHeight={490} />
+      <Skeleton length={20} imgWidth={545} imgHeight={490} />
     )
   }
 }

@@ -24,7 +24,7 @@ const IntroList = ({ list, isLoading }) => {
     )
   } else {
     return (
-      <Skeleton type={'post'} length={9} imgWidth={480} imgHeight={570} />
+      <Skeleton length={9} imgWidth={480} imgHeight={570} />
     )
   }
 }

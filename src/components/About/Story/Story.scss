@@ -6,6 +6,18 @@
     align-items: center;
     margin-bottom: 30px;
   }
+  &__counter {
+    display: none;
+    position: absolute;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 15%);
+  }
   &__slider-nav {
     display: flex;
     align-items: center;
@@ -44,9 +56,11 @@
       }
       &-content {
         max-width: 350px;
+        padding-right: 20px;
       }
       &-photo {
         max-width: 990px;
+        height: 450px;
         width: 100%;
         overflow: hidden;
         img {
@@ -87,6 +101,126 @@
       &.active {
         color: #000000;
         font-size: 96px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1366px) {
+  .story {
+    padding-top: 80px;
+    &-slider {
+      &__item {
+        &-photo {
+          max-width: 680px;
+        }
+      }
+      &__pagination {
+        margin-top: 80px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .story {
+    &__top {
+      margin-bottom: 35px;
+    }
+    &-slider {
+      margin-right: -20px;
+      &__item {
+
+      }
+      &__pagination {
+        overflow: auto;
+        height: 123px;
+        &-item {
+          & + & {
+            margin-left: 135px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .story {
+    &__top {
+      margin-bottom: 80px;
+    }
+    &-slider {
+      margin-right: 0;
+      &__item {
+        &-photo {
+          height: 250px;
+        }
+      }
+      &__pagination {
+        &-item {
+          & + & {
+            margin-left: 80px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 745px) {
+  .story {
+    &-slider {
+      &__item {
+        &-inner {
+          flex-wrap: wrap;
+        }
+        &-content {
+          max-width: 100%;
+          padding-right: 0;
+        }
+        &-photo {
+          max-width: 100%;
+          order: -1;
+          margin-bottom: 25px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 745px) {
+  .story {
+    padding-bottom: 60px;
+    position: relative;
+    &__counter {
+      display: block;
+    }
+    &__top {
+      margin-bottom: 25px;
+      position: static;
+    }
+    &-slider {
+      &__item {
+        &-photo {
+          height: 225px;
+        }
+      }
+      &__pagination {
+        display: none;
+      }
+    }
+    &__slider-nav {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+    &__slider-btn {
+      & + & {
+        margin-left: 0;
       }
     }
   }

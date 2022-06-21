@@ -1,5 +1,7 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { Link } from 'gatsby'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import { isBrowser } from '../utils/isBrowser'
 
@@ -117,6 +119,17 @@ const SingleProduct = ({ pageContext }) => {
       isActive: false
     }
   ])
+
+  let [ isMobile, setIsMobile ] = useState(false)
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    ScrollTrigger.matchMedia({
+      '(min-width: 746px)': () => setIsMobile(false),
+      '(max-width: 745px)': () => setIsMobile(true),
+    })
+  }, [])
 
   const changeDropdownOne = useCallback((sortId, event) => {
     let parent = event.currentTarget.parentElement.parentElement
@@ -358,7 +371,7 @@ const SingleProduct = ({ pageContext }) => {
           isInfoWindowClosed={isInfoWindowClosed}
           closeInfoWindow={closeInfoWindow}
         />
-        <SingleProductAuthor />
+        { !isMobile && <SingleProductAuthor /> }
         <RecomendedProducts />
         <Discount />
       </Layout>

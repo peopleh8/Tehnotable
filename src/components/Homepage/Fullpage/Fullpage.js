@@ -1,74 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react'
-
+import React, { useEffect, useState, useRef } from 'react'
 import gsap from 'gsap'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import './Fullpage.scss'
 
-import { isBrowser } from '../../../utils/isBrowser'
-
 import DrawLogo from '../../DrawLogo/DrawLogo'
 import FullpageSlider from './FullpageSlider'
 
-const Fullpage = React.forwardRef((props, ref) => {
-  let { sectionWrapperOne, sectionWrapperTwo, sectionOne, sectionTwo } = ref
-  let [ isDraw, setIsDraw ] = useState(false);
-  let resizeCount = 1;
+import { isBrowser } from '../../../utils/isBrowser'
+import sprite from "../../../icons/sprite.svg";
 
-  const slider = useRef();
+const Fullpage = ({ setIsHideHeaderFullpage }) => {
+  let fullpage = useRef(null)
 
-  let wheelOrientation = useRef('');
-  let downWheel = useRef(1);
-  let upWheel = useRef(1);
+  let [ isMobile, setIsMobile ] = useState(false)
+  let [ isTablet, setIsTablet ] = useState(false)
+  let [ isDraw, setIsDraw ] = useState(false)
 
-  const sliderRef = { downWheel, upWheel, wheelOrientation }
-
-  const checkFullpage = e => {
-    if (e.wheelDelta > 0 && wheelOrientation.current === 'up' && (slider.current.offsetTop - window.scrollY) <= 0) {
-      if (upWheel.current > 1) {
-        gsap.to(window, {duration: 1, scrollTo: sectionOne.current, ease: "Power1.easeInOut"})
-
-        setTimeout(() => {
-          document.body.style.overflow = ''
-          sectionWrapperOne.current.style.overflowY = ''
-          sectionWrapperTwo.current.style.overflowY = ''
-
-          setIsDraw(false);
-
-          props.setIsHideHeaderFullpage(false)
-        }, 800);
-
-        sectionWrapperOne.current.style.overflowY = 'scroll'
-        sectionWrapperTwo.current.style.overflowY = 'scroll'
-
-        upWheel.current = 1
-      }
-      upWheel.current++
-
-    } else if (e.wheelDelta < 0 && wheelOrientation.current === 'down' && (slider.current.offsetTop - window.scrollY) >= 0) {
-      if (downWheel.current > 1) {
-        gsap.to(window, {duration: 1, scrollTo: sectionTwo.current, ease: "Power1.easeInOut"})
-
-        setTimeout(() => {
-          document.body.style.overflow = ''
-          sectionWrapperOne.current.style.overflowY = ''
-          sectionWrapperTwo.current.style.overflowY = ''
-
-          setIsDraw(false)
-
-          props.setIsHideHeaderFullpage(false)
-        }, 800);
-
-        sectionWrapperOne.current.style.overflowY = 'scroll'
-        sectionWrapperTwo.current.style.overflowY = 'scroll'
-
-        downWheel.current = 1
-      }
-      downWheel.current++
-
-    }
-  }
+  let resizeCount = 1
+  let startTl = null
+  let endTl = null
 
   const resizeWindow = () => {
     if (isBrowser()) {
@@ -77,90 +29,83 @@ const Fullpage = React.forwardRef((props, ref) => {
     }
   }
 
-  if (isBrowser()) {
-    window.addEventListener('scroll', resizeWindow)
-  }
-
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin)
     gsap.registerPlugin(ScrollTrigger)
 
-    let tlStart = null
-    let tlEnd = null
+    ScrollTrigger.matchMedia({
+      '(min-width: 1025px)': () => {
+        startTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.work-position-wrapper',
+            start: 'bottom bottom',
+            onEnter: () => {
+              gsap.to(window, {duration: 1, scrollTo: '.fullpage', ease: "Power1.easeInOut"})
 
-    if (isBrowser()) {
-      window.addEventListener('wheel', checkFullpage);
+              if (isBrowser()) {
+                document.body.style.overflow = 'hidden'
+                fullpage.current.previousElementSibling.style.overflowY = 'scroll'
+                fullpage.current.nextElementSibling.style.overflowY = 'scroll'
+              }
 
-      tlStart = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.work-position-wrapper',
-          start: "bottom bottom",
-          onEnter: () => {
-            setIsDraw(true)
-
-            setTimeout(() => {
-              gsap.to(window, {duration: 1, scrollTo: slider.current, ease: "Power1.easeInOut"})
-            }, 150)
-
-            document.body.style.overflow = 'hidden'
-            sectionWrapperOne.current.style.overflowY = 'scroll'
-            sectionWrapperTwo.current.style.overflowY = 'scroll'
-
-            setTimeout(() => {
-              props.setIsHideHeaderFullpage(true)
-            }, 1)
+              setIsHideHeaderFullpage(true)
+              setIsDraw(true)
+            }
           }
-        }
-      })
+        })
 
-      tlEnd = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.discount-wrapper',
-          start: "top top",
-          onLeaveBack: () => {
-            setIsDraw(true)
+        endTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '.discount-wrapper',
+            start: 'top top',
+            onLeaveBack: () => {
+              gsap.to(window, {duration: 1, scrollTo: '.fullpage', ease: "Power1.easeInOut"})
 
-            setTimeout(() => {
-              gsap.to(window, {duration: 1, scrollTo: slider.current, ease: "Power1.easeInOut"})
-            }, 150)
+              if (isBrowser()) {
+                document.body.style.overflow = 'hidden'
+                fullpage.current.previousElementSibling.style.overflowY = 'scroll'
+                fullpage.current.nextElementSibling.style.overflowY = 'scroll'
+              }
 
-            document.body.style.overflow = 'hidden'
-            sectionWrapperOne.current.style.overflowY = 'scroll'
-            sectionWrapperTwo.current.style.overflowY = 'scroll'
-
-            setTimeout(() => {
-              props.setIsHideHeaderFullpage(true)
-            }, 1)
+              setIsHideHeaderFullpage(true)
+              setIsDraw(true)
+            }
           }
-        }
-      })
-    }
+        })
+
+        setIsTablet(false)
+      },
+      '(max-width: 1024px)': () => setIsTablet(true),
+      '(min-width: 481px)': () => setIsMobile(false),
+      '(max-width: 480px)': () => setIsMobile(true)
+    })
+
+
+
+    if (isBrowser()) window.addEventListener('scroll', resizeWindow)
 
     return () => {
-      if (isBrowser()) {
-        tlStart.kill()
-        tlEnd.kill()
+      startTl && startTl.kill()
+      endTl && endTl.kill()
 
-        window.removeEventListener('wheel', checkFullpage)
-        window.removeEventListener('scroll', resizeWindow)
-      }
+      if (isBrowser()) window.removeEventListener('scroll', resizeWindow)
     }
   }, []);
 
-  if (isBrowser()) {
-    return (
-      <div className='fullpage' ref={slider}>
-        <DrawLogo isDraw={isDraw}/>
-        <FullpageSlider ref={sliderRef} />
+  return (
+    <section className='fullpage' id="fullpage" ref={fullpage}>
+      { isBrowser() && !isTablet && <DrawLogo isDraw={isDraw} /> }
+      <FullpageSlider isMobile={isMobile} setIsHideHeaderFullpage={setIsHideHeaderFullpage} setIsDraw={setIsDraw} />
+      <div className="fullpage-slider__nav">
+        <div className="fullpage-slider__btn fullpage-slider__prev">
+          <svg><use href={`${sprite}#prev-arrow`} /></svg>
+        </div>
+        <div className="fullpage-slider__btn fullpage-slider__next">
+          <svg><use href={`${sprite}#next-arrow`} /></svg>
+        </div>
       </div>
-    )
-  } else {
-    return (
-      <div className='fullpage' ref={slider}>
-        <FullpageSlider ref={sliderRef} />
-      </div>
-    )
-  }
-})
+    </section>
+  )
+}
 
 export default Fullpage

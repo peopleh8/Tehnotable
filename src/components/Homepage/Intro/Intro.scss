@@ -1,12 +1,12 @@
 .intro {
   &-slider {
     position: relative;
-    height: 800px;
+    height: 910px;
     &__item {
       position: relative;
       z-index: 2;
       height: 100%;
-      padding-top: 250px;
+      padding-top: 365px;
       transition: opacity .5s;
       opacity: 0 !important;
       &.swiper-slide-active {
@@ -39,10 +39,11 @@
     &__pagination {
       position: absolute;
       z-index: 100;
-      max-width: 1460px;
+      max-width: 1500px;
       width: 100%;
       left: 50% !important;
       bottom: 67px !important;
+      padding: 0 20px;
       transform: translateX(-50%);
       &-inner {
         display: flex;
@@ -116,6 +117,96 @@
         & + & {
           margin-left: 30px;
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 1366px) {
+  .intro {
+    &-slider {
+      height: 670px;
+      &__item {
+        padding-top: 235px;
+        &-title {
+          font-size: 56px;
+          line-height: 100%;
+          margin-bottom: 25px;
+        }
+      }
+      &__pagination {
+        bottom: 50px !important;
+      }
+      &__nav {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .intro {
+    &-slider {
+      &__item {
+        padding-top: 280px;
+        &-title {
+          margin-bottom: 30px;
+        }
+      }
+      &__pagination {
+        display: none;
+      }
+      &__nav {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 40px;
+        padding: 0 20px;
+        z-index: 10;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        &-btn {
+          width: 25px;
+          height: 18px;
+          transition: opacity .1s ease;
+          & + & {
+            margin-left: 15px;
+          }
+          &:not(&.swiper-button-disabled):active svg {
+            stroke: #133BFE;
+          }
+          svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            stroke: #fff;
+            transition: stroke .1s ease;
+          }
+          &.swiper-button-disabled {
+            opacity: .3;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .intro {
+    &-slider {
+      height: 640px;
+      &__item {
+        padding-top: 270px;
+        &-title {
+          font-size: 32px;
+          line-height: 100%;
+          margin-bottom: 40px;
+        }
+      }
+      &__nav {
+        justify-content: center;
       }
     }
   }

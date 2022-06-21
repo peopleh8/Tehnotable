@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { Link } from 'gatsby'
-import gsap from 'gsap'
 import { Collapse } from 'react-collapse'
 
 import './Cart.scss'
@@ -10,41 +9,8 @@ import CartBotList from './CartBotList'
 
 import { PrefixContext } from '../../context/PrefixProvider'
 
-const Cart = ({ isCartOpen, setIsCartOpen }) => {
+const Cart = ({ isCartOpen, closeCart }) => {
   let prefix = useContext(PrefixContext)
-
-  const closeCart = () => {
-    setIsCartOpen(false)
-
-    let cartTl = gsap.timeline()
-
-    cartTl
-      .fromTo('.cart-bot__info', .4, { y: 0, opacity: 1, onComplete() {
-        cartTl.set(this.targets(), { clearProps: 'all' })
-      }}, { y: 40, opacity: 0, onComplete() {
-        cartTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .fromTo('.cart-bot__list', .4, { y: 0, opacity: 1, onComplete() {
-        cartTl.set(this.targets(), { clearProps: 'all' })
-      }}, {  y: 40, opacity: 0, onComplete() {
-        cartTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.4')
-      .fromTo('.cart-list', .4, { y: 0, opacity: 1, onComplete() {
-        cartTl.set(this.targets(), { clearProps: 'all' })
-      }}, { y: 40, opacity: 0, onComplete() {
-        cartTl.set(this.targets(), { clearProps: 'all' })
-      }},'-=.4')
-      .fromTo('.cart__title', .4, { y: 0, onComplete() {
-        cartTl.set(this.targets(), { clearProps: 'all' })
-      }}, { y: '100%', onComplete() {
-        cartTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.4')
-      .fromTo('.cart__close', .3, { opacity: 1, onComplete() {
-        cartTl.set(this.targets(), { clearProps: 'all' })
-      }}, { opacity: 0, onComplete() {
-        cartTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.4')
-  }
 
   return (
     <div className="cart">

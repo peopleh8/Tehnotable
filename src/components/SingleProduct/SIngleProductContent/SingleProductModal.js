@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import { useForm } from 'react-hook-form'
 import gsap from 'gsap'
 import { Fancybox } from '@fancyapps/ui'

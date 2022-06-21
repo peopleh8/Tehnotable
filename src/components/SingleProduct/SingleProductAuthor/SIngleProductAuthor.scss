@@ -51,3 +51,48 @@
     }
   }
 }
+
+@media (max-width: 1366px) {
+  .single-product-author {
+    &-photo {
+      max-width: 260px;
+      height: 580px;
+      &__inner {
+        transform: translate(50%, -50%);
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .single-product-author {
+    &-photo {
+      background: transparent;
+      z-index: 2;
+      &::before {
+        content: "";
+        position: absolute;
+        left: -20px;
+        top: 0;
+        bottom: 0;
+        width: 280px;
+        background: #eee;
+      }
+      &__inner {
+        right: auto;
+        left: 0;
+        transform: translate(0, -50%);
+      }
+    }
+    &-info {
+      margin-left: 90px;
+      width: calc(100% - 90px - 280px);
+    }
+  }
+}
+
+@media (max-width: 745px) {
+  .single-product-author {
+    display: none;
+  }
+}

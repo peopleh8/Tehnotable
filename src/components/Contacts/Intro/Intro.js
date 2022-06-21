@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 import GoogleMap from 'google-map-react';
-import  { Pagination, EffectFade } from 'swiper'
+import  { Pagination, Navigation, EffectFade } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import './Intro.scss'
 
 import 'swiper/scss'
 import 'swiper/scss/pagination'
+import 'swiper/scss/navigation'
 import 'swiper/scss/effect-fade'
 
 import Marker from './Marker'
@@ -71,23 +73,51 @@ const ContactsIntro = () => {
   useEffect(() => {
     let contactIntroTl = gsap.timeline()
 
-    contactIntroTl
-      .from('.contacts-intro__title', .5, { delay: .2, y: '100%', onComplete() {
-        contactIntroTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.contacts-intro__head-title', .5, { y: -20, opacity: 0, onComplete() {
-        contactIntroTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.contacts-intro-slider__pagination-item', .6, { x: -20, opacity: 0, stagger: .05, onComplete() {
-        contactIntroTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.contacts-intro__info-item', .6, { y: 20, opacity: 0, stagger: .05, onComplete() {
-        contactIntroTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.5')
-      .from('.contacts-intro__slider', .5, { opacity: 0, onComplete() {
-        contactIntroTl.set(this.targets(), { clearProps: 'all' })
-      }}, '-=.2')
+    ScrollTrigger.matchMedia({
+      '(min-width: 481px)': () => {
+        contactIntroTl
+          .from('.contacts-intro__title', .5, { delay: .2, y: '100%', onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.contacts-intro__head-title', .5, { y: -20, opacity: 0, onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.contacts-intro-slider__pagination-item', .6, { x: -20, opacity: 0, stagger: .05, onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.contacts-intro__info-item', .6, { y: 20, opacity: 0, stagger: .05, onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.5')
+          .from('.contacts-intro__slider', .5, { opacity: 0, onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.2')
+      },
+      '(max-width: 480px)': () => {
+        contactIntroTl
+          .from('.contacts-intro__title', .5, { delay: .2, y: '100%', onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.contacts-intro__head-title', .5, { y: -20, opacity: 0, onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.contacts-intro-slider__pagination-item', .6, { x: -20, opacity: 0, stagger: .05, onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.contacts-intro__slider', .5, { opacity: 0, onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }}, '-=.3')
+          .from('.contacts-intro-slider__nav-mobile > *', .5, { scale: 0, stagger: .1, ease: 'back', onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.contacts-intro__info-item', .6, { y: 20, opacity: 0, stagger: .05, onComplete() {
+            contactIntroTl.set(this.targets(), { clearProps: 'all' })
+          }})
+      }
+    })
 
+    return () => {
+      contactIntroTl.kill()
+    }
   }, [])
 
   return (
@@ -98,7 +128,17 @@ const ContactsIntro = () => {
             <h1 className="contacts-intro__title title title--big">Contacts</h1>
           </div>
           <div className="contacts-intro__head">
-            <div className="contacts-intro__head-title local-title local-title--grey">ADDRESS</div>
+            <div className="contacts-intro__head-title local-title local-title--grey">
+              ADDRESS
+              <div className="contacts-intro-slider__nav">
+                <div className="contacts-intro-slider__btn contacts-intro-slider__prev">
+                  <svg><use href={`${sprite}#prev-arrow`} /></svg>
+                </div>
+                <div className="contacts-intro-slider__btn contacts-intro-slider__next">
+                  <svg><use href={`${sprite}#next-arrow`} /></svg>
+                </div>
+              </div>
+            </div>
             <div className="contacts-intro-slider__pagination" />
           </div>
           <div className="contacts-intro__inner">
@@ -143,55 +183,85 @@ const ContactsIntro = () => {
                 </div>
               </div>
             </div>
-            <Swiper
-              className="contacts-intro__slider contacts-intro-slider"
-              modules={[Pagination, EffectFade]}
-              spaceBetween={0}
-              slidesPerView={1}
-              effect="fade"
-              speed={500}
-              allowTouchMove={false}
-              pagination={{
-                clickable: true,
-                el: '.contacts-intro-slider__pagination',
-                bulletClass: 'contacts-intro-slider__pagination-item',
-                bulletActiveClass: 'active',
-                renderBullet: (index, className) => {
-                  return (`
-                    <div class="${className}">
-                      <div class="contacts-intro-slider__pagination-item-title">
-                        ${addresses[index].city}
+            <div className="contacts-intro-slider__wrapper">
+              <Swiper
+                className="contacts-intro__slider contacts-intro-slider"
+                modules={[Pagination, Navigation, EffectFade]}
+                spaceBetween={0}
+                slidesPerView={1}
+                effect="fade"
+                speed={500}
+                allowTouchMove={false}
+                navigation={{
+                  prevEl: '.contacts-intro-slider__prev',
+                  nextEl: '.contacts-intro-slider__next'
+                }}
+                pagination={{
+                  clickable: true,
+                  el: '.contacts-intro-slider__pagination',
+                  bulletClass: 'contacts-intro-slider__pagination-item',
+                  bulletActiveClass: 'active',
+                  renderBullet: (index, className) => {
+                    return (`
+                      <div class="${className}">
+                        <div class="contacts-intro-slider__pagination-item-inner">
+                          <div class="contacts-intro-slider__pagination-item-title">
+                            ${addresses[index].city}
+                          </div>
+                          <div class="contacts-intro-slider__pagination-item-desc">
+                            ${addresses[index].address}
+                          </div>
+                        </div>
                       </div>
-                      <div class="contacts-intro-slider__pagination-item-desc">
-                        ${addresses[index].address}
-                      </div>
-                    </div>
-                  `)
+                    `)
+                  }
+                }}
+                breakpoints={{
+                  489: {
+                    navigation: {
+                      nextEl: '.contacts-intro-slider__next',
+                      prevEl: '.contacts-intro-slider__prev',
+                    }
+                  },
+                  0: {
+                    navigation: {
+                      nextEl: '.contacts-intro-slider__next-mobile',
+                      prevEl: '.contacts-intro-slider__prev-mobile',
+                    }
+                  }
+                }}
+              >
+                {
+                  addresses.map((map, index) => {
+                    return (
+                      <SwiperSlide className="contacts-intro-slider__item" key={index}>
+                        <GoogleMap
+                          bootstrapURLKeys={{ key: "AIzaSyC2Zq7VBtQJJ41xXy6EuxQoQm0k5J31zBw" }}
+                          defaultCenter={map.coords}
+                          defaultZoom={9}
+                          options={{
+                            styles: styles
+                          }}
+                        >
+                          <Marker
+                            lat={map.coords.lat}
+                            lng={map.coords.lng}
+                          />
+                        </GoogleMap>
+                      </SwiperSlide>
+                    )
+                  })
                 }
-              }}
-            >
-              {
-                addresses.map((map, index) => {
-                  return (
-                    <SwiperSlide className="contacts-intro-slider__item" key={index}>
-                      <GoogleMap
-                        bootstrapURLKeys={{ key: "AIzaSyC2Zq7VBtQJJ41xXy6EuxQoQm0k5J31zBw" }}
-                        defaultCenter={map.coords}
-                        defaultZoom={9}
-                        options={{
-                          styles: styles
-                        }}
-                      >
-                        <Marker
-                          lat={map.coords.lat}
-                          lng={map.coords.lng}
-                        />
-                      </GoogleMap>
-                    </SwiperSlide>
-                  )
-                })
-              }
-            </Swiper>
+              </Swiper>
+              <div className="contacts-intro-slider__nav-mobile">
+                <div className="contacts-intro-slider__btn-mobile contacts-intro-slider__prev-mobile">
+                  <svg><use href={`${sprite}#prev-arrow`} /></svg>
+                </div>
+                <div className="contacts-intro-slider__btn-mobile contacts-intro-slider__next-mobile">
+                  <svg><use href={`${sprite}#next-arrow`} /></svg>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

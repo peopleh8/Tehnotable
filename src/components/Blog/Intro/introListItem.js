@@ -13,6 +13,7 @@ const IntroListItem = ({ isVideo, imgSrc, link, date, category, title }) => {
         onMouseOver={e => { update(e, 'in') }}
         onMouseOut={e => { update(e, 'out') }}
       >
+        <Link className="intro-blog__item-link" to={link} />
         {
           isVideo && <div className="intro-blog__item-icon">
             <svg>
@@ -20,9 +21,9 @@ const IntroListItem = ({ isVideo, imgSrc, link, date, category, title }) => {
             </svg>
           </div>
         }
-        <Link className="intro-blog__item-link" to={link}>
+        <div className="intro-blog__item-preview">
           <img src={imgSrc} alt="" width={480} height={570}/>
-        </Link>
+        </div>
         <div className="intro-blog__item-info">
           <div className="intro-blog__item-info-top">
             <div className="intro-blog__item-info-date">{date}</div>

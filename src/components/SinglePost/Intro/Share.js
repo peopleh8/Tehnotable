@@ -21,35 +21,45 @@ const Share = ({ title, article, pageLnk }) => {
           subject={title}
           body={article}
         >
-          <svg><use href={`${sprite}#at`} /></svg>
+          <span className="single-post-intro__share-btn-inner">
+            <svg><use href={`${sprite}#at`} /></svg>
+          </span>
         </EmailShareButton>
         <TwitterShareButton
           className="single-post-intro__share-btn"
           url={pageLnk}
           title={title}
         >
-          <svg><use href={`${sprite}#twitter`} /></svg>
+          <span className="single-post-intro__share-btn-inner">
+            <svg><use href={`${sprite}#twitter`} /></svg>
+          </span>
         </TwitterShareButton>
         <FacebookShareButton
           className="single-post-intro__share-btn"
           url={pageLnk}
           quote={title}
         >
-          <svg><use href={`${sprite}#facebook`} /></svg>
+          <span className="single-post-intro__share-btn-inner">
+            <svg><use href={`${sprite}#facebook`} /></svg>
+          </span>
         </FacebookShareButton>
         <TelegramShareButton
           className="single-post-intro__share-btn"
           url={pageLnk}
           title={title}
         >
-          <svg><use href={`${sprite}#telegram`} /></svg>
+          <span className="single-post-intro__share-btn-inner">
+            <svg><use href={`${sprite}#telegram`} /></svg>
+          </span>
         </TelegramShareButton>
         <ViberShareButton
           className="single-post-intro__share-btn"
           url={pageLnk}
           title={title}
         >
-          <svg><use href={`${sprite}#viber`} /></svg>
+          <span className="single-post-intro__share-btn-inner">
+            <svg><use href={`${sprite}#viber`} /></svg>
+          </span>
         </ViberShareButton>
         <WhatsappShareButton
           className="single-post-intro__share-btn"
@@ -57,7 +67,9 @@ const Share = ({ title, article, pageLnk }) => {
           title={title}
           separator=":: "
         >
-          <svg><use href={`${sprite}#whats-app`} /></svg>
+          <span className="single-post-intro__share-btn-inner">
+            <svg><use href={`${sprite}#whats-app`} /></svg>
+          </span>
         </WhatsappShareButton>
       </div>
     </div>

@@ -58,9 +58,7 @@ const AccountIntro = () => {
   }, [hash])
 
   const hashChange = (e, hash) => {
-    console.log(e.nativeEvent)
     e.stopPropagation()
-    e.nativeEvent.stopImmediatePropagation()
 
     if (isBrowser()) window.location.hash = hash
   }

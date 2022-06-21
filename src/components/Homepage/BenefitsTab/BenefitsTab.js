@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
-
-import  { Pagination, EffectFade, Autoplay } from 'swiper'
+import  { Pagination, Navigation, EffectFade, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import './BenefitsTab.scss'
 import 'swiper/scss'
 import 'swiper/scss/pagination'
+import 'swiper/scss/navigation'
 import 'swiper/scss/effect-fade'
 
 import benefitsTab1 from '../../../images/benefits-tab-1.jpg'
 import introBg from '../../../images/intro-bg.jpg'
 
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
+import sprite from '../../../icons/sprite.svg'
 
 const BenefitsTab = () => {
   const [ slider ] = useState([
@@ -48,13 +49,31 @@ const BenefitsTab = () => {
       }
     })
 
-    benefitsTabTl
-      .from('.benefits-tab__title', .5, { y: '100%', onComplete() {
-        benefitsTabTl.set(this.targets(), { clearProps: 'all' })
-      }})
-      .from('.benefits-tab-slider__pagination-item', .6, { opacity: 0, x: -50, stagger: .05, onComplete() {
-        benefitsTabTl.set(this.targets(), { clearProps: 'all' })
-      }})
+    ScrollTrigger.matchMedia({
+      '(min-width: 480px)': () => {
+        benefitsTabTl
+          .from('.benefits-tab__title', .5, { y: '100%', onComplete() {
+            benefitsTabTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.benefits-tab-slider__pagination-item', .6, { opacity: 0, x: -50, stagger: .05, onComplete() {
+            benefitsTabTl.set(this.targets(), { clearProps: 'all' })
+          }})
+      },
+      '(max-width: 479px)': () => {
+        benefitsTabTl
+          .from('.benefits-tab__title', .5, { y: '100%', onComplete() {
+            benefitsTabTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.benefits-tab-slider__pagination-item', .6, { opacity: 0, x: -50, stagger: .05, onComplete() {
+            benefitsTabTl.set(this.targets(), { clearProps: 'all' })
+          }})
+          .from('.benefits-tab-slider__nav > *', .5, { scale: 0, stagger: .1, ease: 'back', onComplete() {
+            benefitsTabTl.set(this.targets(), { clearProps: 'all' })
+          }})
+      }
+    })
+
+
 
     return () => {
       benefitsTabTl.kill()
@@ -72,7 +91,7 @@ const BenefitsTab = () => {
       </div>
       <Swiper
         className="benefits-tab__slider benefits-tab-slider"
-        modules={[Pagination, EffectFade, Autoplay]}
+        modules={[Pagination, Navigation, EffectFade, Autoplay]}
         spaceBetween={0}
         slidesPerView={1}
         effect="fade"
@@ -82,6 +101,10 @@ const BenefitsTab = () => {
           delay: 8000,
           pauseOnMouseEnter: true,
           disableOnInteraction: false
+        }}
+        navigation={{
+          prevEl: '.benefits-tab-slider__nav-prev',
+          nextEl: '.benefits-tab-slider__nav-next'
         }}
         pagination={{
           clickable: true,
@@ -118,6 +141,14 @@ const BenefitsTab = () => {
         }
         <div className="benefits-tab-slider__pagination">
           <div className="benefits-tab-slider__pagination-inner" />
+        </div>
+        <div className="benefits-tab-slider__nav">
+          <div className="benefits-tab-slider__nav-btn benefits-tab-slider__nav-prev">
+            <svg><use href={`${sprite}#prev-arrow`} /></svg>
+          </div>
+          <div className="benefits-tab-slider__nav-btn benefits-tab-slider__nav-next">
+            <svg><use href={`${sprite}#next-arrow`} /></svg>
+          </div>
         </div>
       </Swiper>
     </section>
