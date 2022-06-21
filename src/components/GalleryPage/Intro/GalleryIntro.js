@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import Draggable from 'gsap/Draggable'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import InertiaPlugin from 'gsap/InertiaPlugin'
+import InertiaPlugin from '../../../../node_modules/gsap/InertiaPlugin'
 import { Fancybox } from '@fancyapps/ui'
 import '@fancyapps/ui/dist/fancybox.css'
 

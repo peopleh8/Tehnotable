@@ -9,10 +9,6 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
             test: path.resolve('./src/components/DrawLogo/DrawLogo.js'),
             use: loaders.null(),
           },
-          {
-            test: path.resolve('./src/components/GalleryPage/Intro/GalleryIntro.js'),
-            use: loaders.null(),
-          },
         ],
       },
     })
